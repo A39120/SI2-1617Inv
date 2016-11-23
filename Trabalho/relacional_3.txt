@@ -21,45 +21,32 @@ Empregado(numero, nome):
 •	CP = {{numero}}
 
 Preço(eqId, valor, duração, validade):
-      ----  -----  -------
+      ----  -----  -------  --------
 •	CC = {{eqId, valor, duração}}
 •	CE = {{eqId REF Equipamento(id)}}
 RI 4: Validade é obrigatoria
 
-//Aluguer(eqId, serial, preço_final, empregado, cliente):
-//	    ----  ------
-//•	CC = {{eqId, serial}}
-//•	CE = {{eqId REF Equipamento(id)}}
-//•	CE = {{empregado REF Empregado(numero)}}
-//•	CE = {{cliente REF Cliente(id)}}
-//RI 5: Todos os atributos de aluguer são obrigatorios
-//
-//TrueAluguer(serial, inicio, duração_final
-//
-//TempoAluguer(eqId, serial, fim)
-//             ----  ------
-//•	CC = {{eqId, serial}}
-//RI 6: fim é obrigatorio
-
-[ASSOCIAÇÃO]
-Aluguer_Equipamento(serial, eqId)
-				    ------  
-•	CC = {{serial}}
-•	CE = {{eqId REF Equipamento(id)}}
-•	CE = {{serial REF Aluguer(serial)}}
-
-Aluguer(serial, empregado, data_inicio, data_fim, cliente)
-	    ------
+ValorAlterado(eqId, valor, validade, valor_alterado) 	// Dados são inseridos nesta tabela quando é criado um novo preço ou uma nova promoção
+			  ----  -----  --------
+ 
+DuraçãoAlterada(eqId, duração, validade, duração_alterada) // Dados são inseridos nesta tabela quando é criado um novo preço ou uma nova promoção
+				----  -------  --------
+				
+Aluguer(serial, preço_eqId, preço_valor, preço_duração, preço_validade, cliente, empregado, data_inicio)
+	    ------ 
+• 	CC = {{serial}}		   
+• 	CE = {{preço_eqId, preço_valor, preço_duração, preço_validade REF Preço(eqId, valor, duração, validade)}}
 •	CE = {{cliente REF Cliente(id)}}
 •	CE = {{empregado REF Empregado(id)}}
-DuraçãoAluguer(serial, duração) 
-			   ------
-•	CE = {{serial REF Aluguer(serial)}}
-PreçoAluguer(serial, eqId, preço)
-		     ------  
 
+AluguerFim(serial, data_fim)
+		   ------
+• 	CC = {{serial}}		   
+• 	CE = {{serial REF Aluguer(serial)}}
+RI 5: data_fim = Aluguer.data_inicio + Aluguer.preço_duração
+		
 Equipamento_Promoção(idPromoção, eqId)
-		     ----------  ----
+					 ----------  ----
 • 	CC = {{idPromoção, eqId}}
 •	CE = {{eqId REF Equipamento(id)}}
 •	CE = {{idPromoção REF Promoção(id)}}
