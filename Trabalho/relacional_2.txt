@@ -1,0 +1,45 @@
+Modelo Relacional
+Tipo(nome, descTipo): 
+•	CC = {{nome}}
+
+Equipamento(id, eqDesc, tipo): 
+•	CP = {{eqId}}
+•	CE = {{tipo REF Tipo(nome)}}
+RI 1: tipo não é nulo; 
+
+Cliente(id, nome, NIF, morada):
+•	CP = {{clId}}
+
+Empregado(numero, nome): 
+•	CP = {{numero}}
+
+Preço(eqId, valor, duração, validade):
+•	CC = {{eqId, valor, duração}}
+•	CE = {{eqId REF Equipamento(id)}}
+
+Aluguer(eqId, serial, inicio, duração, preço, empregado, cliente):
+•	CC = {{eqId, serial}}
+•	CE = {{eqId REF Equipamento(id)}}
+•	CE = {{ preço, duração  REF Preço(valor, duração)}}
+•	CE = {{empregado REF Empregado(numero)}}
+•	CE = {{cliente REF Cliente(id)}}
+
+Promoção(id, inicio, fim, desc):
+•	CC = {{id}}
+
+PromoçãoTemporal(id, tempoExtra):
+•	CC = {{id}}
+•	CE = {{id REF Promoção(id)}}
+
+PromoçãoDesconto(id, desconto):
+•	CC = {{id}}
+•	CE = {{id REF Promoção(id)}}
+
+RI: 
+1.	Cada equipamento tem obrigatoriamente um tipo (NOT NULL);
+2.	Cada aluguer tem obrigatoriamente um empregado (NOT NULL);
+3.	Cada aluguer tem obrigatoriamente um cliente (NOT NULL);
+4.	Cada aluguer tem obrigatoriamente um preço (valor e duração = NOT NULL);
+5.	O cliente tem um código obrigatório, mas caso o nome não for dado, o nome irá ser igual a Cliente Final;
+6.	Os atributos valor e duração do preço podem ser modificados por uma promoção;
+7.	Cada promoção é de desconto ou temporal;
