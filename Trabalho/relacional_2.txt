@@ -1,45 +1,63 @@
 Modelo Relacional
-Tipo(nome, descTipo): 
+Tipo(nome, descTipo):
+     ---- 
 •	CC = {{nome}}
+•	CP = {{nome}}
 
 Equipamento(id, eqDesc, tipo): 
-•	CP = {{eqId}}
+	    -- 
+•	CP = {{id}}
 •	CE = {{tipo REF Tipo(nome)}}
-RI 1: tipo não é nulo; 
+RI 1: Tipo não é nulo; 
 
 Cliente(id, nome, NIF, morada):
-•	CP = {{clId}}
+	--
+•	CP = {{id}}
+RI 2: Nome, NIF, morada são obrigatorios, caso não seja "cliente final"
+RI 3: Cliente final é o unico que tem nome, nif e morada a nulo
 
 Empregado(numero, nome): 
+	  ------
 •	CP = {{numero}}
 
 Preço(eqId, valor, duração, validade):
+      ----  -----  -------
 •	CC = {{eqId, valor, duração}}
 •	CE = {{eqId REF Equipamento(id)}}
+RI 4: Validade é obrigatoria
 
-Aluguer(eqId, serial, inicio, duração, preço, empregado, cliente):
+Aluguer(eqId, serial, inicio, fim, duração, preço, empregado, cliente):
+	----  ------
 •	CC = {{eqId, serial}}
 •	CE = {{eqId REF Equipamento(id)}}
-•	CE = {{ preço, duração  REF Preço(valor, duração)}}
 •	CE = {{empregado REF Empregado(numero)}}
 •	CE = {{cliente REF Cliente(id)}}
+RI 5: Todos os atributos de aluguer são obrigatorios
+RI 6: A data de fim é maior que a data de inicio
+RI 7: Fim = inicio + duração
+
+Equipamento_Promoção(idPromoção, eqId)
+		     ----------  ----
+• 	CC = {{idPromoção, eqId}}
+•	CE = {{eqId REF Equipamento(id)}}
+•	CE = {{idPromoção REF Promoção(id)}}
 
 Promoção(id, inicio, fim, desc):
+	 --
 •	CC = {{id}}
+RI 8: fim > inicio
+RI 9: inicio e fim são obrigatorios
+
 
 PromoçãoTemporal(id, tempoExtra):
+		 --
 •	CC = {{id}}
 •	CE = {{id REF Promoção(id)}}
+RI 10: Os ids em PromoçãoTemporal não aparecem em PromoçãoDesconto
+RI 11: tempoExtra é obrigatorio
 
 PromoçãoDesconto(id, desconto):
 •	CC = {{id}}
 •	CE = {{id REF Promoção(id)}}
-
-RI: 
-1.	Cada equipamento tem obrigatoriamente um tipo (NOT NULL);
-2.	Cada aluguer tem obrigatoriamente um empregado (NOT NULL);
-3.	Cada aluguer tem obrigatoriamente um cliente (NOT NULL);
-4.	Cada aluguer tem obrigatoriamente um preço (valor e duração = NOT NULL);
-5.	O cliente tem um código obrigatório, mas caso o nome não for dado, o nome irá ser igual a Cliente Final;
-6.	Os atributos valor e duração do preço podem ser modificados por uma promoção;
-7.	Cada promoção é de desconto ou temporal;
+RI 12: Os ids em PromoçãoDesconto não aparecem em PromoçãoTemporal
+RI 13: desconto é obrigatorio 
