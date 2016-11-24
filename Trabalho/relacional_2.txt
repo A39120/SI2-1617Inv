@@ -42,11 +42,13 @@ RI 4: Validade é obrigatoria
 //RI 6: fim é obrigatorio
 
 [ASSOCIAÇÃO]
-Aluguer_Equipamento(serial, eqId)
+Aluguer_Equipamento(serial, cliente, empregado, eqId, data_inicio)
 				    ------  
 •	CC = {{serial}}
 •	CE = {{eqId REF Equipamento(id)}}
 •	CE = {{serial REF Aluguer(serial)}}
+•	CE = {{cliente REF Cliente(id)}}
+•	CE = {{empregado REF Empregado(id)}}
 
 Aluguer(serial, empregado, data_inicio, data_fim, cliente)
 	    ------

@@ -7,24 +7,27 @@ SET NOCOUNT ON
 USE AEnima; --Se não existir a base de dados, deve criá-la
 GO
 
+IF OBJECT_ID('Aluguer') IS NOT NULL
+	DROP TABLE Aluguer
+IF OBJECT_ID('Cliente') IS NOT NULL
+	DROP TABLE Cliente
+IF OBJECT_ID('Empregado') IS NOT NULL
+	DROP TABLE Empregado
+IF OBJECT_ID('EquipamentoPromocao') IS NOT NULL
+	DROP TABLE EquipamentoPromocao
 IF OBJECT_ID('PromocaoTemporal') IS NOT NULL
 	DROP TABLE PromocaoTemporal
 IF OBJECT_ID('PromocaoDesconto') IS NOT NULL
 	DROP TABLE PromocaoDesconto
 IF OBJECT_ID('Promocao') IS NOT NULL
 	DROP TABLE Promocao
-IF OBJECT_ID('Aluguer') IS NOT NULL
-	DROP TABLE Aluguer
 IF OBJECT_ID('Preco') IS NOT NULL
 	DROP TABLE Preco
 IF OBJECT_ID('Equipamento') IS NOT NULL
 	DROP TABLE Equipamento
 IF OBJECT_ID('Tipo') IS NOT NULL
 	DROP TABLE Tipo
-IF OBJECT_ID('Cliente') IS NOT NULL
-	DROP TABLE Cliente
-IF OBJECT_ID('Empregado') IS NOT NULL
-	DROP TABLE Empregado
+
 
 GO
 CREATE TABLE Tipo(
@@ -33,58 +36,71 @@ CREATE TABLE Tipo(
 )
 
 CREATE TABLE Equipamento(
-	id VARCHAR(31) PRIMARY KEY, 
+	eqId INT IDENTITY(1,1) PRIMARY KEY, 
 	descr VARCHAR(255),
 	tipo VARCHAR(31) REFERENCES Tipo(nome) NOT NULL
 )
 
 CREATE TABLE Cliente
 (
-	id INT IDENTITY(1, 1) PRIMARY KEY,
+	cId INT IDENTITY(1,1) PRIMARY KEY,
 	nif INT,
-	nome VARCHAR(31) DEFAULT 'Cliente Final',
-	morada VARCHAR(100) DEFAULT NULL
+	nome VARCHAR(31),
+	morada VARCHAR(100),
+	CONSTRAINT ck1_cliente CHECK(nif < 1000000000) 
 )
 
 CREATE TABLE Empregado(
-	id INT IDENTITY(1,1) PRIMARY KEY, 
+	eId INT IDENTITY(1,1) PRIMARY KEY, 
 	nome VARCHAR(31)
 )
 
 CREATE TABLE Preco(
-	id_equipamento VARCHAR(31) REFERENCES Equipamento(id), 
+	eqId INT REFERENCES Equipamento(eqId), 
 	valor FLOAT,
 	duracao TIME,
 	validade DATE, 
-	PRIMARY KEY(id_equipamento, valor, duracao)
+	PRIMARY KEY(eqId, valor, duracao, validade),
+	CONSTRAINT ck1_preco CHECK(valor >= 0),
+	CONSTRAINT ck2_preco CHECK(duracao > '00:00:00') 
 )
 
 CREATE TABLE Promocao(
-	id VARCHAR(31) PRIMARY KEY,
-	inicio DATE,
-	fim DATE,
-	descr VARCHAR(255) 
+	pId INT IDENTITY(1,1) PRIMARY KEY,
+	inicio DATE NOT NULL,
+	fim DATE NOT NULL,
+	descr VARCHAR(255),
+	CONSTRAINT ck1_promocao CHECK(fim > inicio) 
 )
 
 CREATE TABLE PromocaoTemporal(
-	id VARCHAR(31) REFERENCES Promocao(id) PRIMARY KEY,
-	tempoExtra TIME 
+	pId INT REFERENCES Promocao(pId) PRIMARY KEY,
+	tempoExtra TIME NOT NULL,
+	CONSTRAINT ck1_promocaoTemporal CHECK(tempoExtra > '00:00:00')
 )
 
 CREATE TABLE PromocaoDesconto(
-	id VARCHAR(31) REFERENCES Promocao(id) PRIMARY KEY,
-	percentagemDesconto INT
-	CONSTRAINT ck1_PromocaoDesconto CHECK(percentagemDesconto > 0 AND percentagemDesconto < 100) 
+	pId INT REFERENCES Promocao(pId) PRIMARY KEY,
+	percentagemDesconto FLOAT NOT NULL,
+	CONSTRAINT ck1_PromocaoDesconto CHECK(percentagemDesconto > 0 AND percentagemDesconto <= 1) 
+)
+
+CREATE TABLE EquipamentoPromocao(
+	pId INT REFERENCES Promocao(pId),
+	eqId INT REFERENCES Equipamento(eqId),
+	PRIMARY KEY(pId, eqId)
 )
 
 CREATE TABLE Aluguer(
-	e_id VARCHAR(31) REFERENCES Equipamento(id),
-	serial INT IDENTITY(1,1) NOT NULL, 
-	empregado INT REFERENCES Empregado(id),
-	cliente INT REFERENCES Cliente(id),
-	preco FLOAT, 
-	duracao TIME, 
-	inicio DATE, 
-	PRIMARY KEY(e_id, serial),
-	FOREIGN KEY(e_id, preco, duracao) REFERENCES Preco(id_equipamento, valor, duracao) 
+	serial VARCHAR(31) DEFAULT NEWID(), 
+	eqId INT REFERENCES Equipamento(eqId) NOT NULL,
+	empregado INT REFERENCES Empregado(eId) NOT NULL,
+	cliente INT REFERENCES Cliente(cId) NOT NULL,
+	preco_valor FLOAT NOT NULL, 
+	preco_duracao TIME NOT NULL,
+	preco_validade DATE NOT NULL, 
+	data_inicio DATE NOT NULL, 
+	PRIMARY KEY(serial),
+	FOREIGN KEY(eqId, preco_valor, preco_duracao, preco_validade) REFERENCES Preco(eqId, valor, duracao, validade), 
+	CONSTRAINT ck1_Aluguer CHECK(preco_validade > data_inicio) 
 )
