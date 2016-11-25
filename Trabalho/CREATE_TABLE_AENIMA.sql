@@ -44,11 +44,16 @@ CREATE TABLE Equipamento(
 CREATE TABLE Cliente
 (
 	cId INT IDENTITY(1,1) PRIMARY KEY,
-	nif INT,
+	nif INT UNIQUE,
 	nome VARCHAR(31),
 	morada VARCHAR(100),
-	CONSTRAINT ck1_cliente CHECK(nif < 1000000000) 
+	
 )
+INSERT INTO Cliente(nif, nome, morada) VALUES(NULL, NULL, NULL);
+ALTER TABLE Cliente
+	ADD CONSTRAINT ck1_cliente CHECK(nif < 1000000000),
+	ADD CONSTRAINT ck2_cliente CHECK(nif NOT NULL) 
+
 
 CREATE TABLE Empregado(
 	eId INT IDENTITY(1,1) PRIMARY KEY, 
