@@ -1,0 +1,7 @@
+
+(h) Remover se data_inicio > GETCURRENTDATE()
+(j) Equipamento está livre quando: 
+	* Não está em nenhum aluguer
+	* Quando está num aluguer, mas não está na data especificada (data_inicio < especificado < data_fim )
+
+(k) 
