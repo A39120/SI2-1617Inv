@@ -11,24 +11,24 @@ GO
 CREATE FUNCTION dbo.CalcularDuracaoPreco(@pid INT, @eqId INT, @preco FLOAT, @duracao TIME) 
 RETURNS @moddedValues TABLE (preco FLOAT, duracao TIME)
 AS BEGIN 
-	DECLARE @precoComDesconto FLOAT, @desconto FLOAT, @tempoFinal TIME, @tempoExtra TIME
-	SELECT @desconto = IsNull(percentagemDesconto, 0) FROM Equipamento eq 
+	DECLARE @precoComDesconto FLOAT, @desconto FLOAT, @tempoFinal DATETIME, @tempoExtra TIME
+	SELECT @desconto = percentagemDesconto FROM Equipamento eq 
 			INNER JOIN Tipo t ON (t.nome = eq.tipo)
 			INNER JOIN TipoPromocao tp ON (tp.tipo = t.nome)
 			INNER JOIN Promocao p ON(p.pId = tp.pId)
 			INNER JOIN PromocaoDesconto pd ON(pd.pId = p.pId)
 		WHERE @pid = p.pId AND @eqId = eq.eqId;
 	
-	SELECT @tempoExtra = IsNull(tempoExtra, '00:00:00') FROM Equipamento eq 
+	SELECT @tempoExtra = tempoExtra FROM Equipamento eq 
 			INNER JOIN Tipo t ON (t.nome = eq.tipo)
 			INNER JOIN TipoPromocao tp ON (tp.tipo = t.nome)
 			INNER JOIN Promocao p ON(p.pId = tp.pId)
 			INNER JOIN PromocaoTemporal pd ON(pd.pId = p.pId)
 		WHERE @pid = p.pId AND @eqId = eq.eqId 
 
-	SET @precoComDesconto = @preco - (@preco * @desconto)
-	SET @tempoFinal = dateadd(ss, ((DATEPART(HOUR,@tempoExtra) * 60) + DATEPART(MINUTE,@tempoExtra) * 60) + DATEPART(SECOND,@tempoExtra), @duracao)
-	INSERT INTO @moddedValues VALUES (@precoComDesconto, @tempoFinal)
+	SET @precoComDesconto = @preco - (@preco * IsNull(@desconto,0))
+	SET @tempoFinal = CAST(CAST(IsNull(@tempoExtra, '00:00:00') AS DATETIME) + CAST(@duracao AS DATETIME) as TIME)
+	INSERT INTO @moddedValues VALUES (@precoComDesconto, CAST(@tempoFinal AS TIME))
 	RETURN
 END
 
@@ -60,3 +60,5 @@ BEGIN
 		SELECT * FROM EquipamentosLivres(@inicio, @fim, NULL)
 	RETURN;
 END
+
+GO
