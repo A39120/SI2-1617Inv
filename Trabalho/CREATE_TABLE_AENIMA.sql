@@ -4,7 +4,10 @@
 */
 SET XACT_ABORT ON
 SET NOCOUNT ON
-USE AEnima; --Se não existir a base de dados, deve criá-la
+IF DB_ID('AEnima') IS NULL
+	CREATE DATABASE AEnima
+GO
+USE AEnima;
 GO
 
 IF OBJECT_ID('AluguerPrecoDuracao') IS NOT NULL
