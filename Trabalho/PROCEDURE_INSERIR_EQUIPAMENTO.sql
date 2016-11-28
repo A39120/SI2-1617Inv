@@ -9,9 +9,9 @@ CREATE PROCEDURE dbo.InserirEquipamentoComTipo @tipo VARCHAR(31), @descr VARCHAR
 AS
 	BEGIN TRAN 
 	IF NOT EXISTS(SELECT nome FROM Tipo WHERE nome = @tipo) 
-	BEGIN
-		INSERT INTO Tipo(nome, descr) VALUES (@tipo, @descrTipo)
-	END
+		BEGIN
+			INSERT INTO Tipo(nome, descr) VALUES (@tipo, @descrTipo)
+		END
 	INSERT INTO Equipamento(descr, tipo) VALUES (@descr, @tipo)
 	COMMIT
 	

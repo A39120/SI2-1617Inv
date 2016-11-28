@@ -9,7 +9,7 @@ GO
 --INSERE UM ALUGUER COM CLIENTE ESPECIFICADO
 CREATE PROCEDURE dbo.InserirAluguer
 	@empregado INT, 
-	@cliente INT = 0, 
+	@cliente INT = 1, 
 	@eqId INT,
 	@inicioAluguer DATETIME, 
 	@duracao TIME,
@@ -19,22 +19,32 @@ AS
 	BEGIN TRAN -- 5 Reads, 3 Write
 	--VERIFICAR SE O CLIENTE EXISTE
 	IF NOT EXISTS(SELECT * FROM Cliente WHERE cId = @cliente)
-		THROW 50020, 'O Cliente inserido não existe.', 1;
+		BEGIN
+			ROLLBACK TRAN;
+			THROW 50100, 'O cliente inserido não existe', 1;
+		END
 	--VERIFICAR SE EQUIPAMENTO EXISTE
 	IF NOT EXISTS(SELECT * FROM Equipamento WHERE eqId = @eqId)
-		THROW 50021, 'O Equipamento inserido não existe.', 1;
+		BEGIN
+			ROLLBACK TRAN;
+			THROW 50101, 'O Equipamento inserido não existe', 1;
+		END
 	--VERIFICAR SE EMPREGADO EXISTE
 	IF NOT EXISTS(SELECT * FROM Empregado WHERE eId = @empregado)
-		THROW 50022, 'O Empregado inserido não existe.', 1;
-		
+		BEGIN
+			ROLLBACK TRAN;
+			THROW 50102, 'O Empregado inserido não existe', 1;
+		END
 	--VERIFICAR SE PREÇO EXISTE
 	DECLARE @precoValidade DATE
 	IF NOT EXISTS (SELECT validade = @precoValidade 
 		FROM Equipamento eq INNER JOIN Tipo t ON(eq.tipo = t.nome)
 							INNER JOIN Preco p ON(t.nome = p.tipo)
 		WHERE p.valor = @preco AND p.duracao = @duracao AND eq.eqId = @eqId AND p.validade > @inicioAluguer) 
-		THROW 50022, 'Este preço é invalido para este produto inserido não existe.', 1;
-
+		BEGIN
+			ROLLBACK TRAN; 
+			THROW 50103, 'Este preço e duração não constam na tabela de preços para este tipo.', 1;
+		END
 
 	DECLARE @duracaoFinal TIME, @precoFinal FLOAT
 	IF(@pid IS NOT NULL)
@@ -46,12 +56,19 @@ AS
 				WHERE @pid = p.pId AND p.inicio < @inicioAluguer AND  @inicioAluguer < p.fim)
 			SELECT  @precoFinal = preco, @duracaoFinal = duracao 
 				FROM CalcularDuracaoPreco(@pid, @eqId, @preco, @duracao) 
-		ELSE THROW 50023, 'Esta promoção é invalida para este aluguer.', 1;
+		ELSE 
+			BEGIN
+				ROLLBACK TRAN;
+				THROW 50104,'Esta promoção é invalida para este aluguer.', 1
+			END
 	END
-
-
-	DECLARE @currentAluguer TABLE (id INT)
-	DECLARE @currentAluguerId INT 
+	ELSE 
+	BEGIN 
+		SET @duracaoFinal = @duracao 
+		SET @precoFinal = @preco
+	END
+	DECLARE @currentAluguer TABLE (id VARCHAR(36))
+	DECLARE @currentAluguerId VARCHAR(36)
 	INSERT INTO Aluguer(eqId, empregado, cliente, data_inicio)
 		OUTPUT INSERTED.serial INTO @currentAluguer
 		VALUES(@eqId, @empregado, @cliente, @inicioAluguer)
@@ -76,6 +93,8 @@ CREATE PROCEDURE dbo.InserirAluguerComNovoCliente
 	@preco FLOAT,
 	@pid INT = NULL -- cliente escolhe de antemão qual a promoção que quer
 AS 
+	BEGIN TRAN
 	DECLARE @idCliente INT = 0
 	exec dbo.InserirCliente @cliente_nome, @cliente_nif, @cliente_morada, @idCliente
 	exec dbo.InserirAluguer @empregado, @idCliente, @eqId, @inicioAluguer, @duracao, @preco, @pid
+	COMMIT

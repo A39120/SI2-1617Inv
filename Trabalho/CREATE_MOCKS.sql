@@ -1,4 +1,20 @@
 USE AEnima
+
+
+DELETE dbo.AluguerDataFim
+DELETE dbo.AluguerPrecoDuracao
+DELETE dbo.Aluguer
+DELETE dbo.TipoPromocao
+DELETE FROM dbo.Cliente WHERE cId > 1
+DELETE dbo.Empregado
+DELETE dbo.PromocaoTemporal
+DELETE dbo.PromocaoDesconto
+DELETE dbo.Promocao
+DELETE dbo.Preco
+DELETE dbo.Equipamento
+DELETE dbo.Tipo
+
+
 --10 Tipos
 INSERT INTO Tipo VALUES('Chapeu De Palha'		   , 'Relaxar')
 INSERT INTO Tipo VALUES('Toldo' 				   , 'Relaxar')
@@ -14,7 +30,7 @@ INSERT INTO Tipo VALUES('Pás'					   , 'Divertimento')
 INSERT INTO Tipo VALUES('Equipamento Diving'	   , 'Lazer')
 
 --
-DECLARE @loopCount INT = 10
+DECLARE @loopCount INT = 1
 WHILE (@loopCount > 0)
 BEGIN
 exec InserirEquipamentoComTipo 'Chapeu De Palha'		  , 'Equipamento Simples'
@@ -54,8 +70,8 @@ INSERT INTO Empregado VALUES ('João Lopes')
 INSERT INTO Empregado VALUES ('Tiago Santos')
 INSERT INTO Empregado VALUES ('João Correia')
 
-SET @loopCount = 25
-DECLARE @preco FLOAT = 10.0, @duracao TIME = '00:30:00'
+SET @loopCount = 5
+DECLARE @preco FLOAT = 5.0, @duracao TIME = '00:30:00'
 --1 preço fora de validade para cada equipamento
 INSERT INTO Preco VALUES('Chapeu De Palha', @preco, @duracao, '1990-12-31 23:59:59')
 INSERT INTO Preco VALUES('Toldo', @preco, @duracao, '1990-12-31 23:59:59')
@@ -72,6 +88,8 @@ INSERT INTO Preco VALUES('Equipamento Diving', @preco, @duracao, '1990-12-31 23:
 --25 Preços dentro de validade para cada equipamento
 WHILE (@loopCount > 0)
 BEGIN 
+	SET @preco = @preco * 2
+	SET @duracao = DATEADD(MINUTE, 30, @duracao)
 	INSERT INTO Preco VALUES('Chapeu De Palha', @preco, @duracao, '2017-12-31 23:59:59')
 	INSERT INTO Preco VALUES('Toldo', @preco, @duracao, '2017-12-31 23:59:59')
 	INSERT INTO Preco VALUES('Espreguiçadeira', @preco, @duracao, '2017-12-31 23:59:59')
@@ -84,8 +102,6 @@ BEGIN
 	INSERT INTO Preco VALUES('Baldes', @preco, @duracao, '2017-12-31 23:59:59')
 	INSERT INTO Preco VALUES('Pás', @preco, @duracao, '2017-12-31 23:59:59')
 	INSERT INTO Preco VALUES('Equipamento Diving', @preco, @duracao, '2017-12-31 23:59:59')
-	SET @preco = @preco * 2
-	SET @duracao = DATEADD(MINUTE, 30, @duracao)
 	SET @loopCount = @loopCount - 1 			
 END
 
@@ -106,3 +122,10 @@ exec dbo.InserirPromocaoTemporal '2014-12-31 23:59:59', '2017-12-31 23:59:59','P
 exec dbo.InserirPromocaoTemporal '2014-12-31 23:59:59', '2017-12-31 23:59:59','Promoção de tempo','Pás','01:30:00'
 exec dbo.InserirPromocaoTemporal '2014-12-31 23:59:59', '2017-12-31 23:59:59','Promoção de tempo','Equipamento Diving', '01:00:00'
 
+-- Inserir aluguer sem promoção, com preço e duração existentes, no cliente final, que já aconteceu
+exec InserirAluguer @empregado = 1, @eqId = 1, @inicioAluguer = '2014-12-12 13:00:00', @duracao = '01:00:00', @preco = 10
+-- Inserir aluguer sem promoção, com preço e duração existentes, no cliente existente, que já aconteceu, na semana passada
+exec InserirAluguer 1, 3, 2, '2016-12-27 13:00:00', '01:30:00.0000000', 20
+-- Inserir aluguer sem promoção, com preço e duração existentes, no cliente existente, que está a acontecer
+DECLARE @currentDate DATETIME = GETDATE()
+exec InserirAluguer 1, 3, 3, @currentDate, '01:00:00', 10, 3

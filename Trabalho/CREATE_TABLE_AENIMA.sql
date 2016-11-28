@@ -95,7 +95,7 @@ CREATE TABLE TipoPromocao(
 )
 
 CREATE TABLE Aluguer(
-	serial VARCHAR(31) DEFAULT NEWID(), 
+	serial VARCHAR(36) DEFAULT NEWID(), 
 	eqId INT REFERENCES Equipamento(eqId) NOT NULL,
 	empregado INT REFERENCES Empregado(eId) NOT NULL,
 	cliente INT REFERENCES Cliente(cId) NOT NULL,
@@ -105,14 +105,14 @@ CREATE TABLE Aluguer(
 )
 
 CREATE TABLE AluguerPrecoDuracao(
-	serial_apd VARCHAR(31) PRIMARY KEY,
+	serial_apd VARCHAR(36) PRIMARY KEY,
 	duracao DATETIME NOT NULL,
 	preco INT NOT NULL,
 	FOREIGN KEY(serial_apd) REFERENCES Aluguer(serial)
 )
 
 CREATE TABLE AluguerDataFim(
-	serial_adf VARCHAR(31) PRIMARY KEY,
+	serial_adf VARCHAR(36) PRIMARY KEY,
 	data_fim DATETIME NOT NULL
 	FOREIGN KEY(serial_adf) REFERENCES Aluguer(serial)
 )

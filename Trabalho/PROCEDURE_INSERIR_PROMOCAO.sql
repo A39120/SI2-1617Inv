@@ -51,7 +51,7 @@ AS
 	DECLARE @id INT
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
 	IF (@id IS NULL) 
-		THROW 50070, 'O id inserido é null', 1;
+		THROW 50072, 'O id inserido é null', 1;
 	INSERT INTO PromocaoDesconto
 		VALUES (@id, @desconto)
 	COMMIT
