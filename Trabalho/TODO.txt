@@ -1,27 +1,19 @@
 GUIÃO:
 	(i) Efectuar alterações de preçário;
 	(l) Testar cada um dos requisitos anteriores.
-		FEITO: 	(a) Criar o modelo físico;
-		FEITO: 	(b) Remover o modelo físico;
 				(c) Informação de um cliente;
-					a. Inserir 
 					b. Remover
 					c. Actualizar 
 			    (d) Informação de um equipamento:
-					a. Inserir 
 					b. remover 
 					c. actualizar 
 			    (e) Informação de promoções
-					a. Inserir 
 					b. remover 
 					c. actualizar
 			    (f) Inserir um aluguer com inserção de um cliente com dados completos
 					a. Dados correctos
 					b. Forçar exceções
 			    (g) Inserir um aluguer usando um cliente existente;
-					a. Se o cliente passado existir
-					b. Se o cliente passado for null - Inserir com o cliente final
-					c. Se o cliente passado não existir - Erro
 					d. Forçar erros
 			    (h) Remover um aluguer
 					a. Antes da data de inicio
@@ -43,5 +35,7 @@ OUTROS:
 
 TRIGGERS: 
 	- Para o DELETE Aluguer e consequentes 
+	- Para o delete do AluguerDataFim, fazer delete das outras
+	- Para o delete do ultimo equipamento de um tipo, eleminar também um tipo
 NIVEIS DE ISOLAMENTO:
 	
