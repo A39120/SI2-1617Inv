@@ -6,10 +6,21 @@ IF OBJECT_ID('dbo.ActualizarCliente') IS NOT NULL
 GO
 CREATE PROCEDURE dbo.ActualizarCliente @id INT, @nome VARCHAR(31), @nif INT, @morada VARCHAR(100)
 AS	
-	IF(@id IS NULL) THROW 50002, 'Id inválido', 1;
-	ELSE IF(@id = 1) THROW 50003, 'Não se pode alterar a informação do Cliente Final', 1; 
+	IF(@id IS NULL) 
+		BEGIN
+			ROLLBACK
+			THROW 50002, 'Id inválido', 1;
+		END
+	ELSE IF(@id = 1) 
+		BEGIN
+			ROLLBACK
+			THROW 50003, 'Não se pode alterar a informação do Cliente Final', 1; 
+		END
 	ELSE IF(@nome IS NULL OR @nif IS NULL OR @morada IS NULL) 
-		THROW 50004, 'Não se pode alterar a informação do Cliente com alguma informação nula', 1; 
+		BEGIN
+			ROLLBACK
+			THROW 50004, 'Não se pode alterar a informação do Cliente com alguma informação nula', 1;
+		END
 	ELSE UPDATE Cliente 
 	SET 
 		nome = @nome,

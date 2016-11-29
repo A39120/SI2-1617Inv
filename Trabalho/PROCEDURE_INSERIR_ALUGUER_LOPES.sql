@@ -36,10 +36,7 @@ AS
 			THROW 50102, 'O Empregado inserido não existe', 1;
 		END
 	--VERIFICAR SE PREÇO EXISTE
-	DECLARE @precoValidade DATE
-	IF NOT EXISTS (SELECT validade = @precoValidade 
-		FROM Equipamento eq INNER JOIN Tipo t ON(eq.tipo = t.nome)
-							INNER JOIN Preco p ON(t.nome = p.tipo)
+	IF NOT EXISTS (SELECT * FROM Equipamento eq INNER JOIN Preco p ON(eq.tipo = p.tipo)
 		WHERE p.valor = @preco AND p.duracao = @duracao AND eq.eqId = @eqId AND p.validade > @inicioAluguer) 
 		BEGIN
 			ROLLBACK TRAN; 
@@ -95,6 +92,6 @@ CREATE PROCEDURE dbo.InserirAluguerComNovoCliente
 AS 
 	BEGIN TRAN
 	DECLARE @idCliente INT = 0
-	exec dbo.InserirCliente @cliente_nome, @cliente_nif, @cliente_morada, @idCliente
+	exec dbo.InserirCliente @cliente_nome, @cliente_nif, @cliente_morada, @idCliente output
 	exec dbo.InserirAluguer @empregado, @idCliente, @eqId, @inicioAluguer, @duracao, @preco, @pid
 	COMMIT

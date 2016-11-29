@@ -67,7 +67,7 @@ CREATE TABLE Empregado(
 )
 -- Reset identity
 DBCC CHECKIDENT ('Empregado', RESEED, 1);
---TODO: Colocar id para não lixar a alteração de preçario
+
 CREATE TABLE Preco(
 	tipo VARCHAR(31) REFERENCES Tipo(nome), 
 	valor FLOAT,

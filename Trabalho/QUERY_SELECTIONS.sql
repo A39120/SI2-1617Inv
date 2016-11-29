@@ -7,6 +7,8 @@ SELECT * FROM Preco
 SELECT * FROM Aluguer al INNER JOIN AluguerPrecoDuracao apd ON (al.serial = serial_apd)
 	INNER JOIN AluguerDataFim adf ON(serial = serial_adf)
 
+SELECT eq.eqId, p.valor, p.duracao, p.validade FROM Equipamento eq INNER JOIN Preco p ON(eq.tipo = p.tipo)
+WHERE eq.eqId = 4
 
 SELECT * FROM TipoPromocao
 
