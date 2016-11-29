@@ -21,7 +21,7 @@ AS
 	IF NOT EXISTS(SELECT * FROM Cliente WHERE cId = @cliente)
 		BEGIN
 			ROLLBACK TRAN;
-			THROW 50100, 'O cliente inserido não existe', 1;
+			THROW 50100, 'O cliente especificado não existe', 1;
 		END
 	--VERIFICAR SE EQUIPAMENTO EXISTE
 	IF NOT EXISTS(SELECT * FROM Equipamento WHERE eqId = @eqId)

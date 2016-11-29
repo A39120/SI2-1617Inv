@@ -112,6 +112,7 @@ CREATE TABLE Aluguer(
 	empregado INT REFERENCES Empregado(eId) NOT NULL,
 	cliente INT REFERENCES Cliente(cId) NOT NULL,
 	data_inicio DATETIME NOT NULL, 
+	deleted BIT DEFAULT 0,
 	PRIMARY KEY(serial),
 	FOREIGN KEY(eqId) REFERENCES Equipamento(eqId), 
 )

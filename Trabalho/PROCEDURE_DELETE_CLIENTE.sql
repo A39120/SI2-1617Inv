@@ -7,17 +7,21 @@ GO
 CREATE PROC dbo.RemoverCliente @id INT
 AS 
 	IF(@id IS NULL) 
-		BEGIN
-			ROLLBACK
 			THROW 50005, 'Id inválido', 1;
-		END
 	ELSE IF(@id = 1) 
-		BEGIN
-			ROLLBACK
 			THROW 50006, 'Não se pode remover este Cliente', 1;
-		END
-	ELSE DELETE FROM Cliente WHERE cId = @id
-	--TODO: Apagar alugueres que ainda não aconteceram
+			-- XACT_ABORT should be on so no need to rollback here cause its autmaticly done
+	ELSE BEGIN 
+		BEGIN TRAN
+			UPDATE dbo.Cliente
+			SET valido = 0
+			WHERE(@id = cId)
+
+			DECLARE @now DATETIME = GETDATE()
+			
+			UPDATE dbo.Aluguer
+			SET deleted = 1
+			WHERE(@id = cliente AND @now > data_inicio)
+		COMMIT
+	END
 GO
-exec dbo.RemoverCliente NULL
-exec dbo.RemoverCliente 2
