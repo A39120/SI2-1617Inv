@@ -12,5 +12,8 @@ AS
 		UPDATE dbo.Aluguer
 		SET deleted = 0
 		WHERE(serial = @serial)
+
+		DELETE FROM AluguerDataFim WHERE(serial_adf = @serial)
+		DELETE FROM AluguerPrecoDuracao WHERE(serial_apd = @serial)
 	COMMIT
 GO
