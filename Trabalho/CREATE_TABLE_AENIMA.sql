@@ -52,8 +52,10 @@ CREATE TABLE Cliente(
 	cId INT IDENTITY(1,1) PRIMARY KEY,
 	nif INT UNIQUE,
 	nome VARCHAR(31),
-	morada VARCHAR(100)
+	morada VARCHAR(100),
+	valido BIT DEFAULT 1
 )
+
 INSERT INTO Cliente(nif, nome, morada) VALUES(NULL, NULL, NULL);
 
 CREATE TABLE Empregado(
