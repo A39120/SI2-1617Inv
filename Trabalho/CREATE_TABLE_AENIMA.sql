@@ -34,9 +34,8 @@ IF OBJECT_ID('Equipamento') IS NOT NULL
 	DROP TABLE Equipamento
 IF OBJECT_ID('Tipo') IS NOT NULL
 	DROP TABLE Tipo
-
-
 GO
+
 CREATE TABLE Tipo(
 	nome VARCHAR(31) PRIMARY KEY, 
 	descr VARCHAR(255)
@@ -47,6 +46,8 @@ CREATE TABLE Equipamento(
 	descr VARCHAR(255),
 	tipo VARCHAR(31) REFERENCES Tipo(nome) NOT NULL
 )
+-- Reset identity
+DBCC CHECKIDENT ('Equipamento', RESEED, 1);
 
 CREATE TABLE Cliente(
 	cId INT IDENTITY(1,1) PRIMARY KEY,
@@ -55,6 +56,8 @@ CREATE TABLE Cliente(
 	morada VARCHAR(100),
 	valido BIT DEFAULT 1
 )
+-- Reset identity
+DBCC CHECKIDENT ('Cliente', RESEED, 1);
 
 INSERT INTO Cliente(nif, nome, morada) VALUES(NULL, NULL, NULL);
 
@@ -62,6 +65,8 @@ CREATE TABLE Empregado(
 	eId INT IDENTITY(1,1) PRIMARY KEY, 
 	nome VARCHAR(31)
 )
+-- Reset identity
+DBCC CHECKIDENT ('Empregado', RESEED, 1);
 --TODO: Colocar id para não lixar a alteração de preçario
 CREATE TABLE Preco(
 	tipo VARCHAR(31) REFERENCES Tipo(nome), 
@@ -80,6 +85,8 @@ CREATE TABLE Promocao(
 	descr VARCHAR(255),
 	CONSTRAINT ck1_promocao CHECK(fim > inicio) 
 )
+-- Reset identity
+DBCC CHECKIDENT ('Promocao', RESEED, 1);
 
 CREATE TABLE PromocaoTemporal(
 	pId INT REFERENCES Promocao(pId) PRIMARY KEY,
