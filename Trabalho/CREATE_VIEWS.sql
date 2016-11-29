@@ -9,4 +9,9 @@ GO
 CREATE VIEW dbo.ClienteView AS -- view para mostrar apenas os clientes ainda válidos
 SELECT cId, nif, nome, morada FROM Cliente WHERE valido = 1
 
---SELECT * from ClienteView
+GO
+
+CREATE VIEW dbo.AluguerView AS -- view para mostrar apenas os alugueres a decorrer
+SELECT serial, eqId, empregado, cliente, data_inicio
+FROM dbo.Aluguer
+WHERE deleted = 0
