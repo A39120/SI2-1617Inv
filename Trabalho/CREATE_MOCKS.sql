@@ -129,4 +129,5 @@ exec InserirAluguer 1, 3, 2, '2016-12-27 13:00:00', '01:30:00.0000000', 20
 -- Inserir aluguer sem promoção, com preço e duração existentes, no cliente existente, que está a acontecer
 DECLARE @currentDate DATETIME = GETDATE()
 exec InserirAluguer 1, 3, 3, @currentDate, '01:00:00', 10, 3
-exec InserirAluguer 1, 3, 3, @currentDate, '01:00:00', 10, 3
+-- Inserir aluguer que ainda não aconteceu, com uma promoção temporal, com um novo cliente
+exec InserirAluguerComNovoCliente 333322343,'New Client', 'SAvn.', 1, 4, '2017-05-31 23:59:59', '01:30:00', 20, 4
