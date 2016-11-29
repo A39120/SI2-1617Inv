@@ -1,8 +1,6 @@
 GUIÃO:
 	(i) Efectuar alterações de preçário;
 	(l) Testar cada um dos requisitos anteriores.
-				(c) Informação de um cliente;
-					c. Actualizar 
 			    (d) Informação de um equipamento:
 					b. remover 
 					c. actualizar 

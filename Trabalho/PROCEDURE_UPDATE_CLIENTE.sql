@@ -7,21 +7,13 @@ GO
 CREATE PROCEDURE dbo.ActualizarCliente @id INT, @nome VARCHAR(31), @nif INT, @morada VARCHAR(100)
 AS	
 	IF(@id IS NULL) 
-		BEGIN
-			ROLLBACK
 			THROW 50002, 'Id inválido', 1;
-		END
 	ELSE IF(@id = 1) 
-		BEGIN
-			ROLLBACK
 			THROW 50003, 'Não se pode alterar a informação do Cliente Final', 1; 
-		END
 	ELSE IF(@nome IS NULL OR @nif IS NULL OR @morada IS NULL) 
-		BEGIN
-			ROLLBACK
 			THROW 50004, 'Não se pode alterar a informação do Cliente com alguma informação nula', 1;
-		END
-	ELSE UPDATE Cliente 
+	ELSE 
+	UPDATE Cliente 
 	SET 
 		nome = @nome,
 		nif = @nif,
@@ -29,6 +21,8 @@ AS
 	WHERE cId = @id 
 
 GO 
+/*
 exec dbo.ActualizarCliente 2, 'Lopes', 250668122, 'Outra Morada'
 exec dbo.ActualizarCliente 1, 'Cliente final', 23123, 'Outra Morada'
 exec dbo.ActualizarCliente 2, @nome=NULL, @nif=250668123, @morada='At morada'
+*/
