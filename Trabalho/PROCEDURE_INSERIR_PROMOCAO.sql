@@ -35,7 +35,10 @@ AS
 	DECLARE @id INT
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
 	IF (@id IS NULL) 
-		THROW 50071, 'O id inserido é null', 1;
+		BEGIN
+			ROLLBACK
+			THROW 50071, 'O id inserido é null', 1;
+		END
 	INSERT INTO PromocaoTemporal 
 		VALUES (@id, @tempoExtra)
 	COMMIT
@@ -51,7 +54,10 @@ AS
 	DECLARE @id INT
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
 	IF (@id IS NULL) 
-		THROW 50072, 'O id inserido é null', 1;
+		BEGIN
+			ROLLBACK
+			THROW 50072, 'O id inserido é null', 1;
+		END
 	INSERT INTO PromocaoDesconto
 		VALUES (@id, @desconto)
 	COMMIT
