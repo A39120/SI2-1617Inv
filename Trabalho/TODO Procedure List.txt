@@ -1,12 +1,12 @@
 InserirCliente: 
-	*	1 INSERT Cliente-> 1 SELECT @varTable
+	*	[1 INSERT Cliente-> 1 SELECT @varTable] READ COMMITED
 	* 	EXCEÇÃO: 50001
 ActualizarCliente: 
 	* 	1 UPDATE Cliente
 	*	EXCEÇÃO: 50002, 50003, 50004
 RemoverCliente:
+	* 	[1 UPDATE Cliente-> 1 UPDATE Aluguer] READ UNCOMMITED
 	*	EXCEÇÃO: 50005, 50006
-	* 	[1 UPDATE Cliente-> 1 UPDATE Cliente] ???
 InserirEquipamentoComTipo:
 	*	[1 SELECT Tipo-> (1 INSERT Tipo) -> 1 INSERT Equipamento]
 InserirEquipamento: 

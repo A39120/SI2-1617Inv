@@ -11,7 +11,8 @@ AS
 	IF(@id = 1) 
 			THROW 50006, 'Não se pode remover este Cliente', 1;
 			-- XACT_ABORT should be on so no need to rollback here cause its autmaticly done
-	 BEGIN TRAN
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+	BEGIN TRAN
 		UPDATE dbo.Cliente
 		SET valido = 0
 		WHERE(@id = cId)
@@ -21,5 +22,5 @@ AS
 		UPDATE dbo.Aluguer
 		SET deleted = 1
 		WHERE(@id = cliente AND @now > data_inicio)
-	COMMIT
+	COMMIT 
 GO
