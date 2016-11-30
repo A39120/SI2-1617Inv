@@ -11,7 +11,8 @@ CREATE PROCEDURE dbo.ActualizarEquipamentoComNovoTipo
 	@descr VARCHAR(255) = NULL, 
 	@descrTipo VARCHAR(255) = NULL
 AS
-	BEGIN TRAN -- Necessario transação (2 escritas)
+	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+	BEGIN TRAN
 	IF NOT EXISTS(SELECT nome FROM Tipo WHERE nome = @tipo) 
 		INSERT INTO Tipo(nome, descr) VALUES (@tipo, @descrTipo);
 

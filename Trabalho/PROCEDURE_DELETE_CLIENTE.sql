@@ -6,21 +6,19 @@ IF OBJECT_ID('dbo.RemoverCliente') IS NOT NULL
 GO
 CREATE PROC dbo.RemoverCliente @id INT
 AS 
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	IF(@id IS NULL) 
 			THROW 50005, 'Id inválido', 1;
 	IF(@id = 1) 
 			THROW 50006, 'Não se pode remover este Cliente', 1;
 			-- XACT_ABORT should be on so no need to rollback here cause its autmaticly done
-	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	BEGIN TRAN
-		UPDATE dbo.Cliente
-		SET valido = 0
+		UPDATE dbo.Cliente SET valido = 0
 		WHERE(@id = cId)
 
 		DECLARE @now DATETIME = GETDATE()
 		
-		UPDATE dbo.Aluguer
-		SET deleted = 1
-		WHERE(@id = cliente AND @now > data_inicio)
+		UPDATE dbo.Aluguer SET deleted = 1
+		WHERE(@id = cliente) -- AND @now > data_inicio)
 	COMMIT 
 GO

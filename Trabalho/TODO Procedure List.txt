@@ -8,18 +8,18 @@ RemoverCliente:
 	* 	[1 UPDATE Cliente-> 1 UPDATE Aluguer] READ UNCOMMITED
 	*	EXCEÇÃO: 50005, 50006
 InserirEquipamentoComTipo:
-	*	[1 SELECT Tipo-> (1 INSERT Tipo) -> 1 INSERT Equipamento]
+	*	[1 SELECT Tipo-> (1 INSERT Tipo) -> 1 INSERT Equipamento] READ COMMITED
 InserirEquipamento: 
 	* 	1 INSERT Equipamento
 ActualizarEquipamentoComNovoTipo:
-	* 	[1 SELECT Tipo-> (1 INSERT Tipo) -> 1 UPDATE Equipamento]
+	* 	[1 SELECT Tipo-> (1 INSERT Tipo) -> 1 UPDATE Equipamento] READ COMMITED
 ActualizarEquipamento: 
 	* 	1 UPDATE Equipamento
 RemoverEquipamento:
-	*	[1 SELECT AluguerView, AluguerDataFim -> 1 DELETE Equipamento]
+	*	[1 SELECT AluguerView, AluguerDataFim -> 1 DELETE Equipamento] READ COMMITTED
 	*	EXCEÇÃO: 50129 (dentro da transação, logo necessita de rollback)
 InserirPromocao:
-	*	[1 INSERT Promocao -> 1 SELECT @varTable -> 1 INSERT TipoPromocao]
+	*	[1 INSERT Promocao -> 1 SELECT @varTable -> 1 INSERT TipoPromocao] SERIALIZABLE
 	* 	EXCEÇÃO: 50070 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
 InserirPromocaoTemporal:
 	*	[InserirPromocao -> 1 INSERT PromocaoTemporal]

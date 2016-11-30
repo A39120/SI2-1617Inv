@@ -12,6 +12,7 @@ AS
 	
 	IF(@nome IS NOT NULL AND @nif IS NOT NULL AND @morada IS NOT NULL)
 	BEGIN
+			SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 			BEGIN TRAN
 			DECLARE @clienteTable TABLE (id INT)
 			INSERT INTO Cliente(nome, nif, morada) 
