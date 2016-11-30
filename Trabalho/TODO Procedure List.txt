@@ -1,59 +1,59 @@
 InserirCliente: 
-	*	[1 INSERT -> 1 SELECT]
+	*	[1 INSERT Cliente-> 1 SELECT @varTable]
 	* 	EXCEÇÃO: 50001
 ActualizarCliente: 
+	* 	1 UPDATE Cliente
 	*	EXCEÇÃO: 50002, 50003, 50004
-	* 	1 UPDATE
 RemoverCliente:
 	*	EXCEÇÃO: 50005, 50006
-	* 	[2 UPDATE] ???
+	* 	[1 UPDATE Cliente-> 1 UPDATE Cliente] ???
 InserirEquipamentoComTipo:
-	*	[1 SELECT -> (1 INSERT) -> 1 INSERT]
+	*	[1 SELECT Tipo-> (1 INSERT Tipo) -> 1 INSERT Equipamento]
 InserirEquipamento: 
-	* 	1 INSERT (s/tran)
+	* 	1 INSERT Equipamento
 ActualizarEquipamentoComNovoTipo:
-	* 	[1 SELECT -> (1 INSERT) -> 1 UPDATE]
+	* 	[1 SELECT Tipo-> (1 INSERT Tipo) -> 1 UPDATE Equipamento]
 ActualizarEquipamento: 
-	* 	1 UPDATE
+	* 	1 UPDATE Equipamento
 RemoverEquipamento:
-	*	[1 SELECT -> 1 DELETE]
+	*	[1 SELECT AluguerView, AluguerDataFim -> 1 DELETE Equipamento]
 	*	EXCEÇÃO: 50129 (dentro da transação, logo necessita de rollback)
 InserirPromocao:
-	*	[1 INSERT -> 1 SELECT -> 1 INSERT]
+	*	[1 INSERT Promocao -> 1 SELECT @varTable -> 1 INSERT TipoPromocao]
 	* 	EXCEÇÃO: 50070 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
 InserirPromocaoTemporal:
-	*	[InserirPromocao -> 1 INSERT]
+	*	[InserirPromocao -> 1 INSERT PromocaoTemporal]
 	* 	EXCEÇÃO: 50071 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
-InserirPromocaoTemporal:
-	*	[InserirPromocao -> 1 INSERT]
+InserirPromocaoDesconto:
+	*	[InserirPromocao -> 1 INSERT PromocaoDesconto]
 	* 	EXCEÇÃO: 50072 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
 ActualizarPromocao:
-	*	[1 SELECT -> 1 UPDATE]
+	*	[1 SELECT Promoção -> 1 UPDATE Promocao]
 ActualizarPromocaoTemporal: 
-	* 	[ActualizarPromocao -> 1 UPDATE]
+	* 	[ActualizarPromocao -> 1 UPDATE PromocaoTemporal]
 ActualizarPromocaoDesconto: 
-	* 	[ActualizarPromocao -> 1 UPDATE]
+	* 	[ActualizarPromocao -> 1 UPDATE PromocaoDesconto]
 RemoverPromocao:
-	* 	[2 DELETE]
+	* 	[1 DELETE TipoPromocao -> 1 DELETE Promocao]
 RemoverPromocaoDesconto: 
-	* 	[1 DELETE -> RemoverPromocao]
+	* 	[1 DELETE PromocaoDesconto-> RemoverPromocao]
 RemoverPromocaoTemporal: 
-	* 	[1 DELETE -> RemoverPromocao]
+	* 	[1 DELETE PromocaoTemporal-> RemoverPromocao]
 InserirPreco:
-	* 	[1 SELECT -> 1 INSERT]
+	* 	[1 SELECT Tipo-> 1 INSERT Preco]
 	*	EXCEÇÃO: 50 200 até 50 204
 ActualizarPreco:
-	* 	[1 SELECT -> 1 SELECT -> [1 DELETE -> 1 INSERT]]
+	* 	[1 SELECT Tipo -> 1 SELECT Preco -> [1 DELETE Preco-> 1 INSERT Preco]]
 	*	EXCEÇÃO: 50206 até 50210
 RemoverPreco:
-	* 	[1 SELECT -> 1 DELETE]
+	* 	[1 SELECT Tipo -> 1 DELETE Preco]
 	* 	EXCEÇÃO: 50205
 InserirAluguer:
-	* 	[SELECT -> SELECT -> SELECT -> SELECT -> SELECT -> (SELECT) -> 1 INSERT -> SELECT -> 2 INSERT]
+	* 	[SELECT Cliente -> SELECT Equipamento -> SELECT Empregado -> SELECT Preco -> SELECT Promocao-> (SELECT function) -> 1 INSERT Aluguer -> SELECT @varTable-> 1 INSERT AluguerPrecoDuracao -> 1 INSERT AluguerDataFim]
 	*	EXCEÇÃO: 50100 a 50104
 InserirAluguerComNovoCliente:
 	* 	[InserirCliente -> InserirAluguer]
 RemoverAluguer:
-	*	[1 UPDATE -> 2 DELETE]
+	*	[1 UPDATE Aluguer-> 1 DELETE AluguerDataFim-> 1 DELETE AluguerPrecoDuracao]
 
-NOTA: Se 	
+NOTA: Pelos vistos o 	
