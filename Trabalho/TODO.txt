@@ -33,6 +33,6 @@ OUTROS:
 TRIGGERS: 
 	- Para o DELETE Aluguer e consequentes 
 	- Para o delete do AluguerDataFim, fazer delete das outras
+TIAGO DO THIS SHIT:
 	- Para o delete do ultimo equipamento de um tipo, eleminar também um tipo
-NIVEIS DE ISOLAMENTO:
 	

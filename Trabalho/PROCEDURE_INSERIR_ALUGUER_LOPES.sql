@@ -16,6 +16,7 @@ CREATE PROCEDURE dbo.InserirAluguer
 	@preco FLOAT,
 	@pid INT = NULL -- cliente escolhe de antemão qual a promoção que quer
 AS 
+	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	BEGIN TRAN -- 5 Reads, 3 Write
 	--VERIFICAR SE O CLIENTE EXISTE
 	IF NOT EXISTS(SELECT * FROM Cliente WHERE cId = @cliente)
@@ -90,6 +91,7 @@ CREATE PROCEDURE dbo.InserirAluguerComNovoCliente
 	@preco FLOAT,
 	@pid INT = NULL -- cliente escolhe de antemão qual a promoção que quer
 AS 
+	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	BEGIN TRAN
 	DECLARE @idCliente INT = 0
 	exec dbo.InserirCliente @cliente_nome, @cliente_nif, @cliente_morada, @idCliente output

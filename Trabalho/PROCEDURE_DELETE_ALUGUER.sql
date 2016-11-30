@@ -5,13 +5,14 @@ IF OBJECT_ID('dbo.RemoverAluguer') IS NOT NULL
 GO
 
 CREATE PROCEDURE dbo.RemoverAluguer 
-	@serial VARCHAR(31)
+	@serial VARCHAR(36)
 AS
 	-- cannot actually remove a rental, so just mark it as deleted
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	BEGIN TRAN
 		UPDATE dbo.Aluguer
-		SET deleted = 0
-		WHERE(serial = @serial)
+			SET deleted = 0
+			WHERE(serial = @serial)
 
 		DELETE FROM AluguerDataFim WHERE(serial_adf = @serial)
 		DELETE FROM AluguerPrecoDuracao WHERE(serial_apd = @serial)

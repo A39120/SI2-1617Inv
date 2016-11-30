@@ -1,5 +1,5 @@
 InserirCliente: 
-	*	[1 INSERT Cliente-> 1 SELECT @varTable] READ COMMITED
+	*	[1 INSERT Cliente-> 1 SELECT @varTable] READ UNCOMMITED
 	* 	EXCEÇÃO: 50001
 ActualizarCliente: 
 	* 	1 UPDATE Cliente
@@ -20,38 +20,35 @@ RemoverEquipamento:
 	*	EXCEÇÃO: 50129 (dentro da transação, logo necessita de rollback)
 InserirPromocao:
 	*	[1 INSERT Promocao -> 1 SELECT @varTable -> 1 INSERT TipoPromocao] SERIALIZABLE
-	* 	EXCEÇÃO: 50070 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
 InserirPromocaoTemporal:
-	*	[InserirPromocao -> 1 INSERT PromocaoTemporal]
-	* 	EXCEÇÃO: 50071 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
+	*	[InserirPromocao -> 1 INSERT PromocaoTemporal] SERIALIZABLE
 InserirPromocaoDesconto:
-	*	[InserirPromocao -> 1 INSERT PromocaoDesconto]
-	* 	EXCEÇÃO: 50072 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
+	*	[InserirPromocao -> 1 INSERT PromocaoDesconto] SERIALIZABLE
 ActualizarPromocao:
-	*	[1 SELECT Promoção -> 1 UPDATE Promocao]
+	*	[1 SELECT Promoção -> 1 UPDATE Promocao] READ COMMITED
 ActualizarPromocaoTemporal: 
-	* 	[ActualizarPromocao -> 1 UPDATE PromocaoTemporal]
+	* 	[ActualizarPromocao -> 1 UPDATE PromocaoTemporal] READ COMMITED
 ActualizarPromocaoDesconto: 
-	* 	[ActualizarPromocao -> 1 UPDATE PromocaoDesconto]
+	* 	[ActualizarPromocao -> 1 UPDATE PromocaoDesconto] READ COMMITED
 RemoverPromocao:
-	* 	[1 DELETE TipoPromocao -> 1 DELETE Promocao]
+	* 	[1 DELETE TipoPromocao -> 1 DELETE Promocao] READ UNCOMMITTED
 RemoverPromocaoDesconto: 
-	* 	[1 DELETE PromocaoDesconto-> RemoverPromocao]
+	* 	[1 DELETE PromocaoDesconto-> RemoverPromocao] READ UNCOMMITTED
 RemoverPromocaoTemporal: 
-	* 	[1 DELETE PromocaoTemporal-> RemoverPromocao]
+	* 	[1 DELETE PromocaoTemporal-> RemoverPromocao] READ UNCOMMITTED
 InserirPreco:
-	* 	[1 SELECT Tipo-> 1 INSERT Preco]
+	* 	[1 SELECT Tipo-> 1 INSERT Preco] READ COMMITTED
 	*	EXCEÇÃO: 50 200 até 50 204
 ActualizarPreco:
-	* 	[1 SELECT Tipo -> 1 SELECT Preco -> [1 DELETE Preco-> 1 INSERT Preco]]
+	* 	[1 SELECT Tipo -> 1 SELECT Preco -> [1 DELETE Preco-> 1 INSERT Preco]] REPEATABLE READ  
 	*	EXCEÇÃO: 50206 até 50210
 RemoverPreco:
-	* 	[1 SELECT Tipo -> 1 DELETE Preco]
-	* 	EXCEÇÃO: 50205
+	* 	1 DELETE Preco 
 InserirAluguer:
-	* 	[SELECT Cliente -> SELECT Equipamento -> SELECT Empregado -> SELECT Preco -> SELECT Promocao-> (SELECT function) -> 1 INSERT Aluguer -> SELECT @varTable-> 1 INSERT AluguerPrecoDuracao -> 1 INSERT AluguerDataFim]
+	* 	[SELECT Cliente -> SELECT Equipamento -> SELECT Empregado -> SELECT Preco -> SELECT Promocao -> (SELECT function) -> 
+		1 INSERT Aluguer -> SELECT @varTable-> 1 INSERT AluguerPrecoDuracao -> 1 INSERT AluguerDataFim] REPEATABLE READ
 	*	EXCEÇÃO: 50100 a 50104
 InserirAluguerComNovoCliente:
-	* 	[InserirCliente -> InserirAluguer]
+	* 	[InserirCliente -> InserirAluguer] REPEATABLE READ
 RemoverAluguer:
-	*	[1 UPDATE Aluguer-> 1 DELETE AluguerDataFim-> 1 DELETE AluguerPrecoDuracao]
+	*	[1 UPDATE Aluguer-> 1 DELETE AluguerDataFim-> 1 DELETE AluguerPrecoDuracao] READ UNCOMMITTED

@@ -8,6 +8,7 @@ CREATE PROCEDURE dbo.ActualizarPreco
 @tipo VARCHAR(31), @valor FLOAT, @duracao TIME, @validade DATE, 
 				   @novovalor FLOAT, @novaduracao TIME, @novavalidade DATE
 AS
+	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	BEGIN TRAN
 	IF NOT EXISTS(SELECT nome FROM Tipo WHERE nome = @tipo)
 		BEGIN
@@ -32,11 +33,9 @@ AS
 			ROLLBACK;
 			THROW 50210, 'Nova validade não pode ser nula', 1;
 		END
-	BEGIN TRAN -- para garantir atomicidade na "actualização"
 		--apagar velho
-		DELETE FROM Preco WHERE tipo = @tipo AND valor = @valor AND duracao = @duracao AND validade = @validade
-		--inserir novo
-		INSERT INTO Preco(tipo, valor, duracao, validade) VALUES(@tipo, @novovalor, @novaduracao, @novavalidade)
-	COMMIT
+	DELETE FROM Preco WHERE tipo = @tipo AND valor = @valor AND duracao = @duracao AND validade = @validade
+	--inserir novo
+	INSERT INTO Preco(tipo, valor, duracao, validade) VALUES(@tipo, @novovalor, @novaduracao, @novavalidade)
 	COMMIT
 GO 

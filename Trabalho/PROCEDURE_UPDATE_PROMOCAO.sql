@@ -13,6 +13,7 @@ CREATE PROCEDURE dbo.ActualizarPromocao
 	@fim DATETIME = NULL,
 	@descr VARCHAR(255) = NULL
 AS 
+	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN -- 1 leitura e 1 escrita vs 3 escritas
 	DECLARE @customInicio DATETIME, @customFim DATETIME, @customDesc VARCHAR(255)
 	SELECT inicio = @customInicio, fim = @customFim, descr = @customDesc
@@ -36,6 +37,7 @@ CREATE PROCEDURE dbo.ActualizarPromocaoTemporal
 	@descr VARCHAR(255) = NULL,
 	@tempoExtra TIME = NULL
 AS 
+	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN 
 	EXEC ActualizarPromocao @promotion_id, @inicio, @fim, @descr
 	IF(@tempoExtra IS NOT NULL)
@@ -54,6 +56,7 @@ CREATE PROCEDURE dbo.ActualizarPromocaoDesconto
 	@descr VARCHAR(255) = NULL,
 	@desconto FLOAT = NULL
 AS 
+	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN 
 	EXEC ActualizarPromocao @promotion_id, @inicio, @fim, @descr
 	IF(@desconto IS NOT NULL)

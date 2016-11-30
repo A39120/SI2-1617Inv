@@ -11,6 +11,7 @@ GO
 CREATE PROCEDURE dbo.RemoverPromocao
 	@pid INT
 AS 
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	BEGIN TRAN 
 	DELETE FROM TipoPromocao WHERE pId = @pid
 	DELETE FROM Promocao WHERE pId = @pid
@@ -21,6 +22,7 @@ GO
 CREATE PROCEDURE dbo.RemoverPromocaoDesconto 
 	@pid INT
 AS 
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	BEGIN TRAN 
 	DELETE FROM PromocaoDesconto WHERE pId = @pid 
 	EXEC RemoverPromocao @pid
@@ -31,6 +33,7 @@ GO
 CREATE PROCEDURE dbo.RemoverPromocaoTemporal 
 	@pid INT
 AS 
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	BEGIN TRAN 
 	DELETE FROM PromocaoTemporal WHERE pId = @pid 
 	EXEC RemoverPromocao @pid
