@@ -13,7 +13,7 @@ CREATE PROCEDURE dbo.InserirPromocao @inicio DATETIME,
 	@tipo VARCHAR(31),
 	@id INT OUTPUT
 AS 
-	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE  
+	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 	BEGIN TRAN -- 2 escritas
 	DECLARE @promTable TABLE (prom INT)
 	INSERT INTO Promocao(inicio, fim, descr) 
@@ -30,6 +30,7 @@ CREATE PROCEDURE dbo.InserirPromocaoTemporal
 	@tipo VARCHAR(31),
 	@tempoExtra TIME
 AS
+	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 	BEGIN TRAN -- 2 escritas
 	DECLARE @id INT
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
@@ -44,6 +45,7 @@ CREATE PROCEDURE dbo.InserirPromocaoDesconto @inicio DATETIME,
 	@tipo VARCHAR(31),
 	@desconto FLOAT
 AS
+	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 	BEGIN TRAN -- 2 escritas
 	DECLARE @id INT
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
