@@ -10,7 +10,6 @@ CREATE VIEW dbo.ClienteView AS -- view para mostrar apenas os clientes ainda vál
 SELECT cId, nif, nome, morada FROM Cliente WHERE valido = 1
 
 GO
-
 IF OBJECT_ID('dbo.AluguerView') IS NOT NULL
 	DROP VIEW dbo.AluguerView
 GO

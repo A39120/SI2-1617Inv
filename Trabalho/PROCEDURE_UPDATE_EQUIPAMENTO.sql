@@ -5,13 +5,16 @@ IF OBJECT_ID('dbo.ActualizarEquipamento') IS NOT NULL
 	DROP PROCEDURE dbo.ActualizarEquipamento
 
 GO
-CREATE PROCEDURE dbo.ActualizarEquipamentoComNovoTipo @id INT, @tipo VARCHAR(31), @descr VARCHAR(255) = NULL, @descrTipo VARCHAR(255) = NULL
+CREATE PROCEDURE dbo.ActualizarEquipamentoComNovoTipo 
+	@id INT, 
+	@tipo VARCHAR(31), 
+	@descr VARCHAR(255) = NULL, 
+	@descrTipo VARCHAR(255) = NULL
 AS
-	BEGIN TRAN 
+	BEGIN TRAN -- Necessario transação (2 escritas)
 	IF NOT EXISTS(SELECT nome FROM Tipo WHERE nome = @tipo) 
-	BEGIN
-		INSERT INTO Tipo(nome, descr) VALUES (@tipo, @descrTipo)
-	END
+		INSERT INTO Tipo(nome, descr) VALUES (@tipo, @descrTipo);
+
 	UPDATE Equipamento SET 
 		descr = @descr, 
 		tipo = @tipo
@@ -19,14 +22,14 @@ AS
 	COMMIT
 GO
 
-CREATE PROCEDURE dbo.ActualizarEquipamento @id INT, @tipo VARCHAR(31), @descr VARCHAR(255) = NULL
+CREATE PROCEDURE dbo.ActualizarEquipamento 
+	@id INT, 
+	@tipo VARCHAR(31), 
+	@descr VARCHAR(255) = NULL
 AS
+	-- São lançadas exceções se algum dos tipos acima for nulo ou não existir na tabela
 	UPDATE Equipamento SET 
 		descr = @descr, 
 		tipo = @tipo
 	WHERE eqId = @id
-
 GO
-exec dbo.ActualizarEquipamento 2, 'Tenda', ''   --Tipo existe
-exec dbo.ActualizarEquipamento 3, ''		    --Tipo não existente
-exec dbo.ActualizarEquipamentoComNovoTipo 4, 'Paraquedas', 'Partido', 'fasfas' 

@@ -8,9 +8,8 @@ AS
 	BEGIN TRAN
 		IF NOT EXISTS(SELECT nome FROM Tipo WHERE nome = @tipo)
 			BEGIN
-				ROLLBACK
+				ROLLBACK;
 				THROW 50205, 'Tipo não existe', 1;
 			END
-		ELSE
-			DELETE FROM Preco WHERE tipo = @tipo AND valor = @valor AND duracao = @duracao AND validade = @validade
+		DELETE FROM Preco WHERE tipo = @tipo AND valor = @valor AND duracao = @duracao AND validade = @validade
 	COMMIT

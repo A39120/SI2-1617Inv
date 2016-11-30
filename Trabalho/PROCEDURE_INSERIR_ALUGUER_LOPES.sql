@@ -45,25 +45,25 @@ AS
 
 	DECLARE @duracaoFinal TIME, @precoFinal FLOAT
 	IF(@pid IS NOT NULL)
-	BEGIN
-		IF EXISTS(SELECT * FROM Equipamento eq 
-				INNER JOIN Tipo t ON (eq.tipo = t.nome)
-				INNER JOIN TipoPromocao tp ON(t.nome = tp.tipo)
-				INNER JOIN Promocao p ON(tp.pId = p.pId)
-				WHERE @pid = p.pId AND p.inicio < @inicioAluguer AND  @inicioAluguer < p.fim)
-			SELECT  @precoFinal = preco, @duracaoFinal = duracao 
-				FROM CalcularDuracaoPreco(@pid, @eqId, @preco, @duracao) 
-		ELSE 
-			BEGIN
-				ROLLBACK TRAN;
-				THROW 50104,'Esta promoção é invalida para este aluguer.', 1
-			END
-	END
+		BEGIN
+			IF EXISTS(SELECT * FROM Equipamento eq 
+					INNER JOIN Tipo t ON (eq.tipo = t.nome)
+					INNER JOIN TipoPromocao tp ON(t.nome = tp.tipo)
+					INNER JOIN Promocao p ON(tp.pId = p.pId)
+					WHERE @pid = p.pId AND p.inicio < @inicioAluguer AND  @inicioAluguer < p.fim)
+				SELECT  @precoFinal = preco, @duracaoFinal = duracao 
+					FROM CalcularDuracaoPreco(@pid, @eqId, @preco, @duracao) 
+			ELSE 
+				BEGIN
+					ROLLBACK TRAN;
+					THROW 50104,'Esta promoção é invalida para este aluguer.', 1
+				END
+		END
 	ELSE 
-	BEGIN 
-		SET @duracaoFinal = @duracao 
-		SET @precoFinal = @preco
-	END
+		BEGIN 
+			SET @duracaoFinal = @duracao 
+			SET @precoFinal = @preco
+		END
 	DECLARE @currentAluguer TABLE (id VARCHAR(36))
 	DECLARE @currentAluguerId VARCHAR(36)
 	INSERT INTO Aluguer(eqId, empregado, cliente, data_inicio)

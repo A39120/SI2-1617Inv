@@ -19,9 +19,5 @@ GO
 CREATE PROCEDURE dbo.InserirEquipamento @tipo VARCHAR(31), @descr VARCHAR(255) = NULL
 AS
 	INSERT INTO Equipamento(descr, tipo) VALUES (@descr, @tipo)
-	
 GO
 
-exec dbo.InserirEquipamento 'gaivota', 'não interessa'
-exec dbo.InserirEquipamentoComTipo 'Tenda', 'não interessa'
-exec dbo.InserirEquipamento 'Mota de Agua', 'Anda sobre aagua'

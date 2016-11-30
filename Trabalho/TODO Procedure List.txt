@@ -1,0 +1,59 @@
+InserirCliente: 
+	*	[1 INSERT -> 1 SELECT]
+	* 	EXCEÇÃO: 50001
+ActualizarCliente: 
+	*	EXCEÇÃO: 50002, 50003, 50004
+	* 	1 UPDATE
+RemoverCliente:
+	*	EXCEÇÃO: 50005, 50006
+	* 	[2 UPDATE] ???
+InserirEquipamentoComTipo:
+	*	[1 SELECT -> (1 INSERT) -> 1 INSERT]
+InserirEquipamento: 
+	* 	1 INSERT (s/tran)
+ActualizarEquipamentoComNovoTipo:
+	* 	[1 SELECT -> (1 INSERT) -> 1 UPDATE]
+ActualizarEquipamento: 
+	* 	1 UPDATE
+RemoverEquipamento:
+	*	[1 SELECT -> 1 DELETE]
+	*	EXCEÇÃO: 50129 (dentro da transação, logo necessita de rollback)
+InserirPromocao:
+	*	[1 INSERT -> 1 SELECT -> 1 INSERT]
+	* 	EXCEÇÃO: 50070 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
+InserirPromocaoTemporal:
+	*	[InserirPromocao -> 1 INSERT]
+	* 	EXCEÇÃO: 50071 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
+InserirPromocaoTemporal:
+	*	[InserirPromocao -> 1 INSERT]
+	* 	EXCEÇÃO: 50072 (dentro da transação, logo necessita de rollback) ??? provavelmente nunca vai dar nulo 
+ActualizarPromocao:
+	*	[1 SELECT -> 1 UPDATE]
+ActualizarPromocaoTemporal: 
+	* 	[ActualizarPromocao -> 1 UPDATE]
+ActualizarPromocaoDesconto: 
+	* 	[ActualizarPromocao -> 1 UPDATE]
+RemoverPromocao:
+	* 	[2 DELETE]
+RemoverPromocaoDesconto: 
+	* 	[1 DELETE -> RemoverPromocao]
+RemoverPromocaoTemporal: 
+	* 	[1 DELETE -> RemoverPromocao]
+InserirPreco:
+	* 	[1 SELECT -> 1 INSERT]
+	*	EXCEÇÃO: 50 200 até 50 204
+ActualizarPreco:
+	* 	[1 SELECT -> 1 SELECT -> [1 DELETE -> 1 INSERT]]
+	*	EXCEÇÃO: 50206 até 50210
+RemoverPreco:
+	* 	[1 SELECT -> 1 DELETE]
+	* 	EXCEÇÃO: 50205
+InserirAluguer:
+	* 	[SELECT -> SELECT -> SELECT -> SELECT -> SELECT -> (SELECT) -> 1 INSERT -> SELECT -> 2 INSERT]
+	*	EXCEÇÃO: 50100 a 50104
+InserirAluguerComNovoCliente:
+	* 	[InserirCliente -> InserirAluguer]
+RemoverAluguer:
+	*	[1 UPDATE -> 2 DELETE]
+
+NOTA: Se 	

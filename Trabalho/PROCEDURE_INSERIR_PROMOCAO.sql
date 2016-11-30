@@ -20,6 +20,7 @@ AS
 		VALUES (@inicio, @fim, @descricao)
 	SELECT @id = prom FROM @promTable 
 	IF(@id IS NULL) 
+		ROLLBACK TRAN;
 		THROW 50070, 'O id inserido é null', 1;
 	INSERT INTO TipoPromocao VALUES (@tipo, @id)
 	COMMIT
@@ -36,7 +37,7 @@ AS
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
 	IF (@id IS NULL) 
 		BEGIN
-			ROLLBACK
+			ROLLBACK TRAN;
 			THROW 50071, 'O id inserido é null', 1;
 		END
 	INSERT INTO PromocaoTemporal 
@@ -55,7 +56,7 @@ AS
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
 	IF (@id IS NULL) 
 		BEGIN
-			ROLLBACK
+			ROLLBACK;
 			THROW 50072, 'O id inserido é null', 1;
 		END
 	INSERT INTO PromocaoDesconto
