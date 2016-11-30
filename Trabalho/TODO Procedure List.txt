@@ -1,5 +1,5 @@
 InserirCliente: 
-	*	[1 INSERT Cliente-> 1 SELECT @varTable]
+	*	1 INSERT Cliente-> 1 SELECT @varTable
 	* 	EXCEÇÃO: 50001
 ActualizarCliente: 
 	* 	1 UPDATE Cliente
@@ -55,5 +55,3 @@ InserirAluguerComNovoCliente:
 	* 	[InserirCliente -> InserirAluguer]
 RemoverAluguer:
 	*	[1 UPDATE Aluguer-> 1 DELETE AluguerDataFim-> 1 DELETE AluguerPrecoDuracao]
-
-NOTA: Pelos vistos o 	
