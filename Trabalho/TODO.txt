@@ -1,8 +1,8 @@
 GUIÃO:
+	importante: utilizar as views em vez das tabelas em si
 	(i) Efectuar alterações de preçário;
 	(l) Testar cada um dos requisitos anteriores.
 			    (d) Informação de um equipamento:
-					b. remover 
 					c. actualizar 
 			    (e) Informação de promoções
 					b. remover 
