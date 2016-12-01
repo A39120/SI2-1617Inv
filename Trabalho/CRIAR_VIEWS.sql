@@ -7,6 +7,8 @@ IF OBJECT_ID('dbo.AluguerView') IS NOT NULL
 	DROP VIEW dbo.AluguerView
 IF OBJECT_ID('dbo.TipoView') IS NOT NULL
 	DROP VIEW dbo.TipoView
+IF OBJECT_ID('dbo.EquipamentoDisponivelView') IS NOT NULL
+	DROP VIEW dbo.EquipamentoDisponivelView
 
 GO
 
@@ -23,11 +25,10 @@ WHERE deleted = 0
 
 GO
 
-
-CREATE VIEW dbo.EquipamentoDisponivel AS
+CREATE VIEW dbo.EquipamentoDisponivelView AS
 SELECT eqId, descr, tipo
 FROM dbo.Equipamento
-WHERE(in_use = 1)
+WHERE(valid = 1)
 
 GO
 
