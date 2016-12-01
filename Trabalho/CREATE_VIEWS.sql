@@ -23,6 +23,16 @@ WHERE deleted = 0
 
 GO
 
+
+CREATE VIEW dbo.EquipamentoDisponivel AS
+SELECT eqId, descr, tipo
+FROM dbo.Equipamento
+WHERE(in_use = 1)
+
+GO
+
 CREATE VIEW dbo.TipoView AS -- view para mostrar apenas os Tipos para os quais existem Equipamentos desse Tipo (aka "Tipos válidos para aluguer")
 SELECT t.*
 FROM dbo.Tipo t INNER JOIN dbo.Equipamento e ON (t.nome = e.tipo)
+
+GO
