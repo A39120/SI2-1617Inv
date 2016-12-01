@@ -7,7 +7,7 @@ CREATE PROCEDURE dbo.InserirPreco @tipo VARCHAR(31), @valor FLOAT, @duracao TIME
 AS
 	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN
-		IF NOT EXISTS(SELECT nome FROM Tipo WHERE nome = @tipo)
+		IF NOT EXISTS(SELECT nome FROM TipoView WHERE nome = @tipo)
 			BEGIN
 				ROLLBACK;
 				THROW 50200, 'Tipo não existe', 1;
