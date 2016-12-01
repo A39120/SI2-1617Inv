@@ -25,7 +25,7 @@ AS
 			THROW 50100, 'O cliente especificado não existe', 1;
 		END
 	--VERIFICAR SE EQUIPAMENTO EXISTE
-	IF NOT EXISTS(SELECT * FROM Equipamento WHERE eqId = @eqId)
+	IF NOT EXISTS(SELECT * FROM dbo.EquipamentoDisponivel WHERE eqId = @eqId)
 		BEGIN
 			ROLLBACK TRAN;
 			THROW 50101, 'O Equipamento inserido não existe', 1;
@@ -37,7 +37,7 @@ AS
 			THROW 50102, 'O Empregado inserido não existe', 1;
 		END
 	--VERIFICAR SE PREÇO EXISTE
-	IF NOT EXISTS (SELECT * FROM Equipamento eq INNER JOIN Preco p ON(eq.tipo = p.tipo)
+	IF NOT EXISTS (SELECT * FROM EquipamentoDisponivel eq INNER JOIN Preco p ON(eq.tipo = p.tipo)
 		WHERE p.valor = @preco AND p.duracao = @duracao AND eq.eqId = @eqId AND p.validade > @inicioAluguer) 
 		BEGIN
 			ROLLBACK TRAN; 
@@ -47,7 +47,7 @@ AS
 	DECLARE @duracaoFinal TIME, @precoFinal FLOAT
 	IF(@pid IS NOT NULL)
 		BEGIN
-			IF EXISTS(SELECT * FROM Equipamento eq 
+			IF EXISTS(SELECT * FROM EquipamentoDisponivel eq 
 					INNER JOIN Tipo t ON (eq.tipo = t.nome)
 					INNER JOIN TipoPromocao tp ON(t.nome = tp.tipo)
 					INNER JOIN Promocao p ON(tp.pId = p.pId)

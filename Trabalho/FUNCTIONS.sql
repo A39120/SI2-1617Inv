@@ -12,14 +12,14 @@ CREATE FUNCTION dbo.CalcularDuracaoPreco(@pid INT, @eqId INT, @preco FLOAT, @dur
 RETURNS @moddedValues TABLE (preco FLOAT, duracao TIME)
 AS BEGIN 
 	DECLARE @precoComDesconto FLOAT, @desconto FLOAT, @tempoFinal DATETIME, @tempoExtra TIME
-	SELECT @desconto = percentagemDesconto FROM Equipamento eq 
+	SELECT @desconto = percentagemDesconto FROM EquipamentoDisponivel eq 
 			INNER JOIN Tipo t ON (t.nome = eq.tipo)
 			INNER JOIN TipoPromocao tp ON (tp.tipo = t.nome)
 			INNER JOIN Promocao p ON(p.pId = tp.pId)
 			INNER JOIN PromocaoDesconto pd ON(pd.pId = p.pId)
 		WHERE @pid = p.pId AND @eqId = eq.eqId;
 	
-	SELECT @tempoExtra = tempoExtra FROM Equipamento eq 
+	SELECT @tempoExtra = tempoExtra FROM EquipamentoDisponivel eq 
 			INNER JOIN Tipo t ON (t.nome = eq.tipo)
 			INNER JOIN TipoPromocao tp ON (tp.tipo = t.nome)
 			INNER JOIN Promocao p ON(p.pId = tp.pId)
@@ -40,7 +40,7 @@ RETURNS @livres TABLE(eqId INT, descr VARCHAR(255), tipo VARCHAR(31))
 AS 
 BEGIN 
 	INSERT INTO  @livres SELECT eq.* FROM Tipo t
-		INNER JOIN Equipamento eq ON(t.nome = eq.tipo)
+		INNER JOIN EquipamentoDisponivel eq ON(t.nome = eq.tipo)
 		WHERE NOT EXISTS (
 			SELECT * FROM Aluguer al 
 				INNER JOIN AluguerPrecoDuracao apd ON (al.serial = apd.serial_apd)

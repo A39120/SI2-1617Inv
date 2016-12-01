@@ -19,7 +19,8 @@ AS
 	UPDATE Equipamento SET 
 		descr = @descr, 
 		tipo = @tipo
-	WHERE eqId = @id
+	WHERE eqId = @id AND in_use = 1
+
 	COMMIT
 GO
 
@@ -32,5 +33,5 @@ AS
 	UPDATE Equipamento SET 
 		descr = @descr, 
 		tipo = @tipo
-	WHERE eqId = @id
+	WHERE eqId = @id AND in_use = 1
 GO
