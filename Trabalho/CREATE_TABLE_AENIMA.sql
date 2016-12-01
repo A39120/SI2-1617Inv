@@ -51,10 +51,10 @@ DBCC CHECKIDENT ('Equipamento', RESEED, 1);
 
 CREATE TABLE Cliente(
 	cId INT IDENTITY(1,1) PRIMARY KEY,
-	nif INT UNIQUE,
+	nif INT,
 	nome VARCHAR(31),
 	morada VARCHAR(100),
-	valido BIT DEFAULT 1
+	valido BIT DEFAULT 1,
 )
 -- Reset identity
 DBCC CHECKIDENT ('Cliente', RESEED, 1);

@@ -9,11 +9,15 @@ CREATE PROCEDURE dbo.InserirCliente
 	@morada VARCHAR(100), 
 	@idCliente INT output
 AS 
-	
 	IF(@nome IS NOT NULL AND @nif IS NOT NULL AND @morada IS NOT NULL)
 	BEGIN
-			SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+			SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 			BEGIN TRAN
+			IF EXISTS(SELECT * FROM Cliente WHERE valido = 1 AND nif = @nif)
+				BEGIN
+				ROLLBACK;
+				THROW 50007, 'Não se pode inserir um cliente com um nif já a ser utilizado', 1; -- xact on auto aborts
+				END
 			DECLARE @clienteTable TABLE (id INT)
 			INSERT INTO Cliente(nome, nif, morada) 
 				OUTPUT INSERTED.cId INTO @clienteTable
