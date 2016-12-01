@@ -16,16 +16,16 @@ AS
 	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN -- 1 leitura e 1 escrita vs 3 escritas
 	DECLARE @customInicio DATETIME, @customFim DATETIME, @customDesc VARCHAR(255)
-	SELECT inicio = @customInicio, fim = @customFim, descr = @customDesc
+	SELECT @customInicio=inicio, @customFim=fim, @customDesc = descr 
 		FROM Promocao
 		WHERE pId = @promotion_id
 	IF(@inicio IS NOT NULL)  SET @customInicio = @inicio
 	IF(@fim IS NOT NULL)  SET @customFim = @fim
 	IF(@descr IS NOT NULL) SET @customDesc = @descr
 	UPDATE Promocao 
-		SET inicio = @inicio,
-			fim = @fim, 
-			descr = @descr
+		SET inicio = @customInicio,
+			fim = @customFim, 
+			descr = @customDesc
 		WHERE pId = @promotion_id
 	COMMIT
 
@@ -39,7 +39,13 @@ CREATE PROCEDURE dbo.ActualizarPromocaoTemporal
 AS 
 	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN 
-	EXEC ActualizarPromocao @promotion_id, @inicio, @fim, @descr
+	BEGIN TRY
+		EXEC ActualizarPromocao @promotion_id, @inicio, @fim, @descr
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+		THROW 50014, 'Transação interna interrompida', 1
+	END CATCH
 	IF(@tempoExtra IS NOT NULL)
 	BEGIN
 		UPDATE PromocaoTemporal 
@@ -58,12 +64,18 @@ CREATE PROCEDURE dbo.ActualizarPromocaoDesconto
 AS 
 	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN 
-	EXEC ActualizarPromocao @promotion_id, @inicio, @fim, @descr
+	BEGIN TRY
+		EXEC ActualizarPromocao @promotion_id, @inicio, @fim, @descr
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+		THROW 50013, 'Transação interna interrompida', 1
+	END CATCH
 	IF(@desconto IS NOT NULL)
-	BEGIN
-		UPDATE PromocaoDesconto 
-			SET percentagemDesconto = @desconto
-			WHERE pId = @promotion_id
-	END
+		BEGIN
+			UPDATE PromocaoDesconto 
+				SET percentagemDesconto = @desconto
+				WHERE pId = @promotion_id
+		END
 	COMMIT
 GO

@@ -25,7 +25,13 @@ AS
 	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	BEGIN TRAN 
 	DELETE FROM PromocaoDesconto WHERE pId = @pid 
-	EXEC RemoverPromocao @pid
+	BEGIN TRY
+		EXEC RemoverPromocao @pid
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+		THROW 50011, 'Transação interna interrompida', 1
+	END CATCH
 	COMMIT 
 
 GO 
@@ -36,6 +42,12 @@ AS
 	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	BEGIN TRAN 
 	DELETE FROM PromocaoTemporal WHERE pId = @pid 
+	BEGIN TRY
 	EXEC RemoverPromocao @pid
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+		THROW 50012, 'Transação interna interrompida', 1
+	END CATCH
 	COMMIT 
 GO

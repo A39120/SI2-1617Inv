@@ -30,12 +30,21 @@ CREATE PROCEDURE dbo.InserirPromocaoTemporal
 	@tipo VARCHAR(31),
 	@tempoExtra TIME
 AS
+	IF(@tempoExtra IS NULL)
+		THROW 50010, 'O parametro tempoExtra não pode ser nulo', 1
+
 	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 	BEGIN TRAN -- 2 escritas
+	BEGIN TRY
 	DECLARE @id INT
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
 	INSERT INTO PromocaoTemporal 
 		VALUES (@id, @tempoExtra)
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+		THROW 50016, 'Transação interna interrompida', 1
+	END CATCH
 	COMMIT
 
 GO
@@ -45,12 +54,21 @@ CREATE PROCEDURE dbo.InserirPromocaoDesconto @inicio DATETIME,
 	@tipo VARCHAR(31),
 	@desconto FLOAT
 AS
+	IF(@desconto IS NULL)
+		THROW 50011, 'O valor desconto não pode ser nulo', 1
+
 	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 	BEGIN TRAN -- 2 escritas
+	BEGIN TRY
 	DECLARE @id INT
 	EXEC InserirPromocao @inicio, @fim, @descricao, @tipo, @id output
 	INSERT INTO PromocaoDesconto
 		VALUES (@id, @desconto)
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+		THROW 50015, 'Transação interna interrompida', 1
+	END CATCH
 	COMMIT
 
 GO
