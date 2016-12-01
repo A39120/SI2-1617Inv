@@ -18,3 +18,12 @@ CREATE VIEW dbo.AluguerView AS -- view para mostrar apenas os alugueres a decorr
 SELECT serial, eqId, empregado, cliente, data_inicio
 FROM dbo.Aluguer
 WHERE deleted = 0
+
+GO
+
+CREATE VIEW dbo.EquipamentoDisponivel AS
+SELECT eqId, descr, tipo
+FROM dbo.Equipamento
+WHERE(in_use = 1)
+
+GO
