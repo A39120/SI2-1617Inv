@@ -1,7 +1,8 @@
 USE AEnima;
 IF OBJECT_ID('dbo.RemoverAluguer') IS NOT NULL 
 	DROP PROCEDURE dbo.RemoverAluguer
-
+IF OBJECT_ID('dbo.RemoverAlugueresParaCliente') IS NOT NULL 
+	DROP PROCEDURE dbo.RemoverAlugueresParaCliente
 GO
 
 CREATE PROCEDURE dbo.RemoverAluguer 

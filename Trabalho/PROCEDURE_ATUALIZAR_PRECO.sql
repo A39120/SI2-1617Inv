@@ -16,8 +16,10 @@ AS
 			THROW 50206, 'Tipo não existe', 1;
 		END
 	IF NOT EXISTS(SELECT * FROM Preco WHERE tipo = @tipo AND valor = @valor AND duracao = @duracao AND validade = @validade)
+		BEGIN
 			ROLLBACK;
 			THROW 50207, 'Preço não existe', 1;
+		END
 	IF(@novovalor IS NULL)
 		BEGIN
 			ROLLBACK;

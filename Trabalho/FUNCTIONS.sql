@@ -45,7 +45,7 @@ BEGIN
 			SELECT * FROM Aluguer al 
 				INNER JOIN AluguerPrecoDuracao apd ON (al.serial = apd.serial_apd)
 				INNER JOIN AluguerDataFim adf ON (al.serial = adf.serial_adf)
-				WHERE al.data_inicio >= @inicio AND adf.data_fim >= @fim 
+				WHERE (al.data_inicio <= @inicio AND adf.data_fim >= @inicio) OR (al.data_inicio >= @fim AND adf.data_fim <= @fim)
 		) AND  eq.tipo = IsNull(@tipo, eq.tipo)
 	RETURN;
 END
