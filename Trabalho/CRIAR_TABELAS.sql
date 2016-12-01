@@ -45,7 +45,7 @@ CREATE TABLE Equipamento(
 	eqId INT IDENTITY(1,1) PRIMARY KEY, 
 	descr VARCHAR(255),
 	tipo VARCHAR(31) REFERENCES Tipo(nome) NOT NULL,
-	in_use BIT DEFAULT 1
+	valid BIT DEFAULT 1
 )
 -- Reset identity
 DBCC CHECKIDENT ('Equipamento', RESEED, 1);
