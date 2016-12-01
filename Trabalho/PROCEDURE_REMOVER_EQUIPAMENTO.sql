@@ -18,6 +18,6 @@ AS
 		THROW 50129, @msg, 1 
 	END
 
-	UPDATE Equipamento SET in_use = 0 WHERE (eqId = @id)
+	UPDATE Equipamento SET valid = 0 WHERE (eqId = @id)
 	COMMIT
 GO
