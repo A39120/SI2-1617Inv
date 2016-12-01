@@ -94,6 +94,6 @@ AS
 	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	BEGIN TRAN
 	DECLARE @idCliente INT = 0
-	exec dbo.InserirCliente @cliente_nome, @cliente_nif, @cliente_morada, @idCliente output
+	exec dbo.InserirCliente @cliente_nome, @cliente_nif, @cliente_morada, @idCliente OUTPUT
 	exec dbo.InserirAluguer @empregado, @idCliente, @eqId, @inicioAluguer, @duracao, @preco, @pid
 	COMMIT
