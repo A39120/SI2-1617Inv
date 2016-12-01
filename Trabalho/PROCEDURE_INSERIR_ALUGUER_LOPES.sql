@@ -48,7 +48,7 @@ AS
 	IF(@pid IS NOT NULL)
 		BEGIN
 			IF EXISTS(SELECT * FROM EquipamentoDisponivel eq 
-					INNER JOIN Tipo t ON (eq.tipo = t.nome)
+					INNER JOIN TipoView t ON (eq.tipo = t.nome)
 					INNER JOIN TipoPromocao tp ON(t.nome = tp.tipo)
 					INNER JOIN Promocao p ON(tp.pId = p.pId)
 					WHERE @pid = p.pId AND p.inicio < @inicioAluguer AND  @inicioAluguer < p.fim)
