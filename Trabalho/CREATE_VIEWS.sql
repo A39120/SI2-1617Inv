@@ -7,6 +7,8 @@ IF OBJECT_ID('dbo.AluguerView') IS NOT NULL
 	DROP VIEW dbo.AluguerView
 IF OBJECT_ID('dbo.TipoView') IS NOT NULL
 	DROP VIEW dbo.TipoView
+IF OBJECT_ID('dbo.EquipamentoDisponivel') IS NOT NULL
+	DROP VIEW dbo.EquipamentoDisponivel
 
 GO
 
