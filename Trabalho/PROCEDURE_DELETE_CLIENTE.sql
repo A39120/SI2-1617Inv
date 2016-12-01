@@ -18,7 +18,7 @@ AS
 
 		DECLARE @now DATETIME = GETDATE()
 		
-		UPDATE dbo.Aluguer SET deleted = 1
-		WHERE(@id = cliente) -- AND @now > data_inicio)
+		exec dbo.RemoverAlugueresParaCliente @id
+
 	COMMIT 
 GO
