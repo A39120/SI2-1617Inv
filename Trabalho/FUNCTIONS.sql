@@ -39,14 +39,14 @@ CREATE FUNCTION dbo.EquipamentosLivres(@inicio DATETIME, @fim DATETIME, @tipo VA
 RETURNS @livres TABLE(eqId INT, descr VARCHAR(255), tipo VARCHAR(31))
 AS 
 BEGIN 
-	INSERT INTO  @livres SELECT eq.* FROM Tipo t
-		INNER JOIN EquipamentoDisponivelView eq ON(t.nome = eq.tipo)
-		WHERE NOT EXISTS (
-			SELECT * FROM Aluguer al 
-				INNER JOIN AluguerPrecoDuracao apd ON (al.serial = apd.serial_apd)
-				INNER JOIN AluguerDataFim adf ON (al.serial = adf.serial_adf)
-				WHERE (al.data_inicio <= @inicio AND adf.data_fim >= @inicio) OR (al.data_inicio >= @fim AND adf.data_fim <= @fim)
-		) AND  eq.tipo = IsNull(@tipo, eq.tipo)
+	INSERT INTO  @livres SELECT eq.* FROM EquipamentoDisponivelView eq
+	WHERE NOT EXISTS (
+		SELECT eqp.* FROM EquipamentoDisponivelView eqp 
+			INNER JOIN Aluguer al ON (eqp.eqId = al.eqId)
+			INNER JOIN AluguerPrecoDuracao apd ON (al.serial = apd.serial_apd)
+			INNER JOIN AluguerDataFim adf ON (al.serial = adf.serial_adf)
+			WHERE eqp.eqId = eq.eqId AND ((al.data_inicio BETWEEN @inicio AND @fim) OR (adf.data_fim BETWEEN @inicio AND @fim))
+	) AND  eq.tipo = IsNull(@tipo, eq.tipo)
 	RETURN;
 END
 
