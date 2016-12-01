@@ -3,7 +3,8 @@ GO
 -- delete part
 IF OBJECT_ID('dbo.TRG_DELETE_ALUGUER') IS NOT NULL
 	DROP TRIGGER dbo.TRG_DELETE_ALUGUER
-
+IF OBJECT_ID('dbo.TRG_DELETE_EQUIPAMENTO') IS NOT NULL
+	DROP TRIGGER dbo.TRG_DELETE_EQUIPAMENTO
 GO
 
 CREATE TRIGGER dbo.TRG_DELETE_ALUGUER ON Aluguer 
@@ -13,5 +14,17 @@ AS
 		DECLARE @serial VARCHAR(36) = (SELECT deleted.serial FROM deleted);
 		DELETE FROM AluguerDataFim WHERE serial_adf = @serial
 		DELETE FROM AluguerPrecoDuracao WHERE serial_apd = @serial
+	COMMIT
+GO
+
+CREATE TRIGGER dbo.TRG_DELETE_EQUIPAMENTO ON Equipamento -- se já não existirem mais equipamentos daquele tipo, então remover tipo
+AFTER DELETE
+AS
+	BEGIN TRAN SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+		DECLARE @tipo VARCHAR(31) = (SELECT deleted.tipo FROM deleted);
+		IF NOT EXISTS(SELECT * FROM Equipamento WHERE tipo = @tipo)
+		BEGIN
+			DELETE FROM Tipo WHERE @tipo = nome
+		END
 	COMMIT
 GO
