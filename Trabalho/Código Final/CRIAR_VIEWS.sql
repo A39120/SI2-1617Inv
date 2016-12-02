@@ -34,6 +34,6 @@ GO
 
 CREATE VIEW dbo.TipoView AS -- view para mostrar apenas os Tipos para os quais existem Equipamentos desse Tipo (aka "Tipos válidos para aluguer")
 SELECT t.*
-FROM dbo.Tipo t INNER JOIN dbo.Equipamento e ON (t.nome = e.tipo)
+FROM dbo.Tipo t INNER JOIN dbo.Equipamento e ON (t.nome = e.tipo AND e.valid = 1)
 
 GO
