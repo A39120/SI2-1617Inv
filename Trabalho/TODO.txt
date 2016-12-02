@@ -1,34 +1,10 @@
 GUIÃO:
 	importante: utilizar as views em vez das tabelas em si
-	(i) Efectuar alterações de preçário;
-	(l) Testar cada um dos requisitos anteriores.
-			    (d) Informação de um equipamento:
-					c. actualizar 
-			    (e) Informação de promoções
-					b. remover 
-					c. actualizar
-			    (f) Inserir um aluguer com inserção de um cliente com dados completos
-					a. Dados correctos
-					b. Forçar exceções
-			    (g) Inserir um aluguer usando um cliente existente;
-					d. Forçar erros
-			    (h) Remover um aluguer
-					a. Antes da data de inicio
-					b. Após a data de inicio (testar o trigger)
-			    (i) Efectuar alterações de preçário
-					a. Remover
-					b. Inserir
-			    (j) Listar todos os equipamentos livres, para um determinado tempo e tipo;
-					a. Com o tipo a nulo, retornar todos os equipamentos
-					b. Com tipo especificado
-			    (k) Listar os equipamentos sem alugueres na última semana
 OUTROS: 
-	Utilizar correctamente controlo transaccional;
-	Utilizar correctamente níveis de isolamento;
 	Utilizar correctamente vistas, justificando o seu uso na solução;
 	Utilizar correctamente procedimentos armazenados, justificando o seu uso  na solução;
-	Utilizar correctamente gatilhos, justificando o seu uso  na solução;
-	Utilizar correctamente funções, justificando o seu uso  na solução;
+	Utilizar correctamente gatilhos, justificando o seu uso  na solução; ????
+	Utilizar correctamente funções, justificando o seu uso  na solução; ????
 
 TRIGGERS: 
 	- Para o DELETE Aluguer e consequentes 
