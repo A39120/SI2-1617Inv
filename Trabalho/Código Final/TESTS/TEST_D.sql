@@ -33,7 +33,6 @@ END TRY
 BEGIN CATCH
 	IF(@@trancount > 0) 
 		RAISERROR ('Test Error 5: Test transaction still up after error.', 10,  1);
-	
 	DECLARE @AluguerSerial3 VARCHAR(36), @novoCliente2 INT
 	SELECT @novoCliente2 = c.cId FROM ClienteView c WHERE nif = 3
 	SELECT @AluguerSerial3=serial FROM AluguerView WHERE cliente = @novoCliente2
