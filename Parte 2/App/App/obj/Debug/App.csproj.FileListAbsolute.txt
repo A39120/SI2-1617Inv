@@ -1,0 +1,10 @@
+C:\SIApp\App\App\bin\Debug\App.exe.config
+C:\SIApp\App\App\bin\Debug\App.exe
+C:\SIApp\App\App\bin\Debug\App.pdb
+C:\SIApp\App\App\obj\Debug\App.csprojResolveAssemblyReference.cache
+C:\SIApp\App\App\obj\Debug\App.AddPromotionForm.resources
+C:\SIApp\App\App\obj\Debug\App.Start.resources
+C:\SIApp\App\App\obj\Debug\App.Properties.Resources.resources
+C:\SIApp\App\App\obj\Debug\App.csproj.GenerateResource.Cache
+C:\SIApp\App\App\obj\Debug\App.exe
+C:\SIApp\App\App\obj\Debug\App.pdb
