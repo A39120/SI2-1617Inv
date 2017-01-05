@@ -49,11 +49,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddPromotionForm.cs">
+    <Compile Include="AluguerAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddPromotionForm.Designer.cs">
-      <DependentUpon>AddPromotionForm.cs</DependentUpon>
+    <Compile Include="AluguerAddForm.Designer.cs">
+      <DependentUpon>AluguerAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AluguerClienteAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AluguerClienteAddForm.Designer.cs">
+      <DependentUpon>AluguerClienteAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PromotionAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PromotionAddForm.Designer.cs">
+      <DependentUpon>PromotionAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PromotionRemoveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PromotionRemoveForm.Designer.cs">
+      <DependentUpon>PromotionRemoveForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Start.cs">
       <SubType>Form</SubType>
@@ -63,8 +81,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddPromotionForm.resx">
-      <DependentUpon>AddPromotionForm.cs</DependentUpon>
+    <Compile Include="PromotionUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PromotionUpdateForm.Designer.cs">
+      <DependentUpon>PromotionUpdateForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AluguerAddForm.resx">
+      <DependentUpon>AluguerAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AluguerClienteAddForm.resx">
+      <DependentUpon>AluguerClienteAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PromotionAddForm.resx">
+      <DependentUpon>PromotionAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PromotionRemoveForm.resx">
+      <DependentUpon>PromotionRemoveForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Start.resx">
       <DependentUpon>Start.cs</DependentUpon>
@@ -78,6 +111,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PromotionUpdateForm.resx">
+      <DependentUpon>PromotionUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="AlugueresSchema.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -19,18 +19,20 @@ namespace App
 
         public void GoToAddPromotion(object sender, EventArgs e)
         {
-            AddPromotionForm frm = new AddPromotionForm();
+            PromotionAddForm frm = new PromotionAddForm();
             frm.Show();
         }
 
         public void GoToRemovePromotion(object sender, EventArgs e)
         {
-            //Not implemented goes to point (e)
+            PromotionRemoveForm prf = new PromotionRemoveForm();
+            prf.Show();
         }
 
         public void GoToUpdatePromotion(object sender, EventArgs e)
         {
-            //Not implemented goes to point (e)
+            PromotionUpdateForm frm = new PromotionUpdateForm();
+            frm.Show();
         }
 
         public void GoToRemoveAluguer(object sender, EventArgs e)
@@ -38,14 +40,10 @@ namespace App
             //Not implemented goes to point (e)
         }
 
-        public void GoToInsertWithClient(object sender, EventArgs e)
+        public void GoToInsertAluguer(object sender, EventArgs e)
         {
-            //Not implemented goes to point (e)
-        }
-
-        public void GoToInsertWithoutClient(object sender, EventArgs e)
-        {
-            //Not implemented goes to point (e)
+            AluguerAddForm aaf = new AluguerAddForm();
+            aaf.Show();
         }
 
         public void GoToRemovePrice(object sender, EventArgs e)

@@ -34,7 +34,6 @@
             this.addPromotion = new System.Windows.Forms.Button();
             this.groupBoxAluguer = new System.Windows.Forms.GroupBox();
             this.removeAluguer = new System.Windows.Forms.Button();
-            this.insertWithClient = new System.Windows.Forms.Button();
             this.insertWithoutClient = new System.Windows.Forms.Button();
             this.groupBoxPrice = new System.Windows.Forms.GroupBox();
             this.removePrice = new System.Windows.Forms.Button();
@@ -94,7 +93,6 @@
             // groupBoxAluguer
             // 
             this.groupBoxAluguer.Controls.Add(this.removeAluguer);
-            this.groupBoxAluguer.Controls.Add(this.insertWithClient);
             this.groupBoxAluguer.Controls.Add(this.insertWithoutClient);
             this.groupBoxAluguer.Location = new System.Drawing.Point(12, 69);
             this.groupBoxAluguer.Name = "groupBoxAluguer";
@@ -113,25 +111,15 @@
             this.removeAluguer.UseVisualStyleBackColor = true;
             this.removeAluguer.Click += new System.EventHandler(this.GoToRemoveAluguer);
             // 
-            // insertWithClient
-            // 
-            this.insertWithClient.Location = new System.Drawing.Point(228, 21);
-            this.insertWithClient.Name = "insertWithClient";
-            this.insertWithClient.Size = new System.Drawing.Size(211, 23);
-            this.insertWithClient.TabIndex = 1;
-            this.insertWithClient.Text = "Inserir c/ cliente";
-            this.insertWithClient.UseVisualStyleBackColor = true;
-            this.insertWithClient.Click += new System.EventHandler(this.GoToInsertWithClient);
-            // 
             // insertWithoutClient
             // 
             this.insertWithoutClient.Location = new System.Drawing.Point(7, 22);
             this.insertWithoutClient.Name = "insertWithoutClient";
             this.insertWithoutClient.Size = new System.Drawing.Size(211, 23);
             this.insertWithoutClient.TabIndex = 0;
-            this.insertWithoutClient.Text = "Inserir s/ cliente";
+            this.insertWithoutClient.Text = "Inserir";
             this.insertWithoutClient.UseVisualStyleBackColor = true;
-            this.insertWithoutClient.Click += new System.EventHandler(this.GoToInsertWithoutClient);
+            this.insertWithoutClient.Click += new System.EventHandler(this.GoToInsertAluguer);
             // 
             // groupBoxPrice
             // 
@@ -233,7 +221,6 @@
         private System.Windows.Forms.Button addPromotion;
         private System.Windows.Forms.GroupBox groupBoxAluguer;
         private System.Windows.Forms.Button removeAluguer;
-        private System.Windows.Forms.Button insertWithClient;
         private System.Windows.Forms.Button insertWithoutClient;
         private System.Windows.Forms.GroupBox groupBoxPrice;
         private System.Windows.Forms.Button removePrice;

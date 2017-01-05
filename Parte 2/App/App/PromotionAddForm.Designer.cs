@@ -1,6 +1,6 @@
 ﻿namespace App
 {
-    partial class AddPromotionForm
+    partial class PromotionAddForm
     {
         /// <summary>
         /// Required designer variable.
@@ -184,7 +184,7 @@
             this.buttonAddDesconto.UseVisualStyleBackColor = true;
             this.buttonAddDesconto.Click += new System.EventHandler(this.buttonAddDesconto_Click);
             // 
-            // AddPromotionForm
+            // PromotionAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -192,7 +192,7 @@
             this.Controls.Add(this.buttonAddDesconto);
             this.Controls.Add(this.buttonAddTempo);
             this.Controls.Add(this.groupBoxPromotionInfo);
-            this.Name = "AddPromotionForm";
+            this.Name = "PromotionAddForm";
             this.Text = "Adicionar Promoção";
             this.groupBoxPromotionInfo.ResumeLayout(false);
             this.groupBoxPromotionInfo.PerformLayout();
