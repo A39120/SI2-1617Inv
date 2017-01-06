@@ -30,6 +30,7 @@ namespace App
                 }
             }
         }
+
         #region promotion
         #region promotion_insert
         public void promotionInsert(SqlCommand cmd,

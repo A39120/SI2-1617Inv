@@ -21,40 +21,29 @@ namespace App
 
         private void buttonRemoveDesconto_Click(object sender, EventArgs e)
         {
-            Remove("RemoverPromocaoDesconto");
+            Command command = new Command();
+            MessageBox.Show(command.executeProcedure((cmd) => {
+                    command.promotionDescontoRemove(cmd, textBoxId.Text); 
+                },
+                "Promotion removal was successfull.",
+                "Promotion removal failed."
+            ));
+            
+            this.Close();
         }
 
         private void buttonRemoveTemporal_Click(object sender, EventArgs e)
         {
-            Remove("RemoverPromocaoTemporal");
-        }
-
-        private void Remove(String procedure)
-        {
-            using (SqlConnection con = new SqlConnection())
+            Command command = new Command();
+            MessageBox.Show(command.executeProcedure((cmd) =>
             {
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                using (SqlCommand cmd = con.CreateCommand())
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    SqlParameter id = new SqlParameter("@pid", SqlDbType.Int);
-                    cmd.Parameters.Add(id);
-                    cmd.CommandText = procedure;
-                    id.Value = textBoxId.Text;
+                command.promotionTemporalRemove(cmd, textBoxId.Text);
+            },
+                "Promotion removal was successfull.",
+                "Promotion removal failed."
+            ));
 
-                    con.Open();
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Added successfully.");
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Can't add with invalid parameters.");
-                    }
-                    this.Close();
-                }
-            }
+            this.Close();
         }
     }
 }
