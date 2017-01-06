@@ -172,7 +172,7 @@
             this.groupBoxEquipamentos.Size = new System.Drawing.Size(672, 54);
             this.groupBoxEquipamentos.TabIndex = 6;
             this.groupBoxEquipamentos.TabStop = false;
-            this.groupBoxEquipamentos.Text = "Preçario";
+            this.groupBoxEquipamentos.Text = "Equipamentos Livres";
             // 
             // listEquipamentosLivres
             // 

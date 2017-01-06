@@ -22,3 +22,4 @@ C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.AluguerCli
 C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PromotionAddForm.resources
 C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PromotionRemoveForm.resources
 C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PromotionUpdateForm.resources
+C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.AluguerRemoveForm.resources

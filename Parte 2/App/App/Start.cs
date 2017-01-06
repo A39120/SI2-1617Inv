@@ -37,7 +37,8 @@ namespace App
 
         public void GoToRemoveAluguer(object sender, EventArgs e)
         {
-            //Not implemented goes to point (e)
+            AluguerRemoveForm arf = new AluguerRemoveForm();
+            arf.Show();
         }
 
         public void GoToInsertAluguer(object sender, EventArgs e)

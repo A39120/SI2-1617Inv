@@ -61,6 +61,13 @@
     <Compile Include="AluguerClienteAddForm.Designer.cs">
       <DependentUpon>AluguerClienteAddForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AluguerRemoveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AluguerRemoveForm.Designer.cs">
+      <DependentUpon>AluguerRemoveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Command.cs" />
     <Compile Include="PromotionAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AluguerClienteAddForm.resx">
       <DependentUpon>AluguerClienteAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AluguerRemoveForm.resx">
+      <DependentUpon>AluguerRemoveForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PromotionAddForm.resx">
       <DependentUpon>PromotionAddForm.cs</DependentUpon>
