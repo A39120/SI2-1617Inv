@@ -301,27 +301,38 @@ namespace App
         }
         #endregion
 
-        public String getTable(Action<SqlCommand> action, String success, String error)
+        /*public void manageTable(Action<SqlCommand> action, Action<SqlDataReader> action2)
         {
             using (SqlConnection con = new SqlConnection())
             {
                 con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                 using (SqlCommand cmd = con.CreateCommand())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
                     action(cmd);
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        return success;
-                    }
-                    catch (Exception e)
-                    {
-                        return e.Message;
-                    }
+                    con.Open();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+                    action2(sdr);
+                    sdr.Close();
                 }
             }
+        }*/
+
+        public void getLastWeekUnusedEquipments(SqlCommand cmd)
+        {
+            cmd.CommandText = "SELECT * FROM EquipamentosSemAlugueresNaUltimaSemana()";
+        }
+
+        public void getUnusedEquipmentsFor(SqlCommand cmd, String inicio, String fim)
+        {
+            SqlParameter paramInicio = new SqlParameter("@inicio", SqlDbType.DateTime);
+            SqlParameter paramFim = new SqlParameter("@fim", SqlDbType.DateTime);
+
+            paramInicio.Value = inicio;
+            paramFim.Value = fim;
+            cmd.Parameters.Add(paramInicio);
+            cmd.Parameters.Add(paramFim);
+
+            cmd.CommandText = "SELECT * FROM EquipamentosLivres(@inicio, @fim, NULL)";
         }
     }
 

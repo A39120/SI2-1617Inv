@@ -68,6 +68,24 @@
       <DependentUpon>AluguerRemoveForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Command.cs" />
+    <Compile Include="Forms\EquipamentosLivresTabelaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EquipamentosLivresTabelaForm.Designer.cs">
+      <DependentUpon>EquipamentosLivresTabelaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FreeEquipmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FreeEquipmentForm.Designer.cs">
+      <DependentUpon>FreeEquipmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LastWeekForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LastWeekForm.Designer.cs">
+      <DependentUpon>LastWeekForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PrecoAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +138,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AluguerRemoveForm.resx">
       <DependentUpon>AluguerRemoveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EquipamentosLivresTabelaForm.resx">
+      <DependentUpon>EquipamentosLivresTabelaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FreeEquipmentForm.resx">
+      <DependentUpon>FreeEquipmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LastWeekForm.resx">
+      <DependentUpon>LastWeekForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrecoAddForm.resx">
       <DependentUpon>PrecoAddForm.cs</DependentUpon>

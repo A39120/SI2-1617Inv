@@ -41,3 +41,6 @@ C:\Users\João\Desktop\SI2\SI\si2_repo\Parte 2\App\App\obj\Debug\App.csproj.Gene
 C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PrecoAddForm.resources
 C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PrecoUpdateForm.resources
 C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PriceRemoveForm.resources
+C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.Forms.LastWeekForm.resources
+C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.Forms.EquipamentosLivresTabelaForm.resources
+C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.Forms.FreeEquipmentForm.resources
