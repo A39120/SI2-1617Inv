@@ -32,18 +32,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxNif = new System.Windows.Forms.TextBox();
+            this.textBoxNome = new System.Windows.Forms.TextBox();
+            this.textBoxMorada = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBoxMorada);
+            this.groupBox1.Controls.Add(this.textBoxNome);
+            this.groupBox1.Controls.Add(this.textBoxNif);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -83,25 +83,25 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(43, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(183, 22);
-            this.textBox1.TabIndex = 4;
+            this.textBoxNif.Location = new System.Drawing.Point(43, 18);
+            this.textBoxNif.Name = "textBox1";
+            this.textBoxNif.Size = new System.Drawing.Size(183, 22);
+            this.textBoxNif.TabIndex = 4;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(57, 44);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(169, 22);
-            this.textBox2.TabIndex = 5;
+            this.textBoxNome.Location = new System.Drawing.Point(57, 44);
+            this.textBoxNome.Name = "textBox2";
+            this.textBoxNome.Size = new System.Drawing.Size(169, 22);
+            this.textBoxNome.TabIndex = 5;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(11, 89);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(215, 65);
-            this.textBox3.TabIndex = 6;
+            this.textBoxMorada.Location = new System.Drawing.Point(11, 89);
+            this.textBoxMorada.Multiline = true;
+            this.textBoxMorada.Name = "textBox3";
+            this.textBoxMorada.Size = new System.Drawing.Size(215, 65);
+            this.textBoxMorada.TabIndex = 6;
             // 
             // button1
             // 
@@ -131,9 +131,9 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxMorada;
+        private System.Windows.Forms.TextBox textBoxNome;
+        private System.Windows.Forms.TextBox textBoxNif;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

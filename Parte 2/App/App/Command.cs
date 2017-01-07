@@ -300,6 +300,29 @@ namespace App
             cmd.CommandText = "RemoverPreco";
         }
         #endregion
+
+        public String getTable(Action<SqlCommand> action, String success, String error)
+        {
+            using (SqlConnection con = new SqlConnection())
+            {
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                using (SqlCommand cmd = con.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    action(cmd);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        return success;
+                    }
+                    catch (Exception e)
+                    {
+                        return e.Message;
+                    }
+                }
+            }
+        }
     }
 
     

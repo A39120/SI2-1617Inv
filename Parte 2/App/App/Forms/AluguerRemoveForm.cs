@@ -20,12 +20,12 @@ namespace App
         private void buttonRemoverAluguer_Click(object sender, EventArgs e)
         {
             Command cmd = new Command();
-            String result = cmd.executeProcedure(
+            MessageBox.Show(cmd.executeProcedure(
                     (command) => { cmd.removeAluguerProcedure(command, textBox1.Text); },
                     "Aluguer removido com sucesso. ",
                     "Remover aluguer falhado: %s"
-                );
-            MessageBox.Show(result);
+                ));
+            
             this.Close();
         }
     }

@@ -49,17 +49,20 @@ namespace App
 
         public void GoToRemovePrice(object sender, EventArgs e)
         {
-            //Not implemented goes to point (e)
+            PriceRemoveForm prf = new PriceRemoveForm();
+            prf.Show();
         }
 
         public void GoToUpdatePrice(object sender, EventArgs e)
         {
-            //Not implemented goes to point (e)
+            PrecoUpdateForm puf = new PrecoUpdateForm();
+            puf.Show();
         }
 
         public void GoToAddPrice(object sender, EventArgs e)
         {
-            //Not implemented goes to point (e)
+            PrecoAddForm paf = new PrecoAddForm();
+            paf.Show();
         }
 
         public void GoToListEquipamentosLivres(object sender, EventArgs e)
