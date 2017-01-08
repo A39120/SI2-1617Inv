@@ -8,21 +8,6 @@ C:\SIApp\App\App\obj\Debug\App.Properties.Resources.resources
 C:\SIApp\App\App\obj\Debug\App.csproj.GenerateResource.Cache
 C:\SIApp\App\App\obj\Debug\App.exe
 C:\SIApp\App\App\obj\Debug\App.pdb
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\bin\Debug\App.exe.config
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.exe
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.pdb
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\bin\Debug\App.exe
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\bin\Debug\App.pdb
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.csprojResolveAssemblyReference.cache
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.Start.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.Properties.Resources.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.csproj.GenerateResource.Cache
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.AluguerAddForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.AluguerClienteAddForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PromotionAddForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PromotionRemoveForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PromotionUpdateForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.AluguerRemoveForm.resources
 C:\Users\João\Desktop\SI2\SI\si2_repo\Parte 2\App\App\bin\Debug\App.exe.config
 C:\Users\João\Desktop\SI2\SI\si2_repo\Parte 2\App\App\obj\Debug\App.exe
 C:\Users\João\Desktop\SI2\SI\si2_repo\Parte 2\App\App\obj\Debug\App.pdb
@@ -38,9 +23,3 @@ C:\Users\João\Desktop\SI2\SI\si2_repo\Parte 2\App\App\obj\Debug\App.Start.resou
 C:\Users\João\Desktop\SI2\SI\si2_repo\Parte 2\App\App\obj\Debug\App.Properties.Resources.resources
 C:\Users\João\Desktop\SI2\SI\si2_repo\Parte 2\App\App\obj\Debug\App.PromotionUpdateForm.resources
 C:\Users\João\Desktop\SI2\SI\si2_repo\Parte 2\App\App\obj\Debug\App.csproj.GenerateResource.Cache
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PrecoAddForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PrecoUpdateForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.PriceRemoveForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.Forms.LastWeekForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.Forms.EquipamentosLivresTabelaForm.resources
-C:\Users\siad\Desktop\Trabalho\si2_repo\Parte 2\App\App\obj\Debug\App.Forms.FreeEquipmentForm.resources
