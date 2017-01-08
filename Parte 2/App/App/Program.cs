@@ -18,5 +18,10 @@ namespace App
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Start());
         }
+
+        static void ExportXML()
+        {
+
+        }
     }
 }

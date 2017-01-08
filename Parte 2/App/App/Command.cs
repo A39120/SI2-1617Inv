@@ -317,6 +317,7 @@ namespace App
             }
         }*/
 
+        #region tables
         public void getLastWeekUnusedEquipments(SqlCommand cmd)
         {
             cmd.CommandText = "SELECT * FROM EquipamentosSemAlugueresNaUltimaSemana()";
@@ -334,6 +335,7 @@ namespace App
 
             cmd.CommandText = "SELECT * FROM EquipamentosLivres(@inicio, @fim, NULL)";
         }
+        #endregion
     }
 
     
