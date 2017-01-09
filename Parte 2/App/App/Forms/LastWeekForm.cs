@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
+using App.EF;
 
 namespace App.Forms
 {
@@ -17,24 +18,33 @@ namespace App.Forms
         public LastWeekForm()
         {
             InitializeComponent();
-            using (SqlConnection con = new SqlConnection())
+            if (Program.EntityFramework)
             {
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                using (SqlCommand cmd = con.CreateCommand())
+                AEnimaEntities ctx = new AEnimaEntities();
+                dataGridView1.DataSource = ctx.EquipamentosSemAlugueresNaUltimaSemana();
+            }
+            else
+            {
+
+                using (SqlConnection con = new SqlConnection())
                 {
-                    Command command = new Command();
-                    command.getLastWeekUnusedEquipments(cmd);
-                    con.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.HasRows)
+                    con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                    using (SqlCommand cmd = con.CreateCommand())
                     {
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        dataGridView1.DataSource = dt;
-                    }
-                    reader.Close();
+                        AdoCommand command = new AdoCommand();
+                        command.getLastWeekUnusedEquipments(cmd);
+                        con.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            DataTable dt = new DataTable();
+                            dt.Load(reader);
+                            dataGridView1.DataSource = dt;
+                        }
+                        reader.Close();
                     }
                 }
+            }
             }
         }
     }

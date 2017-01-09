@@ -19,8 +19,8 @@ SELECT cId, nif, nome, morada FROM Cliente WHERE valido = 1
 GO
 
 CREATE VIEW dbo.AluguerView AS -- view para mostrar apenas os alugueres a decorrer
-SELECT serial, eqId, empregado, cliente, data_inicio
-FROM dbo.Aluguer
+SELECT serial as id, eqId as equipamento, empregado, cliente, data_inicio as dataInicio, data_fim as dataFim
+FROM dbo.Aluguer a INNER JOIN dbo.AluguerDataFim adf ON (a.serial = adf.serial_adf)
 WHERE deleted = 0
 
 GO

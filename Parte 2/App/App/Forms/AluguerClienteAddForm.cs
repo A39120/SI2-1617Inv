@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.EF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +23,25 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Command command = new Command();
+            
+            if (Program.EntityFramework) {
+                AEnimaEntities ctx = new AEnimaEntities();
+                ctx.InserirAluguerComNovoCliente(
+                    int.Parse(textBoxNif.Text),
+                    textBoxNome.Text,
+                    textBoxMorada.Text,
+                    int.Parse(values["empregado"]),
+                    int.Parse(values["eqId"]),
+                    DateTime.Parse(values["inicio"]), 
+                    TimeSpan.Parse(values["duracao"]), 
+                    double.Parse(values["preco"]), 
+                    int.Parse(values["pid"]));
+                MessageBox.Show("Aluguer e novo clientes inserido.");
+            }
+            #region ADO
+            else 
+                        {
+            AdoCommand command = new AdoCommand();
             MessageBox.Show(command.executeProcedure(
                     (cmd) =>
                     {
@@ -41,6 +60,9 @@ namespace App
                     "Cliente and Aluguer added with success.",
                     "Failed to insert Cliente and Aluguer."
                 ));
+        }
+            #endregion
+            this.Close();
         }
     }
 }

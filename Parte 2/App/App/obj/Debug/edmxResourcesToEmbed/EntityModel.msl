@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AEnimaModelStoreContainer" CdmEntityContainer="AEnimaEntities">
+    <EntitySetMapping Name="Aluguer">
+      <EntityTypeMapping TypeName="AEnimaModel.Aluguer">
+        <MappingFragment StoreEntitySet="Aluguer">
+          <ScalarProperty Name="serial" ColumnName="serial" />
+          <ScalarProperty Name="eqId" ColumnName="eqId" />
+          <ScalarProperty Name="empregado" ColumnName="empregado" />
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+          <ScalarProperty Name="data_inicio" ColumnName="data_inicio" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AluguerDataFim">
+      <EntityTypeMapping TypeName="AEnimaModel.AluguerDataFim">
+        <MappingFragment StoreEntitySet="AluguerDataFim">
+          <ScalarProperty Name="serial_adf" ColumnName="serial_adf" />
+          <ScalarProperty Name="data_fim" ColumnName="data_fim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AluguerPrecoDuracao">
+      <EntityTypeMapping TypeName="AEnimaModel.AluguerPrecoDuracao">
+        <MappingFragment StoreEntitySet="AluguerPrecoDuracao">
+          <ScalarProperty Name="serial_apd" ColumnName="serial_apd" />
+          <ScalarProperty Name="duracao" ColumnName="duracao" />
+          <ScalarProperty Name="preco" ColumnName="preco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="AEnimaModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="cId" ColumnName="cId" />
+          <ScalarProperty Name="nif" ColumnName="nif" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="morada" ColumnName="morada" />
+          <ScalarProperty Name="valido" ColumnName="valido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empregado">
+      <EntityTypeMapping TypeName="AEnimaModel.Empregado">
+        <MappingFragment StoreEntitySet="Empregado">
+          <ScalarProperty Name="eId" ColumnName="eId" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Equipamento">
+      <EntityTypeMapping TypeName="AEnimaModel.Equipamento">
+        <MappingFragment StoreEntitySet="Equipamento">
+          <ScalarProperty Name="eqId" ColumnName="eqId" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="valid" ColumnName="valid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Preco">
+      <EntityTypeMapping TypeName="AEnimaModel.Preco">
+        <MappingFragment StoreEntitySet="Preco">
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="duracao" ColumnName="duracao" />
+          <ScalarProperty Name="validade" ColumnName="validade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Promocao">
+      <EntityTypeMapping TypeName="AEnimaModel.Promocao">
+        <MappingFragment StoreEntitySet="Promocao">
+          <ScalarProperty Name="pId" ColumnName="pId" />
+          <ScalarProperty Name="inicio" ColumnName="inicio" />
+          <ScalarProperty Name="fim" ColumnName="fim" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PromocaoDesconto">
+      <EntityTypeMapping TypeName="AEnimaModel.PromocaoDesconto">
+        <MappingFragment StoreEntitySet="PromocaoDesconto">
+          <ScalarProperty Name="pId" ColumnName="pId" />
+          <ScalarProperty Name="percentagemDesconto" ColumnName="percentagemDesconto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PromocaoTemporal">
+      <EntityTypeMapping TypeName="AEnimaModel.PromocaoTemporal">
+        <MappingFragment StoreEntitySet="PromocaoTemporal">
+          <ScalarProperty Name="pId" ColumnName="pId" />
+          <ScalarProperty Name="tempoExtra" ColumnName="tempoExtra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo">
+      <EntityTypeMapping TypeName="AEnimaModel.Tipo">
+        <MappingFragment StoreEntitySet="Tipo">
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AluguerView">
+      <EntityTypeMapping TypeName="AEnimaModel.AluguerView">
+        <MappingFragment StoreEntitySet="AluguerView">
+          <ScalarProperty Name="serial" ColumnName="serial" />
+          <ScalarProperty Name="eqId" ColumnName="eqId" />
+          <ScalarProperty Name="empregado" ColumnName="empregado" />
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+          <ScalarProperty Name="data_inicio" ColumnName="data_inicio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClienteView">
+      <EntityTypeMapping TypeName="AEnimaModel.ClienteView">
+        <MappingFragment StoreEntitySet="ClienteView">
+          <ScalarProperty Name="cId" ColumnName="cId" />
+          <ScalarProperty Name="nif" ColumnName="nif" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="morada" ColumnName="morada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EquipamentoDisponivel">
+      <EntityTypeMapping TypeName="AEnimaModel.EquipamentoDisponivel">
+        <MappingFragment StoreEntitySet="EquipamentoDisponivel">
+          <ScalarProperty Name="eqId" ColumnName="eqId" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EquipamentoDisponivelView">
+      <EntityTypeMapping TypeName="AEnimaModel.EquipamentoDisponivelView">
+        <MappingFragment StoreEntitySet="EquipamentoDisponivelView">
+          <ScalarProperty Name="eqId" ColumnName="eqId" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoView">
+      <EntityTypeMapping TypeName="AEnimaModel.TipoView">
+        <MappingFragment StoreEntitySet="TipoView">
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TipoPromocao" TypeName="AEnimaModel.TipoPromocao" StoreEntitySet="TipoPromocao">
+      <EndProperty Name="Tipo">
+        <ScalarProperty Name="nome" ColumnName="tipo" />
+      </EndProperty>
+      <EndProperty Name="Promocao">
+        <ScalarProperty Name="pId" ColumnName="pId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionName="AEnimaModel.Store.CalcularDuracaoPreco" FunctionImportName="CalcularDuracaoPreco">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AEnimaModel.CalcularDuracaoPreco_Result">
+          <ScalarProperty Name="preco" ColumnName="preco" />
+          <ScalarProperty Name="duracao" ColumnName="duracao" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="AEnimaModel.Store.CalcularSemanaPassada" FunctionImportName="CalcularSemanaPassada">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AEnimaModel.CalcularSemanaPassada_Result">
+          <ScalarProperty Name="firstDay" ColumnName="firstDay" />
+          <ScalarProperty Name="lastDay" ColumnName="lastDay" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="AEnimaModel.Store.EquipamentosLivres" FunctionImportName="EquipamentosLivres">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AEnimaModel.EquipamentosLivres_Result">
+          <ScalarProperty Name="eqId" ColumnName="eqId" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="AEnimaModel.Store.EquipamentosSemAlugueresNaUltimaSemana" FunctionImportName="EquipamentosSemAlugueresNaUltimaSemana">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AEnimaModel.EquipamentosSemAlugueresNaUltimaSemana_Result">
+          <ScalarProperty Name="eqId" ColumnName="eqId" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="AEnimaModel.Store.GetPromocao" FunctionImportName="GetPromocao">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AEnimaModel.GetPromocao_Result">
+          <ScalarProperty Name="pId" ColumnName="pId" />
+          <ScalarProperty Name="inicio" ColumnName="inicio" />
+          <ScalarProperty Name="fim" ColumnName="fim" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="AEnimaModel.Store.GETPROMOTION" FunctionImportName="GETPROMOTION">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AEnimaModel.GETPROMOTION_Result">
+          <ScalarProperty Name="pId" ColumnName="pId" />
+          <ScalarProperty Name="inicio" ColumnName="inicio" />
+          <ScalarProperty Name="fim" ColumnName="fim" />
+          <ScalarProperty Name="descr" ColumnName="descr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ActualizarCliente" FunctionName="AEnimaModel.Store.ActualizarCliente" />
+    <FunctionImportMapping FunctionImportName="ActualizarEquipamento" FunctionName="AEnimaModel.Store.ActualizarEquipamento" />
+    <FunctionImportMapping FunctionImportName="ActualizarEquipamentoComNovoTipo" FunctionName="AEnimaModel.Store.ActualizarEquipamentoComNovoTipo" />
+    <FunctionImportMapping FunctionImportName="ActualizarPreco" FunctionName="AEnimaModel.Store.ActualizarPreco" />
+    <FunctionImportMapping FunctionImportName="ActualizarPromocao" FunctionName="AEnimaModel.Store.ActualizarPromocao" />
+    <FunctionImportMapping FunctionImportName="ActualizarPromocaoDesconto" FunctionName="AEnimaModel.Store.ActualizarPromocaoDesconto" />
+    <FunctionImportMapping FunctionImportName="ActualizarPromocaoTemporal" FunctionName="AEnimaModel.Store.ActualizarPromocaoTemporal" />
+    <FunctionImportMapping FunctionImportName="InserirAluguer" FunctionName="AEnimaModel.Store.InserirAluguer" />
+    <FunctionImportMapping FunctionImportName="InserirAluguerComNovoCliente" FunctionName="AEnimaModel.Store.InserirAluguerComNovoCliente" />
+    <FunctionImportMapping FunctionImportName="InserirCliente" FunctionName="AEnimaModel.Store.InserirCliente" />
+    <FunctionImportMapping FunctionImportName="InserirEquipamento" FunctionName="AEnimaModel.Store.InserirEquipamento" />
+    <FunctionImportMapping FunctionImportName="InserirEquipamentoComTipo" FunctionName="AEnimaModel.Store.InserirEquipamentoComTipo" />
+    <FunctionImportMapping FunctionImportName="InserirPreco" FunctionName="AEnimaModel.Store.InserirPreco" />
+    <FunctionImportMapping FunctionImportName="InserirPromocao" FunctionName="AEnimaModel.Store.InserirPromocao" />
+    <FunctionImportMapping FunctionImportName="InserirPromocaoDesconto" FunctionName="AEnimaModel.Store.InserirPromocaoDesconto" />
+    <FunctionImportMapping FunctionImportName="InserirPromocaoTemporal" FunctionName="AEnimaModel.Store.InserirPromocaoTemporal" />
+    <FunctionImportMapping FunctionImportName="RemoverAluguer" FunctionName="AEnimaModel.Store.RemoverAluguer" />
+    <FunctionImportMapping FunctionImportName="RemoverAlugueresParaCliente" FunctionName="AEnimaModel.Store.RemoverAlugueresParaCliente" />
+    <FunctionImportMapping FunctionImportName="RemoverCliente" FunctionName="AEnimaModel.Store.RemoverCliente" />
+    <FunctionImportMapping FunctionImportName="RemoverEquipamento" FunctionName="AEnimaModel.Store.RemoverEquipamento" />
+    <FunctionImportMapping FunctionImportName="RemoverPreco" FunctionName="AEnimaModel.Store.RemoverPreco" />
+    <FunctionImportMapping FunctionImportName="RemoverPromocao" FunctionName="AEnimaModel.Store.RemoverPromocao" />
+    <FunctionImportMapping FunctionImportName="RemoverPromocaoDesconto" FunctionName="AEnimaModel.Store.RemoverPromocaoDesconto" />
+    <FunctionImportMapping FunctionImportName="RemoverPromocaoTemporal" FunctionName="AEnimaModel.Store.RemoverPromocaoTemporal" />
+    <FunctionImportMapping FunctionImportName="UpdateCliente" FunctionName="AEnimaModel.Store.UpdateCliente" />
+  </EntityContainerMapping>
+</Mapping>

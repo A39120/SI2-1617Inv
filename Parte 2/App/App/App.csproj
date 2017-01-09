@@ -55,62 +55,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EF - Model\Aluguer.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\AluguerDataFim.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\AluguerPrecoDuracao.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\AluguerView.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\CalcularDuracaoPreco_Result.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\CalcularSemanaPassada_Result.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\Cliente.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\ClienteView.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\Empregado.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF - Model\EntityModel.Context.cs">
+    <Compile Include="ADO.NET\AlugueresDataAdapter.cs" />
+    <Compile Include="EF\AEnimaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntityModel.Context.tt</DependentUpon>
+      <DependentUpon>AEnimaModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\EntityModel.cs">
+    <Compile Include="EF\AEnimaModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntityModel.tt</DependentUpon>
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\EntityModel.Designer.cs">
+    <Compile Include="EF\AEnimaModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntityModel.edmx</DependentUpon>
+      <DependentUpon>AEnimaModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\Equipamento.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\Aluguer.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\EquipamentoDisponivel.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\AluguerDataFim.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\EquipamentoDisponivelView.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\AluguerPrecoDuracao.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\EquipamentosLivres_Result.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\AluguerView.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\EquipamentosSemAlugueresNaUltimaSemana_Result.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\CalcularDuracaoPreco_Result.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\CalcularSemanaPassada_Result.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Cliente.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ClienteView.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Empregado.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Equipamento.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EquipamentoDisponivel.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EquipamentoDisponivelView.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADO.NET\AlugueresDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EF\EquipamentosLivres_Result.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EquipamentosSemAlugueresNaUltimaSemana_Result.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Forms\AluguerAddForm.cs">
       <SubType>Form</SubType>
@@ -136,6 +140,12 @@
     </Compile>
     <Compile Include="Forms\EquipamentosLivresTabelaForm.Designer.cs">
       <DependentUpon>EquipamentosLivresTabelaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ExportAluguerXmlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExportAluguerXmlForm.Designer.cs">
+      <DependentUpon>ExportAluguerXmlForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FreeEquipmentForm.cs">
       <SubType>Form</SubType>
@@ -185,24 +195,24 @@
     <Compile Include="Forms\Start.Designer.cs">
       <DependentUpon>Start.cs</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\GetPromocao_Result.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\GetPromocao_Result.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\GETPROMOTION_Result.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\GETPROMOTION_Result.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\Preco.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\Preco.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="EF - Model\Promocao.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\Promocao.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\PromocaoDesconto.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\PromocaoDesconto.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\PromocaoTemporal.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\PromocaoTemporal.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\PromotionUpdateForm.cs">
@@ -211,11 +221,15 @@
     <Compile Include="Forms\PromotionUpdateForm.Designer.cs">
       <DependentUpon>PromotionUpdateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\Tipo.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\Tipo.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF - Model\TipoView.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
+    <Compile Include="EF\TipoView.cs">
+      <DependentUpon>AEnimaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XML\Alugueres.cs" />
+    <Compile Include="XML\AlugueresSchema.cs">
+      <DependentUpon>AlugueresSchema.xsd</DependentUpon>
     </Compile>
     <Compile Include="XML\XmlFileCreator.cs" />
     <EmbeddedResource Include="Forms\AluguerAddForm.resx">
@@ -229,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EquipamentosLivresTabelaForm.resx">
       <DependentUpon>EquipamentosLivresTabelaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExportAluguerXmlForm.resx">
+      <DependentUpon>ExportAluguerXmlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FreeEquipmentForm.resx">
       <DependentUpon>FreeEquipmentForm.cs</DependentUpon>
@@ -266,22 +283,25 @@
     <EmbeddedResource Include="Forms\PromotionUpdateForm.resx">
       <DependentUpon>PromotionUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="EF - Model\EntityModel.edmx">
+    <EntityDeploy Include="EF\AEnimaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EntityModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>AEnimaModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EF - Model\EntityModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntityModel.edmx</DependentUpon>
-      <LastGenOutput>EntityModel.Context.cs</LastGenOutput>
+    <None Include="ADO.NET\AlugueresSchema.xsd">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="EF - Model\EntityModel.edmx.diagram">
-      <DependentUpon>EntityModel.edmx</DependentUpon>
-    </None>
-    <None Include="EF - Model\EntityModel.tt">
+    <None Include="EF\AEnimaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntityModel.edmx</DependentUpon>
-      <LastGenOutput>EntityModel.cs</LastGenOutput>
+      <DependentUpon>AEnimaModel.edmx</DependentUpon>
+      <LastGenOutput>AEnimaModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EF\AEnimaModel.edmx.diagram">
+      <DependentUpon>AEnimaModel.edmx</DependentUpon>
+    </None>
+    <None Include="EF\AEnimaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AEnimaModel.edmx</DependentUpon>
+      <LastGenOutput>AEnimaModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="XML\AlugueresSchema.xsd">
@@ -303,6 +323,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

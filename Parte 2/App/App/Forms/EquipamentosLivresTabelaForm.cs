@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.EF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -17,24 +18,38 @@ namespace App.Forms
         public EquipamentosLivresTabelaForm(String inicio, String fim)
         {
             InitializeComponent();
-            using (SqlConnection con = new SqlConnection())
+            if (Program.EntityFramework) 
             {
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                using (SqlCommand cmd = con.CreateCommand())
+                AEnimaEntities ctx = new AEnimaEntities();
+                var equip = ctx.EquipamentosLivres(
+                    DateTime.Parse(inicio),
+                    DateTime.Parse(fim),
+                    null);
+                dataGridView1.DataSource = equip;
+            }
+            #region ADO
+            else
+            {
+                using (SqlConnection con = new SqlConnection())
                 {
-                    Command command = new Command();
-                    command.getUnusedEquipmentsFor(cmd, inicio, fim);
-                    con.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.HasRows)
+                    con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                    using (SqlCommand cmd = con.CreateCommand())
                     {
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        dataGridView1.DataSource = dt;
-                    }
-                    reader.Close();
+                        AdoCommand command = new AdoCommand();
+                        command.getUnusedEquipmentsFor(cmd, inicio, fim);
+                        con.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            DataTable dt = new DataTable();
+                            dt.Load(reader);
+                            dataGridView1.DataSource = dt;
+                        }
+                        reader.Close();
                     }
                 }
+            #endregion
             }
         }
     }
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.EF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,14 +20,28 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Command cmd = new Command();
-            MessageBox.Show(
-                cmd.executeProcedure((command) => {
-                    cmd.priceInsert(command, textBoxTipo.Text, textBoxValor.Text, textBoxDuracao.Text, textBoxValidade.Text);
-                },
-                "Price has been inserted successfully.",
-                "Error in inserting price.")
-                );
+            if (Program.EntityFramework)
+            {
+                AEnimaEntities ctx = new AEnimaEntities();
+                ctx.InserirPreco(
+                    textBoxTipo.Text,
+                    double.Parse(textBoxValor.Text),
+                    TimeSpan.Parse(textBoxDuracao.Text),
+                    DateTime.Parse(textBoxValidade.Text)
+                    );
+                MessageBox.Show("Preço Inserido.");
+            }
+            else 
+            {
+                AdoCommand cmd = new AdoCommand();
+                MessageBox.Show(
+                    cmd.executeProcedure((command) => {
+                        cmd.priceInsert(command, textBoxTipo.Text, textBoxValor.Text, textBoxDuracao.Text, textBoxValidade.Text);
+                    },
+                    "Price has been inserted successfully.",
+                    "Error in inserting price.")
+                    );
+            }
             this.Close();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using App.Forms;
+using App.XML;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace App
 {
     public partial class Start : Form
     {
+        public bool ado = true;
+
         public Start()
         {
             InitializeComponent();
@@ -79,5 +82,16 @@ namespace App
             lwf.Show();
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Program.EntityFramework) Program.EntityFramework = false;
+            Program.EntityFramework = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExportAluguerXmlForm eaxf = new ExportAluguerXmlForm();
+            eaxf.Show();
+        }
     }
 }

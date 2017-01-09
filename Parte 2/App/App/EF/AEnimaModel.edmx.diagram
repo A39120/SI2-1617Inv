@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="47ad096b74c44b9d914512d5bf239fff" Name="Diagram1">
+        <EntityTypeShape EntityType="AEnimaModel.Aluguer" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.AluguerDataFim" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.AluguerPrecoDuracao" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.Cliente" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.Empregado" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.Equipamento" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.Preco" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.Promocao" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.PromocaoDesconto" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.PromocaoTemporal" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.Tipo" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.AluguerView" Width="1.5" PointX="7.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.ClienteView" Width="1.5" PointX="9.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.EquipamentoDisponivel" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.EquipamentoDisponivelView" Width="1.5" PointX="9.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AEnimaModel.TipoView" Width="1.5" PointX="7.75" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="AEnimaModel.FK__Aluguer__cliente__4480EA04" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__Aluguer__emprega__438CC5CB" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__Aluguer__eqId__4298A192" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__Aluguer__eqId__46693276" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__AluguerDa__data___4C220BCC" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__AluguerPr__seria__49459F21" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__Equipament__tipo__25FC62E4" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__Preco__tipo__2E91A8E5" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__PromocaoDes__pId__3A035B91" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.FK__PromocaoTem__pId__3632CAAD" ManuallyRouted="false" />
+        <AssociationConnector Association="AEnimaModel.TipoPromocao" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

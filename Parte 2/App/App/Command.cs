@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace App
 {
-
-    class Command
+    class AdoCommand
     {
 
         public String executeProcedure(Action<SqlCommand> action, String success, String error){
@@ -300,23 +299,6 @@ namespace App
             cmd.CommandText = "RemoverPreco";
         }
         #endregion
-
-        /*public void manageTable(Action<SqlCommand> action, Action<SqlDataReader> action2)
-        {
-            using (SqlConnection con = new SqlConnection())
-            {
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                using (SqlCommand cmd = con.CreateCommand())
-                {
-                    action(cmd);
-                    con.Open();
-                    SqlDataReader sdr = cmd.ExecuteReader();
-                    action2(sdr);
-                    sdr.Close();
-                }
-            }
-        }*/
-
         #region tables
         public void getLastWeekUnusedEquipments(SqlCommand cmd)
         {
@@ -336,7 +318,12 @@ namespace App
             cmd.CommandText = "SELECT * FROM EquipamentosLivres(@inicio, @fim, NULL)";
         }
         #endregion
+
+        
     }
 
-    
+    class EfCommand
+    {
+
+    }
 }

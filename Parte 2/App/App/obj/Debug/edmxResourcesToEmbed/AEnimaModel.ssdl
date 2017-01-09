@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AEnimaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Aluguer">
+    <Key>
+      <PropertyRef Name="serial" />
+    </Key>
+    <Property Name="serial" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="eqId" Type="int" Nullable="false" />
+    <Property Name="empregado" Type="int" Nullable="false" />
+    <Property Name="cliente" Type="int" Nullable="false" />
+    <Property Name="data_inicio" Type="datetime" Nullable="false" />
+    <Property Name="deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="AluguerDataFim">
+    <Key>
+      <PropertyRef Name="serial_adf" />
+    </Key>
+    <Property Name="serial_adf" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="data_fim" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AluguerPrecoDuracao">
+    <Key>
+      <PropertyRef Name="serial_apd" />
+    </Key>
+    <Property Name="serial_apd" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="duracao" Type="datetime" Nullable="false" />
+    <Property Name="preco" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="cId" />
+    </Key>
+    <Property Name="cId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nif" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="31" />
+    <Property Name="morada" Type="varchar" MaxLength="100" />
+    <Property Name="valido" Type="bit" />
+  </EntityType>
+  <EntityType Name="Empregado">
+    <Key>
+      <PropertyRef Name="eId" />
+    </Key>
+    <Property Name="eId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="31" />
+  </EntityType>
+  <EntityType Name="Equipamento">
+    <Key>
+      <PropertyRef Name="eqId" />
+    </Key>
+    <Property Name="eqId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descr" Type="varchar" MaxLength="255" />
+    <Property Name="tipo" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="valid" Type="bit" />
+  </EntityType>
+  <EntityType Name="Preco">
+    <Key>
+      <PropertyRef Name="tipo" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="duracao" />
+      <PropertyRef Name="validade" />
+    </Key>
+    <Property Name="tipo" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="valor" Type="float" Nullable="false" />
+    <Property Name="duracao" Type="time" Precision="7" Nullable="false" />
+    <Property Name="validade" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Promocao">
+    <Key>
+      <PropertyRef Name="pId" />
+    </Key>
+    <Property Name="pId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="inicio" Type="datetime" Nullable="false" />
+    <Property Name="fim" Type="datetime" Nullable="false" />
+    <Property Name="descr" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="PromocaoDesconto">
+    <Key>
+      <PropertyRef Name="pId" />
+    </Key>
+    <Property Name="pId" Type="int" Nullable="false" />
+    <Property Name="percentagemDesconto" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PromocaoTemporal">
+    <Key>
+      <PropertyRef Name="pId" />
+    </Key>
+    <Property Name="pId" Type="int" Nullable="false" />
+    <Property Name="tempoExtra" Type="time" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo">
+    <Key>
+      <PropertyRef Name="nome" />
+    </Key>
+    <Property Name="nome" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="descr" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="TipoPromocao">
+    <Key>
+      <PropertyRef Name="tipo" />
+      <PropertyRef Name="pId" />
+    </Key>
+    <Property Name="tipo" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="pId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AEnima.dbo.AluguerView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AluguerView">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="equipamento" />
+      <PropertyRef Name="empregado" />
+      <PropertyRef Name="cliente" />
+      <PropertyRef Name="dataInicio" />
+      <PropertyRef Name="dataFim" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="equipamento" Type="int" Nullable="false" />
+    <Property Name="empregado" Type="int" Nullable="false" />
+    <Property Name="cliente" Type="int" Nullable="false" />
+    <Property Name="dataInicio" Type="datetime" Nullable="false" />
+    <Property Name="dataFim" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AEnima.dbo.ClienteView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ClienteView">
+    <Key>
+      <PropertyRef Name="cId" />
+    </Key>
+    <Property Name="cId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nif" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="31" />
+    <Property Name="morada" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AEnima.dbo.EquipamentoDisponivel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EquipamentoDisponivel">
+    <Key>
+      <PropertyRef Name="eqId" />
+      <PropertyRef Name="tipo" />
+    </Key>
+    <Property Name="eqId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descr" Type="varchar" MaxLength="255" />
+    <Property Name="tipo" Type="varchar" MaxLength="31" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AEnima.dbo.EquipamentoDisponivelView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EquipamentoDisponivelView">
+    <Key>
+      <PropertyRef Name="eqId" />
+      <PropertyRef Name="tipo" />
+    </Key>
+    <Property Name="eqId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descr" Type="varchar" MaxLength="255" />
+    <Property Name="tipo" Type="varchar" MaxLength="31" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TipoView">
+    <Key>
+      <PropertyRef Name="nome" />
+    </Key>
+    <Property Name="nome" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="descr" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__Aluguer__cliente__4480EA04">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="cId" />
+      </Principal>
+      <Dependent Role="Aluguer">
+        <PropertyRef Name="cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Aluguer__emprega__438CC5CB">
+    <End Role="Empregado" Type="Self.Empregado" Multiplicity="1" />
+    <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empregado">
+        <PropertyRef Name="eId" />
+      </Principal>
+      <Dependent Role="Aluguer">
+        <PropertyRef Name="empregado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Aluguer__eqId__4298A192">
+    <End Role="Equipamento" Type="Self.Equipamento" Multiplicity="1" />
+    <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipamento">
+        <PropertyRef Name="eqId" />
+      </Principal>
+      <Dependent Role="Aluguer">
+        <PropertyRef Name="eqId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Aluguer__eqId__46693276">
+    <End Role="Equipamento" Type="Self.Equipamento" Multiplicity="1" />
+    <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipamento">
+        <PropertyRef Name="eqId" />
+      </Principal>
+      <Dependent Role="Aluguer">
+        <PropertyRef Name="eqId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AluguerDa__data___4C220BCC">
+    <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="1" />
+    <End Role="AluguerDataFim" Type="Self.AluguerDataFim" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Aluguer">
+        <PropertyRef Name="serial" />
+      </Principal>
+      <Dependent Role="AluguerDataFim">
+        <PropertyRef Name="serial_adf" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AluguerPr__seria__49459F21">
+    <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="1" />
+    <End Role="AluguerPrecoDuracao" Type="Self.AluguerPrecoDuracao" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Aluguer">
+        <PropertyRef Name="serial" />
+      </Principal>
+      <Dependent Role="AluguerPrecoDuracao">
+        <PropertyRef Name="serial_apd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Equipament__tipo__25FC62E4">
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
+    <End Role="Equipamento" Type="Self.Equipamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo">
+        <PropertyRef Name="nome" />
+      </Principal>
+      <Dependent Role="Equipamento">
+        <PropertyRef Name="tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Preco__tipo__2E91A8E5">
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
+    <End Role="Preco" Type="Self.Preco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo">
+        <PropertyRef Name="nome" />
+      </Principal>
+      <Dependent Role="Preco">
+        <PropertyRef Name="tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PromocaoDes__pId__3A035B91">
+    <End Role="Promocao" Type="Self.Promocao" Multiplicity="1" />
+    <End Role="PromocaoDesconto" Type="Self.PromocaoDesconto" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Promocao">
+        <PropertyRef Name="pId" />
+      </Principal>
+      <Dependent Role="PromocaoDesconto">
+        <PropertyRef Name="pId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PromocaoTem__pId__3632CAAD">
+    <End Role="Promocao" Type="Self.Promocao" Multiplicity="1" />
+    <End Role="PromocaoTemporal" Type="Self.PromocaoTemporal" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Promocao">
+        <PropertyRef Name="pId" />
+      </Principal>
+      <Dependent Role="PromocaoTemporal">
+        <PropertyRef Name="pId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TipoPromoc__tipo__3DD3EC75">
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
+    <End Role="TipoPromocao" Type="Self.TipoPromocao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo">
+        <PropertyRef Name="nome" />
+      </Principal>
+      <Dependent Role="TipoPromocao">
+        <PropertyRef Name="tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TipoPromoca__pId__3EC810AE">
+    <End Role="Promocao" Type="Self.Promocao" Multiplicity="1" />
+    <End Role="TipoPromocao" Type="Self.TipoPromocao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Promocao">
+        <PropertyRef Name="pId" />
+      </Principal>
+      <Dependent Role="TipoPromocao">
+        <PropertyRef Name="pId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ActualizarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="nome" Type="varchar" Mode="In" />
+    <Parameter Name="nif" Type="int" Mode="In" />
+    <Parameter Name="morada" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ActualizarEquipamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="descr" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ActualizarEquipamentoComNovoTipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="descr" Type="varchar" Mode="In" />
+    <Parameter Name="descrTipo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ActualizarPreco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="valor" Type="float" Mode="In" />
+    <Parameter Name="duracao" Type="time" Mode="In" />
+    <Parameter Name="validade" Type="date" Mode="In" />
+    <Parameter Name="novovalor" Type="float" Mode="In" />
+    <Parameter Name="novaduracao" Type="time" Mode="In" />
+    <Parameter Name="novavalidade" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ActualizarPromocao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="promotion_id" Type="int" Mode="In" />
+    <Parameter Name="inicio" Type="datetime" Mode="In" />
+    <Parameter Name="fim" Type="datetime" Mode="In" />
+    <Parameter Name="descr" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ActualizarPromocaoDesconto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="promotion_id" Type="int" Mode="In" />
+    <Parameter Name="inicio" Type="datetime" Mode="In" />
+    <Parameter Name="fim" Type="datetime" Mode="In" />
+    <Parameter Name="descr" Type="varchar" Mode="In" />
+    <Parameter Name="desconto" Type="float" Mode="In" />
+  </Function>
+  <Function Name="ActualizarPromocaoTemporal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="promotion_id" Type="int" Mode="In" />
+    <Parameter Name="inicio" Type="datetime" Mode="In" />
+    <Parameter Name="fim" Type="datetime" Mode="In" />
+    <Parameter Name="descr" Type="varchar" Mode="In" />
+    <Parameter Name="tempoExtra" Type="time" Mode="In" />
+  </Function>
+  <Function Name="CalcularDuracaoPreco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="eqId" Type="int" Mode="In" />
+    <Parameter Name="preco" Type="float" Mode="In" />
+    <Parameter Name="duracao" Type="time" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="preco" Type="float" />
+          <Property Name="duracao" Type="time" Precision="7" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="CalcularSemanaPassada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="currentDate" Type="datetime" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="firstDay" Type="datetime" />
+          <Property Name="lastDay" Type="datetime" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="EquipamentosLivres" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="inicio" Type="datetime" Mode="In" />
+    <Parameter Name="fim" Type="datetime" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="eqId" Type="int" />
+          <Property Name="descr" Type="varchar" MaxLength="255" />
+          <Property Name="tipo" Type="varchar" MaxLength="31" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="EquipamentosSemAlugueresNaUltimaSemana" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="eqId" Type="int" />
+          <Property Name="descr" Type="varchar" MaxLength="255" />
+          <Property Name="tipo" Type="varchar" MaxLength="31" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="GetPromocao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="eqId" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="pId" Type="int" Nullable="false" />
+          <Property Name="inicio" Type="datetime" Nullable="false" />
+          <Property Name="fim" Type="datetime" Nullable="false" />
+          <Property Name="descr" Type="varchar" MaxLength="255" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="GetPromocaoDesconto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="eqId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetPromocaoTemporal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="time">
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="eqId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GETPROMOTION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="eqId" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="pId" Type="int" Nullable="false" />
+          <Property Name="inicio" Type="datetime" Nullable="false" />
+          <Property Name="fim" Type="datetime" Nullable="false" />
+          <Property Name="descr" Type="varchar" MaxLength="255" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="InserirAluguer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empregado" Type="int" Mode="In" />
+    <Parameter Name="cliente" Type="int" Mode="In" />
+    <Parameter Name="eqId" Type="int" Mode="In" />
+    <Parameter Name="inicioAluguer" Type="datetime" Mode="In" />
+    <Parameter Name="duracao" Type="time" Mode="In" />
+    <Parameter Name="preco" Type="float" Mode="In" />
+    <Parameter Name="pid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InserirAluguerComNovoCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cliente_nif" Type="int" Mode="In" />
+    <Parameter Name="cliente_nome" Type="varchar" Mode="In" />
+    <Parameter Name="cliente_morada" Type="varchar" Mode="In" />
+    <Parameter Name="empregado" Type="int" Mode="In" />
+    <Parameter Name="eqId" Type="int" Mode="In" />
+    <Parameter Name="inicioAluguer" Type="datetime" Mode="In" />
+    <Parameter Name="duracao" Type="time" Mode="In" />
+    <Parameter Name="preco" Type="float" Mode="In" />
+    <Parameter Name="pid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InserirCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nome" Type="varchar" Mode="In" />
+    <Parameter Name="nif" Type="int" Mode="In" />
+    <Parameter Name="morada" Type="varchar" Mode="In" />
+    <Parameter Name="idCliente" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="InserirEquipamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="descr" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="InserirEquipamentoComTipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="descr" Type="varchar" Mode="In" />
+    <Parameter Name="descrTipo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="InserirPreco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="valor" Type="float" Mode="In" />
+    <Parameter Name="duracao" Type="time" Mode="In" />
+    <Parameter Name="validade" Type="date" Mode="In" />
+  </Function>
+  <Function Name="InserirPromocao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="inicio" Type="datetime" Mode="In" />
+    <Parameter Name="fim" Type="datetime" Mode="In" />
+    <Parameter Name="descricao" Type="varchar" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="InserirPromocaoDesconto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="inicio" Type="datetime" Mode="In" />
+    <Parameter Name="fim" Type="datetime" Mode="In" />
+    <Parameter Name="descricao" Type="varchar" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="desconto" Type="float" Mode="In" />
+  </Function>
+  <Function Name="InserirPromocaoTemporal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="inicio" Type="datetime" Mode="In" />
+    <Parameter Name="fim" Type="datetime" Mode="In" />
+    <Parameter Name="descricao" Type="varchar" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="tempoExtra" Type="time" Mode="In" />
+  </Function>
+  <Function Name="RemoverAluguer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="serial" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="RemoverAlugueresParaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RemoverCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RemoverEquipamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RemoverPreco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="valor" Type="float" Mode="In" />
+    <Parameter Name="duracao" Type="time" Mode="In" />
+    <Parameter Name="validade" Type="date" Mode="In" />
+  </Function>
+  <Function Name="RemoverPromocao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RemoverPromocaoDesconto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RemoverPromocaoTemporal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="nome" Type="varchar" Mode="In" />
+    <Parameter Name="nif" Type="int" Mode="In" />
+    <Parameter Name="morada" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="AEnimaModelStoreContainer">
+    <EntitySet Name="Aluguer" EntityType="Self.Aluguer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AluguerDataFim" EntityType="Self.AluguerDataFim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AluguerPrecoDuracao" EntityType="Self.AluguerPrecoDuracao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empregado" EntityType="Self.Empregado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipamento" EntityType="Self.Equipamento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Preco" EntityType="Self.Preco" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Promocao" EntityType="Self.Promocao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PromocaoDesconto" EntityType="Self.PromocaoDesconto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PromocaoTemporal" EntityType="Self.PromocaoTemporal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo" EntityType="Self.Tipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoPromocao" EntityType="Self.TipoPromocao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AluguerView" EntityType="Self.AluguerView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[AluguerView].[id] AS [id], 
+[AluguerView].[equipamento] AS [equipamento], 
+[AluguerView].[empregado] AS [empregado], 
+[AluguerView].[cliente] AS [cliente], 
+[AluguerView].[dataInicio] AS [dataInicio], 
+[AluguerView].[dataFim] AS [dataFim]
+FROM [dbo].[AluguerView] AS [AluguerView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ClienteView" EntityType="Self.ClienteView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[ClienteView].[cId] AS [cId], 
+[ClienteView].[nif] AS [nif], 
+[ClienteView].[nome] AS [nome], 
+[ClienteView].[morada] AS [morada]
+FROM [dbo].[ClienteView] AS [ClienteView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="EquipamentoDisponivel" EntityType="Self.EquipamentoDisponivel" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[EquipamentoDisponivel].[eqId] AS [eqId], 
+[EquipamentoDisponivel].[descr] AS [descr], 
+[EquipamentoDisponivel].[tipo] AS [tipo]
+FROM [dbo].[EquipamentoDisponivel] AS [EquipamentoDisponivel]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="EquipamentoDisponivelView" EntityType="Self.EquipamentoDisponivelView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[EquipamentoDisponivelView].[eqId] AS [eqId], 
+[EquipamentoDisponivelView].[descr] AS [descr], 
+[EquipamentoDisponivelView].[tipo] AS [tipo]
+FROM [dbo].[EquipamentoDisponivelView] AS [EquipamentoDisponivelView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TipoView" EntityType="Self.TipoView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[TipoView].[nome] AS [nome], 
+[TipoView].[descr] AS [descr]
+FROM [dbo].[TipoView] AS [TipoView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Aluguer__cliente__4480EA04" Association="Self.FK__Aluguer__cliente__4480EA04">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Aluguer" EntitySet="Aluguer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Aluguer__emprega__438CC5CB" Association="Self.FK__Aluguer__emprega__438CC5CB">
+      <End Role="Empregado" EntitySet="Empregado" />
+      <End Role="Aluguer" EntitySet="Aluguer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Aluguer__eqId__4298A192" Association="Self.FK__Aluguer__eqId__4298A192">
+      <End Role="Equipamento" EntitySet="Equipamento" />
+      <End Role="Aluguer" EntitySet="Aluguer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Aluguer__eqId__46693276" Association="Self.FK__Aluguer__eqId__46693276">
+      <End Role="Equipamento" EntitySet="Equipamento" />
+      <End Role="Aluguer" EntitySet="Aluguer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AluguerDa__data___4C220BCC" Association="Self.FK__AluguerDa__data___4C220BCC">
+      <End Role="Aluguer" EntitySet="Aluguer" />
+      <End Role="AluguerDataFim" EntitySet="AluguerDataFim" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AluguerPr__seria__49459F21" Association="Self.FK__AluguerPr__seria__49459F21">
+      <End Role="Aluguer" EntitySet="Aluguer" />
+      <End Role="AluguerPrecoDuracao" EntitySet="AluguerPrecoDuracao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Equipament__tipo__25FC62E4" Association="Self.FK__Equipament__tipo__25FC62E4">
+      <End Role="Tipo" EntitySet="Tipo" />
+      <End Role="Equipamento" EntitySet="Equipamento" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Preco__tipo__2E91A8E5" Association="Self.FK__Preco__tipo__2E91A8E5">
+      <End Role="Tipo" EntitySet="Tipo" />
+      <End Role="Preco" EntitySet="Preco" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PromocaoDes__pId__3A035B91" Association="Self.FK__PromocaoDes__pId__3A035B91">
+      <End Role="Promocao" EntitySet="Promocao" />
+      <End Role="PromocaoDesconto" EntitySet="PromocaoDesconto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PromocaoTem__pId__3632CAAD" Association="Self.FK__PromocaoTem__pId__3632CAAD">
+      <End Role="Promocao" EntitySet="Promocao" />
+      <End Role="PromocaoTemporal" EntitySet="PromocaoTemporal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TipoPromoc__tipo__3DD3EC75" Association="Self.FK__TipoPromoc__tipo__3DD3EC75">
+      <End Role="Tipo" EntitySet="Tipo" />
+      <End Role="TipoPromocao" EntitySet="TipoPromocao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TipoPromoca__pId__3EC810AE" Association="Self.FK__TipoPromoca__pId__3EC810AE">
+      <End Role="Promocao" EntitySet="Promocao" />
+      <End Role="TipoPromocao" EntitySet="TipoPromocao" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

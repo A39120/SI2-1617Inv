@@ -42,10 +42,14 @@
             this.groupBoxEquipamentos = new System.Windows.Forms.GroupBox();
             this.listEquipamentosLivres = new System.Windows.Forms.Button();
             this.listLastWeekFree = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBoxPromotion.SuspendLayout();
             this.groupBoxAluguer.SuspendLayout();
             this.groupBoxPrice.SuspendLayout();
             this.groupBoxEquipamentos.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxPromotion
@@ -103,9 +107,9 @@
             // 
             // removeAluguer
             // 
-            this.removeAluguer.Location = new System.Drawing.Point(445, 21);
+            this.removeAluguer.Location = new System.Drawing.Point(332, 21);
             this.removeAluguer.Name = "removeAluguer";
-            this.removeAluguer.Size = new System.Drawing.Size(211, 23);
+            this.removeAluguer.Size = new System.Drawing.Size(324, 23);
             this.removeAluguer.TabIndex = 2;
             this.removeAluguer.Text = "Remover";
             this.removeAluguer.UseVisualStyleBackColor = true;
@@ -115,7 +119,7 @@
             // 
             this.insertWithoutClient.Location = new System.Drawing.Point(7, 22);
             this.insertWithoutClient.Name = "insertWithoutClient";
-            this.insertWithoutClient.Size = new System.Drawing.Size(211, 23);
+            this.insertWithoutClient.Size = new System.Drawing.Size(319, 23);
             this.insertWithoutClient.TabIndex = 0;
             this.insertWithoutClient.Text = "Inserir";
             this.insertWithoutClient.UseVisualStyleBackColor = true;
@@ -169,7 +173,7 @@
             this.groupBoxEquipamentos.Controls.Add(this.listLastWeekFree);
             this.groupBoxEquipamentos.Location = new System.Drawing.Point(12, 189);
             this.groupBoxEquipamentos.Name = "groupBoxEquipamentos";
-            this.groupBoxEquipamentos.Size = new System.Drawing.Size(672, 54);
+            this.groupBoxEquipamentos.Size = new System.Drawing.Size(672, 53);
             this.groupBoxEquipamentos.TabIndex = 6;
             this.groupBoxEquipamentos.TabStop = false;
             this.groupBoxEquipamentos.Text = "Equipamentos Livres";
@@ -194,11 +198,44 @@
             this.listLastWeekFree.UseVisualStyleBackColor = true;
             this.listLastWeekFree.Click += new System.EventHandler(this.GoToListLastWeekFree);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(12, 271);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(138, 21);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Entity Framework";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(14, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(324, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Exportar Alugueres (.xml)";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(330, 248);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(354, 56);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Alugueres";
+            // 
             // Start
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 254);
+            this.ClientSize = new System.Drawing.Size(696, 308);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.groupBoxEquipamentos);
             this.Controls.Add(this.groupBoxPrice);
             this.Controls.Add(this.groupBoxAluguer);
@@ -209,7 +246,9 @@
             this.groupBoxAluguer.ResumeLayout(false);
             this.groupBoxPrice.ResumeLayout(false);
             this.groupBoxEquipamentos.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -229,6 +268,9 @@
         private System.Windows.Forms.GroupBox groupBoxEquipamentos;
         private System.Windows.Forms.Button listEquipamentosLivres;
         private System.Windows.Forms.Button listLastWeekFree;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
