@@ -1,38 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace App
 {
-    class AdoCommand
+    class AdoCommand : ICommand
     {
-
-        public String executeProcedure(Action<SqlCommand> action, String success, String error){
-            using(SqlConnection con = new SqlConnection()){
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                using (SqlCommand cmd = con.CreateCommand())
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    action(cmd);
-                    try{
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        return success;
-                    }catch (Exception e){
-                        return e.Message;
-                    }
-                }
+        SqlConnection con;
+        public AdoCommand()
+        {
+            con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+        }
+        
+        private T executeProcedure<T>(Func<SqlCommand, T> action){
+            using (SqlCommand cmd = con.CreateCommand())
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                return action(cmd);
             }
         }
 
-        #region promotion
-        #region promotion_insert
-        public void promotionInsert(SqlCommand cmd,
+        private int ReturnRowNumber(SqlCommand cmd, Action<SqlCommand> action){
+            action(cmd);
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            return i;
+        }
+
+        private String ReturnSerial(SqlCommand cmd, Action<SqlCommand> action)
+        {
+            action(cmd);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            return (String)cmd.Parameters["@ret"].Value;
+        }
+
+        private int ReturnResult(SqlCommand cmd, Action<SqlCommand> action)
+        {
+            action(cmd);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            return (int)cmd.Parameters["@ret"].Value; ;
+        }
+
+        #region parameters
+        private void InsertPromotionParameters(SqlCommand cmd,
             String textBoxTipo, 
             String textBoxDescricao, 
             String textBoxFim, 
@@ -48,25 +63,20 @@ namespace App
             fim.Value = textBoxFim;
             inicio.Value = textBoxInicio;
             
-            //exec InserirPromocaoTemporal '2020-10-20 13:00:00', '2030-10-20 13:00:00', '1', 'Generic', '13:00:00'-- pId = 5
-            //exec InserirPromocaoDesconto '2020-10-20 13:00:00', '2030-10-20 13:00:00', '1', 'Generic', 0.5-- pId = 6
-            //exec InserirPromocaoTemporal @inicio, @fim, @descricao, @tipo, @tempoExtra
-            //exec InserirPromocaoDesconto @inicio, @fim, @descricao, @tipo, @desconto
-            
             cmd.Parameters.Add(tipo);
             cmd.Parameters.Add(fim);
             cmd.Parameters.Add(inicio);
             cmd.Parameters.Add(desc);
         }
 
-        public void promotionTemporalInsert(SqlCommand cmd, 
+        private void InsertPromotionTemporalParameters(SqlCommand cmd, 
             String textBoxTipo, 
             String textBoxDescricao, 
             String textBoxFim,
             String textBoxInicio,
             String textBoxTempoExtra)
         {
-            promotionInsert(cmd, textBoxTipo, textBoxDescricao, textBoxFim, textBoxInicio);
+            InsertPromotionParameters(cmd, textBoxTipo, textBoxDescricao, textBoxFim, textBoxInicio);
 
             SqlParameter tempoExtra = new SqlParameter("@tempoExtra", SqlDbType.Time);
             tempoExtra.Value = textBoxTempoExtra;
@@ -75,14 +85,14 @@ namespace App
             cmd.CommandText = "InserirPromocaoTemporal";
         }
 
-        public void promotionDescontoInsert(SqlCommand cmd,
+        private void InsertPromotionDescontoParameters(SqlCommand cmd,
             String textBoxTipo,
             String textBoxDescricao,
             String textBoxFim,
             String textBoxInicio,
             String textBoxDesconto)
         {
-            promotionInsert(cmd, textBoxTipo, textBoxDescricao, textBoxFim, textBoxInicio);
+            InsertPromotionParameters(cmd, textBoxTipo, textBoxDescricao, textBoxFim, textBoxInicio);
 
             SqlParameter desconto = new SqlParameter("@desconto", SqlDbType.Float);
             desconto.Value = textBoxDesconto;
@@ -90,9 +100,8 @@ namespace App
 
             cmd.CommandText = "InserirPromocaoDesconto";
         }
-        #endregion 
-        #region promotion_remove
-        private void promotionRemove(SqlCommand cmd, 
+
+        private void RemovePromotionParameters(SqlCommand cmd, 
             String textBoxId)
         {
             SqlParameter id = new SqlParameter("@pid", SqlDbType.Int);
@@ -100,22 +109,21 @@ namespace App
             id.Value = textBoxId;
         }
 
-        public void promotionTemporalRemove(SqlCommand cmd, 
+        private void RemovePromotionTemporalParameters(SqlCommand cmd, 
             String textBoxId)
         {
-            promotionRemove(cmd, textBoxId);
+            RemovePromotionParameters(cmd, textBoxId);
             cmd.CommandText = "RemoverPromocaoTemporal";
         }
 
-        public void promotionDescontoRemove(SqlCommand cmd, 
+        private void RemovePromotionDescontoParameters(SqlCommand cmd, 
             String textBoxId)
         {
-            promotionRemove(cmd, textBoxId);
+            RemovePromotionParameters(cmd, textBoxId);
             cmd.CommandText = "RemoverPromocaoDesconto";
         }
-        #endregion
-        #region promotion_update
-        public void promotionUpdate(SqlCommand cmd, 
+
+        private void UpdatePromotionParameters(SqlCommand cmd, 
             String inicio, 
             String fim, 
             String desc, 
@@ -137,14 +145,14 @@ namespace App
             cmd.Parameters.Add(ParamDesc);
         }
 
-        public void promotionTemporalUpdate(SqlCommand cmd, 
+        private void UpdatePromotionTemporalParameters(SqlCommand cmd, 
             String inicio, 
             String fim, 
             String desc, 
             String id, 
             String tempoExtra)
         {
-            promotionUpdate(cmd, inicio, fim, desc, id);
+            UpdatePromotionParameters(cmd, inicio, fim, desc, id);
             SqlParameter ParamTempoExtra = new SqlParameter("@tempoExtra", SqlDbType.Time);
             ParamTempoExtra.Value = tempoExtra;
             cmd.Parameters.Add(ParamTempoExtra);
@@ -152,25 +160,22 @@ namespace App
             cmd.CommandText = "ActualizarPromocaoTemporal";
         }
 
-        public void promotionDescontoUpdate(SqlCommand cmd, 
+        private void UpdatePromotionDescontoParameters(SqlCommand cmd, 
             String inicio, 
             String fim, 
             String desc, 
             String id, 
             String desconto)
         {
-            promotionUpdate(cmd, inicio, fim, desc, id);
+            UpdatePromotionParameters(cmd, inicio, fim, desc, id);
             SqlParameter paramDesconto = new SqlParameter("@desconto", SqlDbType.Float);
             paramDesconto.Value = desconto;
             cmd.Parameters.Add(paramDesconto);
 
             cmd.CommandText = "ActualizarPromocaoDesconto";
         }
-        #endregion
-        #endregion
-        #region aluguer
-        #region insert_aluguer
-        public void insertAluguer(SqlCommand cmd, 
+
+        private void InsertAluguerParameters(SqlCommand cmd, 
             String empregado, 
             String eqId, 
             String inicio, 
@@ -205,7 +210,7 @@ namespace App
             
         }
 
-        public void insertAluguerWithClientProcedure(SqlCommand cmd, String empregado,
+        private void InsertAluguerWithClientParameters(SqlCommand cmd, String empregado,
             String eqId,
             String inicio,
             String duracao,
@@ -213,14 +218,14 @@ namespace App
             String pid,
             String cliente)
         {
-            insertAluguer(cmd, empregado, eqId, inicio, duracao, preco, pid);
+            InsertAluguerParameters(cmd, empregado, eqId, inicio, duracao, preco, pid);
             SqlParameter param_cliente = new SqlParameter("@cliente", SqlDbType.Int);
             param_cliente.Value = cliente;
             cmd.Parameters.Add(param_cliente);
             cmd.CommandText = "InserirAluguer";
         }
 
-        public void insertAluguerWithNewClientProcedure(SqlCommand cmd, String empregado,
+        private void InsertAluguerWithNewClientParameters(SqlCommand cmd, String empregado,
             String eqId,
             String inicio,
             String duracao,
@@ -230,7 +235,7 @@ namespace App
             String cliente_morada, 
             String cliente_nome)
         {
-            insertAluguer(cmd, empregado, eqId, inicio, duracao, preco, pid);
+            InsertAluguerParameters(cmd, empregado, eqId, inicio, duracao, preco, pid);
             SqlParameter clienteNif = new SqlParameter("@cliente_nif", SqlDbType.Int);
             SqlParameter clienteNome = new SqlParameter("@cliente_nome", SqlDbType.VarChar, 31);
             SqlParameter clienteMorada = new SqlParameter("@cliente_morada", SqlDbType.VarChar, 100);
@@ -246,18 +251,15 @@ namespace App
             cmd.CommandText = "InserirAluguerComNovoCliente";
         }
 
-        #endregion
-
-        public void removeAluguerProcedure(SqlCommand cmd, String serialForm)
+        private void RemoveAluguerParameters(SqlCommand cmd, String serialForm)
         {
             SqlParameter serial = new SqlParameter("@serial", SqlDbType.VarChar, 36);
             serial.Value = serialForm;
             cmd.Parameters.Add(serial);
             cmd.CommandText = "RemoverAluguer";
         }
-        #endregion
-        #region price
-        public void priceInsert(SqlCommand cmd, String tipo, 
+
+        private void InsertPriceParameters(SqlCommand cmd, String tipo, 
             String valor, String duracao, String validade)
         {
             SqlParameter tipoParam = new SqlParameter("@tipo", SqlDbType.VarChar, 31);
@@ -278,11 +280,11 @@ namespace App
             cmd.CommandText = "InserirPreco";
         }
 
-        public void priceUpdate(SqlCommand cmd, String tipo,
+        private void UpdatePriceParameters(SqlCommand cmd, String tipo,
             String valor, String duracao, String validade,
             String novovalor, String novaduracao, String novavalidade)
         {
-            priceInsert(cmd, tipo, valor, duracao, validade);
+            InsertPriceParameters(cmd, tipo, valor, duracao, validade);
             SqlParameter novovalorParam = new SqlParameter("@novovalor", SqlDbType.Float);
             SqlParameter novaduracaoParam = new SqlParameter("@novaduracao", SqlDbType.Time);
             SqlParameter novavalidadeParam = new SqlParameter("@novavalidade", SqlDbType.Date);
@@ -298,19 +300,18 @@ namespace App
             cmd.CommandText = "ActualizarPreco";
         }
 
-        public void priceRemove(SqlCommand cmd, String tipo, String valor, String duracao, String validade)
+        private void RemovePriceParameters(SqlCommand cmd, String tipo, String valor, String duracao, String validade)
         {
-            priceInsert(cmd, tipo, valor, duracao, validade);
+            InsertPriceParameters(cmd, tipo, valor, duracao, validade);
             cmd.CommandText = "RemoverPreco";
         }
-        #endregion
-        #region tables
-        public void getLastWeekUnusedEquipments(SqlCommand cmd)
+
+        private void GetLastWeekUnusedEquipments(SqlCommand cmd)
         {
             cmd.CommandText = "SELECT * FROM EquipamentosSemAlugueresNaUltimaSemana()";
         }
 
-        public void getUnusedEquipmentsFor(SqlCommand cmd, String inicio, String fim)
+        private void GetUnusedEquipmentsFor(SqlCommand cmd, String inicio, String fim)
         {
             SqlParameter paramInicio = new SqlParameter("@inicio", SqlDbType.DateTime);
             SqlParameter paramFim = new SqlParameter("@fim", SqlDbType.DateTime);
@@ -322,8 +323,129 @@ namespace App
 
             cmd.CommandText = "SELECT * FROM EquipamentosLivres(@inicio, @fim, NULL)";
         }
-        #endregion
+#endregion 
 
-        
+        public String InserirAluguer(string empregado, string cliente, string equipamento, string inicio, string duracao, string preco, string prom)
+        {
+            Func<SqlCommand, String> ret = (comd) => ReturnSerial(comd,
+                (cmd) => { InsertAluguerWithClientParameters(cmd, empregado, equipamento, inicio, duracao, preco, prom, cliente); });
+            return executeProcedure(ret);
+        }
+        public String InserirAluguerComNovoCliente(string nif, string nome, string morada, string empregado, string eq, string inicio, string duracao, string preco, string pid)
+        {
+            Func<SqlCommand, String> ret = (comd) => ReturnSerial(comd,
+                (cmd) => { InsertAluguerWithNewClientParameters(cmd, empregado, eq, inicio, duracao, preco, pid, nif, morada, nome); });
+            return executeProcedure(ret);
+        }
+        public int RemoverAluguer(string id)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+               (cmd) => { RemoveAluguerParameters(cmd, id); });
+            return executeProcedure(ret);
+        }
+        public int InserirPreco(string tipo, string valor, string duracao, string validade)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+                (cmd) => { InsertPriceParameters(cmd, tipo, valor, duracao, validade); });
+            return executeProcedure(ret);
+        }
+        public int ActualizarPreco(string tipo, string valor, string duracao, string validade, string novovalor, string novaduracao, string novavalidade)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd, 
+                (cmd) => { UpdatePriceParameters(cmd, tipo, valor, duracao, validade, novovalor, novaduracao, novavalidade);} );
+            return executeProcedure(ret);
+        }
+        public int RemoverPreco(string tipo, string valor, string duracao, string validade)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+                (cmd) => { RemovePriceParameters(cmd, tipo, valor, duracao, validade); });
+            return executeProcedure(ret);
+        }
+        public int InserirPromocaoTemporal(string inicio, string fim, string desc, string tipo, string tempoExtra)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+                (cmd) => { InsertPromotionTemporalParameters(cmd, tipo, desc, fim, inicio, tempoExtra); });
+            return executeProcedure(ret);
+        }
+        public int InserirPromocaoDesconto(string inicio, string fim, string desc, string tipo, string desconto)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+                (cmd) => { InsertPromotionDescontoParameters(cmd, tipo, desc, fim, inicio, desconto); });
+            return executeProcedure(ret);
+        }
+        public int RemoverPromocaoTemporal(string id)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+                (cmd) => { RemovePromotionTemporalParameters(cmd, id); });
+            return executeProcedure(ret);
+        }
+        public int RemoverPromocaoDesconto(string id)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+                (cmd) => { RemovePromotionDescontoParameters(cmd, id); });
+            return executeProcedure(ret);
+        }
+        public int ActualizarPromocaoTemporal(string id, string inicio, string fim, string desc, string tempoExtra)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+                (cmd) => { UpdatePromotionTemporalParameters(cmd, inicio, fim, desc, id, tempoExtra); });
+            return executeProcedure(ret);
+        }
+        public int ActualizarPromocaoDesconto(string id, string inicio, string fim, string desc, string desconto)
+        {
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
+                (cmd) => { UpdatePromotionDescontoParameters(cmd, inicio, fim, desc, id, desconto); });
+            return executeProcedure(ret);
+        }
+        public void ExportarXml(string inicio, string fim)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(xmlType));
+
+            using (SqlCommand cmd = con.CreateCommand())
+            {
+                AlugueresDataSet ds = new AlugueresDataSet();
+                SqlDataAdapter adapterAluguer, adapterAlugueres; //adapterEquipamento
+                SqlParameter param_inicio = new SqlParameter("@inicio", SqlDbType.DateTime);
+                SqlParameter param_fim = new SqlParameter("@fim", SqlDbType.DateTime);
+                param_inicio.Value = inicio;
+                param_fim.Value = fim;
+
+                cmd.Parameters.Add(param_inicio);
+                cmd.Parameters.Add(param_fim);
+                cmd.CommandText = "SELECT @inicio as dataInicio, @fim as dataFim, al.serial as id " +
+                    "FROM Aluguer al INNER JOIN AluguerDataFim adf ON (al.serial = adf.serial_adf) " +
+                    "WHERE al.data_inicio >= @inicio AND adf.data_fim <= @fim";
+                adapterAlugueres = new SqlDataAdapter(cmd);
+                adapterAlugueres.Fill(ds.AlugueresTable);
+
+                cmd.CommandText = "SELECT serial as id, tipo, al.eqId as equipamento, cliente " +
+                    "FROM Aluguer al INNER JOIN Equipamento eq ON (al.eqId = eq.eqId) " +
+                    "INNER JOIN AluguerDataFim adf ON (al.serial = adf.serial_adf) " +
+                    "WHERE al.deleted = 0 AND data_inicio >= @inicio AND adf.data_fim <= @fim";
+                adapterAluguer = new SqlDataAdapter(cmd);
+                adapterAluguer.Fill(ds.AluguerTable);
+
+                DataRelation alugueres = ds.Relations.Add("xml",
+                    ds.Tables["alugueres"].Columns["id"], ds.Tables["aluguer"].Columns["id"]);
+
+                alugueres.Nested = true;
+            }
+
+            
+            //String path =  Environment.CurrentDirectory + "\\Alugueres" + inicio.Replace(":", "").Replace(" ", "") + "_" + fim.Replace(":", "").Replace(" ", "") + ".xml";
+            //using (FileStream file = File.Create(path))
+            //{
+            //    serializer.Serialize(file, xml);
+            //}
+                
+            //TODO
+            //throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            if(con != null) 
+                con.Dispose();
+        }
     }
 }
