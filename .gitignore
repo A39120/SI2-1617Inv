@@ -1,9 +1,10 @@
-**/bin/Debug/*
+**/Debug/*
 !**/bin/Debug/*.xml
 !**/bin/Debug/*.xsd
 !**/bin/Debug/*.XML
 !**/bin/Debug/*.XSD
 *.config
+*.suo
 
 # For Mac OS
 *~
