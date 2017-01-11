@@ -22,45 +22,24 @@ namespace App
 
         private void buttonRemoveDesconto_Click(object sender, EventArgs e)
         {
+            ICommand cmd;
+
             if (Program.EntityFramework)
             {
-                using (EfCommand cmd = new EfCommand())
+                
+                using (cmd = Program.GetCommand())
                 {
-                    MessageBox.Show(cmd.RemoverPromocaoDesconto(textBoxId.Text));
+                    cmd.RemoverPromocaoDesconto(textBoxId.Text);
                 }
-            }
-            else
-            {
-                AdoCommand command = new AdoCommand();
-                MessageBox.Show(command.executeProcedure((cmd) =>
-                {
-                    command.promotionDescontoRemove(cmd, textBoxId.Text);
-                },
-                    "Promotion removal was successfull.",
-                    "Promotion removal failed."
-                ));
             }
         }
 
         private void buttonRemoveTemporal_Click(object sender, EventArgs e)
         {
-            if (Program.EntityFramework)
+            using (ICommand cmd = Program.GetCommand())
             {
-                using (EfCommand cmd = new EfCommand())
-                {
-                    MessageBox.Show(cmd.RemoverPromocaoTemporal(textBoxId.Text));
-                }
-            }
-            else
-            {
-                AdoCommand command = new AdoCommand();
-                MessageBox.Show(command.executeProcedure((cmd) =>
-                {
-                    command.promotionTemporalRemove(cmd, textBoxId.Text);
-                },
-                    "Promotion removal was successfull.",
-                    "Promotion removal failed."
-                ));
+                //TODO: Use result, try & catch
+                cmd.RemoverPromocaoTemporal(textBoxId.Text);
             }
         }
     }

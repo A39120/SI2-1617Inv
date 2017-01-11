@@ -23,50 +23,20 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            #region EF
-            if (Program.EntityFramework) {
-                using (EfCommand cmd = new EfCommand())
-                {
-                    MessageBox.Show(
-                            cmd.InserirAluguerComNovoCliente(
-                                textBoxNif.Text,
-                                textBoxNome.Text,
-                                textBoxMorada.Text,
-                                values["empregado"],
-                                values["eqId"],
-                                values["inicio"], 
-                                values["duracao"], 
-                                values["preco"], 
-                                values["pid"]
-                        )
-                    );
-                }
+            using(ICommand cmd = Program.GetCommand())
+            {
+                //TODO: try, catch & handle return
+                cmd.InserirAluguerComNovoCliente(
+                    textBoxNif.Text,
+                    textBoxNome.Text,
+                    textBoxMorada.Text,
+                    values["empregado"],
+                    values["eqId"],
+                    values["inicio"], 
+                    values["duracao"], 
+                    values["preco"], 
+                    values["pid"]);
             }
-            #endregion
-            #region ADO
-            else 
-                        {
-            AdoCommand command = new AdoCommand();
-            MessageBox.Show(command.executeProcedure(
-                    (cmd) =>
-                    {
-                        command.insertAluguerWithNewClientProcedure(cmd,
-                            values["empregado"],
-                            values["eqId"],
-                            values["inicio"],
-                            values["duracao"],
-                            values["preco"],
-                            values["pid"],
-                            textBoxNif.Text,
-                            textBoxNome.Text,
-                            textBoxMorada.Text
-                        );
-                    }, 
-                    "Cliente and Aluguer added with success.",
-                    "Failed to insert Cliente and Aluguer."
-                ));
-        }
-            #endregion
             this.Close();
         }
     }

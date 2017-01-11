@@ -20,35 +20,16 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            #region EF
-            if (Program.EntityFramework)
+            using (ICommand cmd = Program.GetCommand())
             {
-                using (EfCommand cmd = new EfCommand())
-                {
-                    MessageBox.Show(
-                        cmd.InserirPreco(
+                //TODO: Use result, try & catch
+                cmd.InserirPreco(
                             textBoxTipo.Text,
                             textBoxValor.Text,
                             textBoxDuracao.Text,
                             textBoxValidade.Text
-                        ));
-                }
-
+                        );
             }
-            #endregion
-            #region ADO
-            else 
-            {
-                AdoCommand cmd = new AdoCommand();
-                MessageBox.Show(
-                    cmd.executeProcedure((command) => {
-                        cmd.priceInsert(command, textBoxTipo.Text, textBoxValor.Text, textBoxDuracao.Text, textBoxValidade.Text);
-                    },
-                    "Price has been inserted successfully.",
-                    "Error in inserting price.")
-                    );
-            }
-            #endregion
         }
     }
 }

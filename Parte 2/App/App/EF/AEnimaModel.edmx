@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AEnimaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AEnimaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Aluguer">
           <Key>
             <PropertyRef Name="serial" />
@@ -638,8 +638,7 @@ FROM [dbo].[TipoView] AS [TipoView]</DefiningQuery>
             <End Role="TipoPromocao" EntitySet="TipoPromocao" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AEnimaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1031,7 +1030,7 @@ FROM [dbo].[TipoView] AS [TipoView]</DefiningQuery>
             <Parameter Name="duracao" Mode="In" Type="Time" />
           </FunctionImport>
           <FunctionImport Name="CalcularSemanaPassada" IsComposable="true" ReturnType="Collection(AEnimaModel.CalcularSemanaPassada_Result)">
-            <Parameter Name="currentDate" Mode="In" Type="DateTime" />
+          <Parameter Name="currentDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="EquipamentosLivres" IsComposable="true" ReturnType="Collection(AEnimaModel.EquipamentosLivres_Result)">
             <Parameter Name="inicio" Mode="In" Type="DateTime" />
@@ -1156,16 +1155,16 @@ FROM [dbo].[TipoView] AS [TipoView]</DefiningQuery>
             <Parameter Name="tempoExtra" Mode="In" Type="Time" />
           </FunctionImport>
           <FunctionImport Name="RemoverAluguer">
-            <Parameter Name="serial" Mode="In" Type="String" />
+          <Parameter Name="serial" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="RemoverAlugueresParaCliente">
-            <Parameter Name="cid" Mode="In" Type="Int32" />
+          <Parameter Name="cid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RemoverCliente">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RemoverEquipamento">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RemoverPreco">
             <Parameter Name="tipo" Mode="In" Type="String" />
@@ -1174,13 +1173,13 @@ FROM [dbo].[TipoView] AS [TipoView]</DefiningQuery>
             <Parameter Name="validade" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="RemoverPromocao">
-            <Parameter Name="pid" Mode="In" Type="Int32" />
+          <Parameter Name="pid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RemoverPromocaoDesconto">
-            <Parameter Name="pid" Mode="In" Type="Int32" />
+          <Parameter Name="pid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RemoverPromocaoTemporal">
-            <Parameter Name="pid" Mode="In" Type="Int32" />
+          <Parameter Name="pid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UpdateCliente">
             <Parameter Name="id" Mode="In" Type="Int32" />

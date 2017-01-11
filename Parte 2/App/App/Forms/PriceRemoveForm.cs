@@ -20,32 +20,14 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            #region EF
-            if (Program.EntityFramework)
+            using (ICommand cmd = Program.GetCommand())
             {
-                using (EfCommand cmd = new EfCommand())
-                {
-                    MessageBox.Show(cmd.RemoverPreco(textBoxTipo.Text,
-                        textBoxValor.Text,
-                        textBoxDuracao.Text,
-                        textBoxDuracao.Text));
-                }
+                //TODO: Use result, try & catch
+                cmd.RemoverPreco(textBoxTipo.Text,
+                    textBoxValor.Text,
+                    textBoxDuracao.Text,
+                    textBoxDuracao.Text);
             }
-            #endregion
-            #region ADO
-            else 
-            {
-                AdoCommand cmd = new AdoCommand();
-                MessageBox.Show(
-                    cmd.executeProcedure((command) =>
-                    {
-                        cmd.priceRemove(command, textBoxTipo.Text, textBoxValor.Text, textBoxDuracao.Text, textBoxValidade.Text);
-                    },
-                    "Price has been removed successfully.",
-                    "Error in removing price.")
-                    );
-            }
-            #endregion
         }
     }
 }

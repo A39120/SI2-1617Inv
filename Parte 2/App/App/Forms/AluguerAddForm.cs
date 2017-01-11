@@ -36,46 +36,17 @@ namespace App
             }
             else
             {
-                #region EF
-                if (Program.EntityFramework)
+                using(ICommand cmd = Program.GetCommand())
                 {
-                    using (EfCommand cmd = new EfCommand())
-                    {
-                        MessageBox.Show(
-                            cmd.InserirAluguer(empregado, textBoxCliente.Text,
-                                    equipamento,
-                                    inicio,
-                                    duracao,
-                                    preco,
-                                    pid)
-                            );
-                    }
+                //TODO: try, catch & handle return
+                cmd.InserirAluguer(empregado, textBoxCliente.Text,
+                        equipamento,
+                        inicio,
+                        duracao,
+                        preco,
+                        pid);
                 }
-                #endregion
-                #region ADO
-                else
-                {
-                    AdoCommand command = new AdoCommand();
-                    MessageBox.Show(
-                            command.executeProcedure((cmd) =>
-                            {
-                                command.insertAluguerWithClientProcedure(cmd,
-                                    empregado,
-                                    equipamento,
-                                    inicio,
-                                    duracao,
-                                    preco,
-                                    pid,
-                                    textBoxCliente.Text);
-                            },
-                            "Aluguer inserted with success.",
-                            "Aluguer insert failed.")
-                        );
-                }
-                #endregion
             }
-        }
-            
-            
+        }  
     }
 }

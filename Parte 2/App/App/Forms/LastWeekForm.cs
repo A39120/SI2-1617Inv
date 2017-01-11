@@ -34,7 +34,7 @@ namespace App.Forms
                     using (SqlCommand cmd = con.CreateCommand())
                     {
                         AdoCommand command = new AdoCommand();
-                        command.getLastWeekUnusedEquipments(cmd);
+                        //command.GetLastWeekUnusedEquipments(cmd);
                         con.Open();
                         SqlDataReader reader = cmd.ExecuteReader();
                         if (reader.HasRows)
