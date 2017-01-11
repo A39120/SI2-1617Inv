@@ -135,7 +135,7 @@
     <Compile Include="Forms\AluguerRemoveForm.Designer.cs">
       <DependentUpon>AluguerRemoveForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Command.cs" />
+    <Compile Include="ADO.NET\AdoCommand.cs" />
     <Compile Include="Forms\EquipamentosLivresTabelaForm.cs">
       <SubType>Form</SubType>
     </Compile>

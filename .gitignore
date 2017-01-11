@@ -1,0 +1,11 @@
+**/bin/Debug/
+!**/bin/Debug/*.xml
+!**/bin/Debug/*.xsd
+!**/bin/Debug/*.XML
+!**/bin/Debug/*.XSD
+*.config
+
+# For Mac OS
+*~
+.DS_Store
+
