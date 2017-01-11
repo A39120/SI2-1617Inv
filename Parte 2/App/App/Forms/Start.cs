@@ -84,8 +84,7 @@ namespace App
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (Program.EntityFramework) Program.EntityFramework = false;
-            Program.EntityFramework = true;
+            Program.EntityFramework = (checkBox1.CheckState == CheckState.Checked);
         }
 
         private void button1_Click(object sender, EventArgs e)
