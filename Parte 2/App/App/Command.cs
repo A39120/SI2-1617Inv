@@ -123,7 +123,7 @@ namespace App
         {
             SqlParameter ParamInicio = new SqlParameter("@inicio", SqlDbType.DateTime);
             SqlParameter ParamFim = new SqlParameter("@fim", SqlDbType.DateTime);
-            SqlParameter ParamDesc = new SqlParameter("@descricao", SqlDbType.VarChar, 255);
+            SqlParameter ParamDesc = new SqlParameter("@descr", SqlDbType.VarChar, 255);
             SqlParameter ParamId = new SqlParameter("@promotion_id", SqlDbType.VarChar, 31);
 
             ParamId.Value = id;
@@ -131,10 +131,10 @@ namespace App
             ParamFim.Value = fim;
             ParamInicio.Value = inicio;
 
-            cmd.Parameters.Add(id);
-            cmd.Parameters.Add(fim);
-            cmd.Parameters.Add(inicio);
-            cmd.Parameters.Add(desc);
+            cmd.Parameters.Add(ParamId);
+            cmd.Parameters.Add(ParamFim);
+            cmd.Parameters.Add(ParamInicio);
+            cmd.Parameters.Add(ParamDesc);
         }
 
         public void promotionTemporalUpdate(SqlCommand cmd, 
@@ -149,7 +149,7 @@ namespace App
             ParamTempoExtra.Value = tempoExtra;
             cmd.Parameters.Add(ParamTempoExtra);
 
-            cmd.CommandText = "InserirPromocaoTemporal";
+            cmd.CommandText = "ActualizarPromocaoTemporal";
         }
 
         public void promotionDescontoUpdate(SqlCommand cmd, 
@@ -164,7 +164,7 @@ namespace App
             paramDesconto.Value = desconto;
             cmd.Parameters.Add(paramDesconto);
 
-            cmd.CommandText = "InserirPromocaoDesconto";
+            cmd.CommandText = "ActualizarPromocaoDesconto";
         }
         #endregion
         #endregion
@@ -183,21 +183,26 @@ namespace App
             SqlParameter param_inicioAluguer = new SqlParameter("@inicioAluguer", SqlDbType.DateTime);
             SqlParameter param_duracao = new SqlParameter("@duracao", SqlDbType.Time);
             SqlParameter param_preco = new SqlParameter("@preco", SqlDbType.Float);
-            SqlParameter param_promocao = new SqlParameter("@pid", SqlDbType.Int);
+            if (!pid.Equals(""))
+            {
+                SqlParameter param_promocao = new SqlParameter("@pid", SqlDbType.Int);
+                param_promocao.Value = pid;
+                cmd.Parameters.Add(param_promocao);
+            }
 
             param_empregado.Value = empregado;
             param_equipamento.Value = eqId;
             param_inicioAluguer.Value = inicio;
             param_duracao.Value = duracao;
             param_preco.Value = preco;
-            param_promocao.Value = pid;
+            
 
             cmd.Parameters.Add(param_empregado);
             cmd.Parameters.Add(param_equipamento);
             cmd.Parameters.Add(param_inicioAluguer);
             cmd.Parameters.Add(param_duracao);
             cmd.Parameters.Add(param_preco);
-            cmd.Parameters.Add(param_promocao);
+            
         }
 
         public void insertAluguerWithClientProcedure(SqlCommand cmd, String empregado,
@@ -320,10 +325,5 @@ namespace App
         #endregion
 
         
-    }
-
-    class EfCommand
-    {
-
     }
 }

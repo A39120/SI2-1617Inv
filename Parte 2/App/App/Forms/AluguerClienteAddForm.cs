@@ -23,21 +23,26 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            #region EF
             if (Program.EntityFramework) {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.InserirAluguerComNovoCliente(
-                    int.Parse(textBoxNif.Text),
-                    textBoxNome.Text,
-                    textBoxMorada.Text,
-                    int.Parse(values["empregado"]),
-                    int.Parse(values["eqId"]),
-                    DateTime.Parse(values["inicio"]), 
-                    TimeSpan.Parse(values["duracao"]), 
-                    double.Parse(values["preco"]), 
-                    int.Parse(values["pid"]));
-                MessageBox.Show("Aluguer e novo clientes inserido.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(
+                            cmd.InserirAluguerComNovoCliente(
+                                textBoxNif.Text,
+                                textBoxNome.Text,
+                                textBoxMorada.Text,
+                                values["empregado"],
+                                values["eqId"],
+                                values["inicio"], 
+                                values["duracao"], 
+                                values["preco"], 
+                                values["pid"]
+                        )
+                    );
+                }
             }
+            #endregion
             #region ADO
             else 
                         {

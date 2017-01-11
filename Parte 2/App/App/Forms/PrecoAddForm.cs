@@ -20,17 +20,23 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
+            #region EF
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.InserirPreco(
-                    textBoxTipo.Text,
-                    double.Parse(textBoxValor.Text),
-                    TimeSpan.Parse(textBoxDuracao.Text),
-                    DateTime.Parse(textBoxValidade.Text)
-                    );
-                MessageBox.Show("Preço Inserido.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(
+                        cmd.InserirPreco(
+                            textBoxTipo.Text,
+                            textBoxValor.Text,
+                            textBoxDuracao.Text,
+                            textBoxValidade.Text
+                        ));
+                }
+
             }
+            #endregion
+            #region ADO
             else 
             {
                 AdoCommand cmd = new AdoCommand();
@@ -42,7 +48,7 @@ namespace App
                     "Error in inserting price.")
                     );
             }
-            this.Close();
+            #endregion
         }
     }
 }

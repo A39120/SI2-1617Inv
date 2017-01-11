@@ -23,8 +23,10 @@ namespace App.Forms
         {
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                
+                using (EfCommand cmd = new EfCommand())
+                {
+                    cmd.ExportarXml(textBox1.Text, textBox2.Text);
+                }
             } 
             else 
             {

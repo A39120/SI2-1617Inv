@@ -24,9 +24,10 @@ namespace App
         {
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.RemoverPromocaoDesconto(int.Parse(textBoxId.Text));
-                MessageBox.Show("Promoção temporal removida.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(cmd.RemoverPromocaoDesconto(textBoxId.Text));
+                }
             }
             else
             {
@@ -39,16 +40,16 @@ namespace App
                     "Promotion removal failed."
                 ));
             }
-            this.Close();
         }
 
         private void buttonRemoveTemporal_Click(object sender, EventArgs e)
         {
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.RemoverPromocaoTemporal(int.Parse(textBoxId.Text));
-                MessageBox.Show("Promoção temporal removida.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(cmd.RemoverPromocaoTemporal(textBoxId.Text));
+                }
             }
             else
             {
@@ -61,7 +62,6 @@ namespace App
                     "Promotion removal failed."
                 ));
             }
-            this.Close();
         }
     }
 }

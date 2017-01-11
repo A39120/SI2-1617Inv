@@ -20,8 +20,10 @@ namespace App.Forms
             InitializeComponent();
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                dataGridView1.DataSource = ctx.EquipamentosSemAlugueresNaUltimaSemana();
+                using (EfCommand cmd = new EfCommand())
+                {
+                    dataGridView1.DataSource = cmd.EquipamentosSemAlugueresNaUltimaSemana();
+                }
             }
             else
             {

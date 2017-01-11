@@ -18,15 +18,16 @@ namespace App.Forms
         public EquipamentosLivresTabelaForm(String inicio, String fim)
         {
             InitializeComponent();
+            #region EF
             if (Program.EntityFramework) 
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                var equip = ctx.EquipamentosLivres(
-                    DateTime.Parse(inicio),
-                    DateTime.Parse(fim),
-                    null);
-                dataGridView1.DataSource = equip;
+                using (EfCommand cmd = new EfCommand())
+                {
+                    var equip = cmd.EquipamentosLivres(inicio, fim);
+                    dataGridView1.DataSource = equip;
+                }
             }
+            #endregion
             #region ADO
             else
             {

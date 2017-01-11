@@ -22,16 +22,22 @@ namespace App
 
         private void buttonAddTempo_Click(object sender, EventArgs e)
         {
+            #region EF
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.InserirPromocaoTemporal(DateTime.Parse(textBoxInicio.Text), 
-                    DateTime.Parse(textBoxFim.Text),
-                    textBoxDescricao.Text,
-                    textBoxTipo.Text,
-                    TimeSpan.Parse(textBoxTempoExtra.Text));
-                MessageBox.Show("Promoção temporal inserida.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(
+                        cmd.InserirPromocaoTemporal(textBoxInicio.Text, 
+                            textBoxFim.Text,
+                            textBoxDescricao.Text,
+                            textBoxTipo.Text,
+                            textBoxTempoExtra.Text)
+                        );
+                }
             }
+            #endregion
+            #region ADO
             else
             {
                 AdoCommand command = new AdoCommand();
@@ -48,20 +54,23 @@ namespace App
                     "Failed in inserting new promotion"
                 ));
             }
-            this.Close();
+            #endregion
         }
 
         private void buttonAddDesconto_Click(object sender, EventArgs e)
         {
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.InserirPromocaoDesconto(DateTime.Parse(textBoxInicio.Text),
-                    DateTime.Parse(textBoxFim.Text),
-                    textBoxDescricao.Text,
-                    textBoxTipo.Text,
-                    double.Parse(textBoxDesconto.Text));
-                MessageBox.Show("Promoção de desconto inserida.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(
+                        cmd.InserirPromocaoDesconto(textBoxInicio.Text,
+                            textBoxFim.Text,
+                            textBoxDescricao.Text,
+                            textBoxTipo.Text,
+                            textBoxDesconto.Text)
+                        );
+                }
             }
             else
             {
@@ -79,7 +88,6 @@ namespace App
                     "Failed in inserting new promotion"
                 ));
             }
-            this.Close();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace App
     class AlugueresTable : DataTable
     {
         public AlugueresTable()
-            : base("alugueres")
+            : base("alugueresType")
         {
             this.Columns.Add("dataInicio", typeof(String));
             this.Columns.Add("dataFim", typeof(String));
@@ -30,7 +30,7 @@ namespace App
 
     class AluguerTable : DataTable 
     {
-        public AluguerTable() : base("aluguer")
+        public AluguerTable() : base("aluguerType")
         {
             this.Columns.Add("id", typeof(String));
             this.Columns.Add("equipamento", typeof(int));
@@ -55,13 +55,12 @@ namespace App
         AlugueresTable alugueresTable;
 
         public AlugueresDataSet()
-            : base("xml")
+            : base("xmlType")
         {
             aluguerTable = new AluguerTable();
             alugueresTable = new AlugueresTable();
             this.Tables.Add(aluguerTable);
             this.Tables.Add(alugueresTable);
-            this.DataSetName = "xml";
 
             this.ReadXmlSchema("AlugueresSchema.xsd");
         }

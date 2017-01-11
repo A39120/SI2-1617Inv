@@ -20,12 +20,15 @@ namespace App
 
         private void buttonRemoverAluguer_Click(object sender, EventArgs e)
         {
+            #region EF
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.RemoverAluguer(textBox1.Text);
-                MessageBox.Show("Aluguer removed.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(cmd.RemoverAluguer(textBox1.Text));
+                }
             }
+            #endregion
             #region ADO
             else
             {
@@ -37,7 +40,6 @@ namespace App
                 ));
             }
             #endregion
-            this.Close();
         }
     }
 }

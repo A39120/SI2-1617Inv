@@ -24,14 +24,14 @@ namespace App
         {
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.ActualizarPromocaoTemporal(int.Parse(textBoxId.Text),
-                    DateTime.Parse(textBoxInicio.Text),
-                    DateTime.Parse(textBoxFim.Text),
-                    textBoxDescricao.Text,
-                    TimeSpan.Parse(textBoxTempoExtra.Text)
-                    );
-                MessageBox.Show("Promoção temporal actualizada.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(cmd.ActualizarPromocaoTemporal(textBoxId.Text,
+                            textBoxInicio.Text,
+                            textBoxFim.Text,
+                            textBoxDescricao.Text,
+                            textBoxTempoExtra.Text));
+                }
             }
             else
             {
@@ -39,31 +39,30 @@ namespace App
                 MessageBox.Show(cmd.executeProcedure((command) =>
                     {
                         cmd.promotionTemporalUpdate(command,
-                          textBoxId.Text,
-                          textBoxDescricao.Text,
-                          textBoxFim.Text,
                           textBoxInicio.Text,
+                          textBoxFim.Text,
+                          textBoxDescricao.Text,
+                          textBoxId.Text,
                           textBoxTempoExtra.Text);
                     },
                     "Promotion updated successfully.",
                     "Error in updating promotion:"
                 ));
             }
-            this.Close();
         }
 
         private void buttonUpdateDesconto_Click(object sender, EventArgs e)
         {
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.ActualizarPromocaoDesconto(int.Parse(textBoxId.Text),
-                    DateTime.Parse(textBoxInicio.Text),
-                    DateTime.Parse(textBoxFim.Text),
-                    textBoxDescricao.Text,
-                    float.Parse(textBoxDesconto.Text)
-                    );
-                MessageBox.Show("Promoção de desconto actualizada.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(cmd.ActualizarPromocaoDesconto(textBoxId.Text,
+                        textBoxInicio.Text,
+                        textBoxFim.Text,
+                        textBoxDescricao.Text,
+                        textBoxDesconto.Text));
+                }
             }
             else
             {
@@ -71,17 +70,16 @@ namespace App
                 MessageBox.Show(cmd.executeProcedure((command) =>
                 {
                     cmd.promotionDescontoUpdate(command,
-                      textBoxId.Text,
-                      textBoxDescricao.Text,
-                      textBoxFim.Text,
                       textBoxInicio.Text,
+                      textBoxFim.Text,
+                      textBoxDescricao.Text,
+                      textBoxId.Text,
                       textBoxDesconto.Text);
                 },
                     "Promotion updated successfully.",
                     "Error in updating promotion:"
                 ));
             }
-            this.Close();
         }
     }
 }

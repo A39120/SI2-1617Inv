@@ -95,6 +95,7 @@
     <Compile Include="EF\ClienteView.cs">
       <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\EfCommand.cs" />
     <Compile Include="EF\Empregado.cs">
       <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
@@ -228,7 +229,7 @@
       <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="XML\Alugueres.cs" />
-    <Compile Include="XML\AlugueresSchema.cs">
+    <Compile Include="EF\AlugueresSchema.cs">
       <DependentUpon>AlugueresSchema.xsd</DependentUpon>
     </Compile>
     <Compile Include="XML\XmlFileCreator.cs" />
@@ -304,7 +305,7 @@
       <LastGenOutput>AEnimaModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="XML\AlugueresSchema.xsd">
+    <None Include="EF\AlugueresSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">

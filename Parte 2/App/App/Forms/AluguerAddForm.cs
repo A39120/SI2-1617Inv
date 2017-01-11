@@ -21,7 +21,8 @@ namespace App
             String duracao = textBoxDuracao.Text;
             String preco = textBoxPreco.Text;
             String pid = textBoxPromocao.Text;
-            if (textBoxCliente.Text.Equals("")){
+            if (textBoxCliente.Text.Equals(""))
+            {
                 Dictionary<String, String> dic = new Dictionary<string, string>();
                 dic.Add("empregado", empregado);
                 dic.Add("eqId", equipamento);
@@ -33,40 +34,46 @@ namespace App
                 acaf.Show();
                 this.Close();
             }
-            if (Program.EntityFramework) {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.InserirAluguer(
-                    int.Parse(empregado),
-                    int.Parse(textBoxCliente.Text),
-                    int.Parse(equipamento), 
-                    DateTime.Parse(inicio), 
-                    TimeSpan.Parse(duracao), 
-                    double.Parse(preco), 
-                    int.Parse(pid));
-                MessageBox.Show("Aluguer inserido.");
-            }
-            #region ADO
             else
             {
-                AdoCommand command = new AdoCommand();
-                MessageBox.Show(
-                        command.executeProcedure((cmd) =>
-                        {
-                            command.insertAluguerWithClientProcedure(cmd,
-                                empregado,
-                                equipamento,
-                                inicio,
-                                duracao,
-                                preco,
-                                pid,
-                                textBoxCliente.Text);
-                        },
-                        "Aluguer inserted with success.",
-                        "Aluguer insert failed.")
-                    );
+                #region EF
+                if (Program.EntityFramework)
+                {
+                    using (EfCommand cmd = new EfCommand())
+                    {
+                        MessageBox.Show(
+                            cmd.InserirAluguer(empregado, textBoxCliente.Text,
+                                    equipamento,
+                                    inicio,
+                                    duracao,
+                                    preco,
+                                    pid)
+                            );
+                    }
                 }
-            #endregion
-            this.Close();
+                #endregion
+                #region ADO
+                else
+                {
+                    AdoCommand command = new AdoCommand();
+                    MessageBox.Show(
+                            command.executeProcedure((cmd) =>
+                            {
+                                command.insertAluguerWithClientProcedure(cmd,
+                                    empregado,
+                                    equipamento,
+                                    inicio,
+                                    duracao,
+                                    preco,
+                                    pid,
+                                    textBoxCliente.Text);
+                            },
+                            "Aluguer inserted with success.",
+                            "Aluguer insert failed.")
+                        );
+                }
+                #endregion
+            }
         }
             
             

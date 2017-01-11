@@ -20,15 +20,19 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
+            #region EF
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.RemoverPreco(textBoxTipo.Text,
-                    double.Parse(textBoxValor.Text),
-                    TimeSpan.Parse(textBoxDuracao.Text),
-                    DateTime.Parse(textBoxDuracao.Text));
-                MessageBox.Show("Preço removido.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(cmd.RemoverPreco(textBoxTipo.Text,
+                        textBoxValor.Text,
+                        textBoxDuracao.Text,
+                        textBoxDuracao.Text));
+                }
             }
+            #endregion
+            #region ADO
             else 
             {
                 AdoCommand cmd = new AdoCommand();
@@ -41,7 +45,7 @@ namespace App
                     "Error in removing price.")
                     );
             }
-            this.Close();
+            #endregion
         }
     }
 }

@@ -20,18 +20,23 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
+            #region EF
             if (Program.EntityFramework)
             {
-                AEnimaEntities ctx = new AEnimaEntities();
-                ctx.ActualizarPreco(textBoxTipo.Text,
-                    double.Parse(textBoxValor.Text),
-                    TimeSpan.Parse(textBoxDuracao.Text),
-                    DateTime.Parse(textBoxDuracao.Text),
-                    double.Parse(textBoxNovoValor.Text),
-                    TimeSpan.Parse(textBoxNovaDuracao.Text),
-                    DateTime.Parse(textBoxNovaValidade.Text));
-                MessageBox.Show("Preço actualizado.");
+                using (EfCommand cmd = new EfCommand())
+                {
+                    MessageBox.Show(
+                        cmd.ActualizarPreco(textBoxTipo.Text,
+                            textBoxValor.Text,
+                            textBoxDuracao.Text,
+                            textBoxDuracao.Text,
+                            textBoxNovoValor.Text,
+                            textBoxNovaDuracao.Text,
+                            textBoxNovaValidade.Text));
+                }
             }
+            #endregion
+            #region ADO
             else { 
                 AdoCommand command = new AdoCommand();
                 MessageBox.Show(command.executeProcedure(
@@ -43,6 +48,7 @@ namespace App
                     "Price updated.",
                     "Price update failed."));
             }
+            #endregion
         }
     }
 }
