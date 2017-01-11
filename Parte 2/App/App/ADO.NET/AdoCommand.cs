@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace App
 {
-    class AdoCommand : ICommand
+    public class AdoCommand : ICommand
     {
         SqlConnection con;
         public AdoCommand()
