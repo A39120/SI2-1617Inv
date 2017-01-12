@@ -324,7 +324,7 @@ namespace App.EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirAluguer", empregadoParameter, clienteParameter, eqIdParameter, inicioAluguerParameter, duracaoParameter, precoParameter, pidParameter, novoID);
         }
     
-        public virtual int InserirAluguerComNovoCliente(Nullable<int> cliente_nif, string cliente_nome, string cliente_morada, Nullable<int> empregado, Nullable<int> eqId, Nullable<System.DateTime> inicioAluguer, Nullable<System.TimeSpan> duracao, Nullable<double> preco, Nullable<int> pid)
+        public virtual int InserirAluguerComNovoCliente(Nullable<int> cliente_nif, string cliente_nome, string cliente_morada, Nullable<int> empregado, Nullable<int> eqId, Nullable<System.DateTime> inicioAluguer, Nullable<System.TimeSpan> duracao, Nullable<double> preco, Nullable<int> pid, ObjectParameter novoID)
         {
             var cliente_nifParameter = cliente_nif.HasValue ?
                 new ObjectParameter("cliente_nif", cliente_nif) :
@@ -362,7 +362,7 @@ namespace App.EF
                 new ObjectParameter("pid", pid) :
                 new ObjectParameter("pid", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirAluguerComNovoCliente", cliente_nifParameter, cliente_nomeParameter, cliente_moradaParameter, empregadoParameter, eqIdParameter, inicioAluguerParameter, duracaoParameter, precoParameter, pidParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirAluguerComNovoCliente", cliente_nifParameter, cliente_nomeParameter, cliente_moradaParameter, empregadoParameter, eqIdParameter, inicioAluguerParameter, duracaoParameter, precoParameter, pidParameter, novoID);
         }
     
         public virtual int InserirCliente(string nome, Nullable<int> nif, string morada, ObjectParameter idCliente)
@@ -382,7 +382,7 @@ namespace App.EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirCliente", nomeParameter, nifParameter, moradaParameter, idCliente);
         }
     
-        public virtual int InserirEquipamento(string tipo, string descr)
+        public virtual int InserirEquipamento(string tipo, string descr, ObjectParameter novoID)
         {
             var tipoParameter = tipo != null ?
                 new ObjectParameter("tipo", tipo) :
@@ -392,10 +392,10 @@ namespace App.EF
                 new ObjectParameter("descr", descr) :
                 new ObjectParameter("descr", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirEquipamento", tipoParameter, descrParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirEquipamento", tipoParameter, descrParameter, novoID);
         }
     
-        public virtual int InserirEquipamentoComTipo(string tipo, string descr, string descrTipo)
+        public virtual int InserirEquipamentoComTipo(string tipo, string descr, string descrTipo, ObjectParameter novoID)
         {
             var tipoParameter = tipo != null ?
                 new ObjectParameter("tipo", tipo) :
@@ -409,7 +409,7 @@ namespace App.EF
                 new ObjectParameter("descrTipo", descrTipo) :
                 new ObjectParameter("descrTipo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirEquipamentoComTipo", tipoParameter, descrParameter, descrTipoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirEquipamentoComTipo", tipoParameter, descrParameter, descrTipoParameter, novoID);
         }
     
         public virtual int InserirPreco(string tipo, Nullable<double> valor, Nullable<System.TimeSpan> duracao, Nullable<System.DateTime> validade)
