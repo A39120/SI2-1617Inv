@@ -460,6 +460,7 @@
       <Parameter Name="duracao" Mode="In" Type="Time" />
       <Parameter Name="preco" Mode="In" Type="Double" />
       <Parameter Name="pid" Mode="In" Type="Int32" />
+      <Parameter Name="novoID" Mode="InOut" Type="String" />
     </FunctionImport>
     <FunctionImport Name="InserirCliente">
       <Parameter Name="nome" Mode="In" Type="String" />
@@ -470,11 +471,13 @@
     <FunctionImport Name="InserirEquipamento">
       <Parameter Name="tipo" Mode="In" Type="String" />
       <Parameter Name="descr" Mode="In" Type="String" />
+      <Parameter Name="novoID" Mode="InOut" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="InserirEquipamentoComTipo">
       <Parameter Name="tipo" Mode="In" Type="String" />
       <Parameter Name="descr" Mode="In" Type="String" />
       <Parameter Name="descrTipo" Mode="In" Type="String" />
+      <Parameter Name="novoID" Mode="InOut" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="InserirPreco">
       <Parameter Name="tipo" Mode="In" Type="String" />
