@@ -149,7 +149,7 @@ namespace App.EF
                 double.Parse(desconto));
         }
 
-        public void ExportarXml(string inicio, string fim)
+        public string ExportarXml(string inicio, string fim)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(xmlType));
             xmlType xml = new xmlType();
@@ -185,7 +185,7 @@ namespace App.EF
             using (FileStream file = File.Create(path))
             {
                 serializer.Serialize(file, xml);
-
+                return path;
             }
 
         }

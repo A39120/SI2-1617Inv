@@ -23,7 +23,6 @@ namespace App
         int RemoverPromocaoDesconto(String id);
         int ActualizarPromocaoTemporal(String id, String inicio, String fim, String desc, String tempoExtra);
         int ActualizarPromocaoDesconto(String id, String inicio, String fim, String desc, String desconto);
-        void ExportarXml(String inicio, String fim);
-
+        string ExportarXml(String inicio, String fim);
     }
 }

@@ -23,9 +23,9 @@ namespace App.Forms
         {
             using (ICommand cmd = Program.GetCommand())
             {
-                cmd.ExportarXml(textBox1.Text, textBox2.Text);
+                string filename = cmd.ExportarXml(textBox1.Text, textBox2.Text);
+                MessageBox.Show("Created XML file. (" + filename  + ")");
             }
-            MessageBox.Show("Created XML file.");
         }
     }
 }

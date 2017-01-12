@@ -94,3 +94,4 @@ D:\SI2\si2_repo\Parte 2\App\App\bin\Debug\App.exe
 D:\SI2\si2_repo\Parte 2\App\App\bin\Debug\App.pdb
 D:\SI2\si2_repo\Parte 2\App\App\bin\Debug\EntityFramework.dll
 D:\SI2\si2_repo\Parte 2\App\App\bin\Debug\EntityFramework.xml
+C:\Users\Tiago\Desktop\SI2\repo\si2_repo\Parte 2\App\App\obj\Debug\App.csprojResolveAssemblyReference.cache

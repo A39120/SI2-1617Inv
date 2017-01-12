@@ -427,7 +427,7 @@ namespace App
                 (cmd) => { UpdatePromotionDescontoParameters(cmd, inicio, fim, desc, id, desconto); });
             return executeProcedure(ret);
         }
-        public void ExportarXml(string inicio, string fim)
+        public string ExportarXml(string inicio, string fim)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(xmlType),"xml");
             xmlType xml = new xmlType();
@@ -467,6 +467,7 @@ namespace App
             using (FileStream file = File.Create(path))
             {
                 serializer.Serialize(file, xml);
+                return path;
             }
         }
 
