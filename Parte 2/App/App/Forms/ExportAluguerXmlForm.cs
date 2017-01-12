@@ -21,10 +21,11 @@ namespace App.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-                using (ICommand cmd = Program.GetCommand())
-                {
-                    cmd.ExportarXml(textBox1.Text, textBox2.Text);
-                }
+            using (ICommand cmd = Program.GetCommand())
+            {
+                cmd.ExportarXml(textBox1.Text, textBox2.Text);
+            }
+            MessageBox.Show("Created XML file.");
         }
     }
 }

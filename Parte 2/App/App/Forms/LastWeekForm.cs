@@ -18,8 +18,11 @@ namespace App.Forms
         public LastWeekForm()
         {
             InitializeComponent();
-            ICommand cmd = App.Program.GetCommand();
-            dataGridView1.DataSource = cmd.EquipamentosSemAlugueresNaUltimaSemana();
+            using (ICommand cmd = Program.GetCommand())
+            {
+                dataGridView1.DataSource = cmd.EquipamentosSemAlugueresNaUltimaSemana();
+            }
+            
         }
     }
 }

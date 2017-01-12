@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -13,14 +14,14 @@ namespace App.EF
             ctx = new AEnimaEntities();
         }
 
-        public IQueryable<EquipamentosLivres_Result> EquipamentosLivres(String inicio, String fim) {
-            return ctx.EquipamentosLivres(DateTime.Parse(inicio), DateTime.Parse(fim), null);
-        }
-
-        public IQueryable<EquipamentosSemAlugueresNaUltimaSemana_Result> EquipamentosSemAlugueresNaUltimaSemana() {
+        public object EquipamentosSemAlugueresNaUltimaSemana()
+        {
             return ctx.EquipamentosSemAlugueresNaUltimaSemana();
         }
 
+        public object EquipamentosLivres(String inicio, String fim) {
+            return ctx.EquipamentosLivres(DateTime.Parse(inicio), DateTime.Parse(fim), null);
+        }
 
         public string InserirAluguer(string empregado, string cliente, string equipamento, string inicio, string duracao, string preco, string prom)
         {

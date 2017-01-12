@@ -10,12 +10,29 @@ namespace App
     public class AdoCommand : ICommand
     {
         SqlConnection con;
+        SqlDataReader reader = null;
+
         public AdoCommand()
         {
             con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
         }
-        
+
+        private DataTable executeFunction(Action<SqlCommand> action) {
+            using (SqlCommand cmd = con.CreateCommand()) {
+                action(cmd);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows) {
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+                    return dt;
+                }
+                reader.Close();
+                return null;
+            }
+        }
+
         private T executeProcedure<T>(Func<SqlCommand, T> action){
             using (SqlCommand cmd = con.CreateCommand())
             {
@@ -325,6 +342,18 @@ namespace App
             cmd.CommandText = "SELECT * FROM EquipamentosLivres(@inicio, @fim, NULL)";
         }
 #endregion 
+
+        public object EquipamentosLivres(String inicio, String fim) {
+            return executeFunction((cmd) => {
+                GetUnusedEquipmentsFor(cmd, inicio, fim);
+            });
+        }
+
+        public object EquipamentosSemAlugueresNaUltimaSemana() {
+            return executeFunction((cmd) => {
+                GetLastWeekUnusedEquipments(cmd);
+            });
+        }
 
         public String InserirAluguer(string empregado, string cliente, string equipamento, string inicio, string duracao, string preco, string prom)
         {
