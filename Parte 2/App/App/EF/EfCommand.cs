@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -14,12 +15,16 @@ namespace App.EF
         }
 
         //
-        public IQueryable<EquipamentosLivres_Result> EquipamentosLivres(String inicio, String fim) {
+        /*public IQueryable<EquipamentosLivres_Result> EquipamentosLivres(String inicio, String fim) {
             return ctx.EquipamentosLivres(DateTime.Parse(inicio), DateTime.Parse(fim), null);
+        }*/
+        // TODO
+        public DataTable EquipamentosLivres(String inicio, String fim) {
+            //return ctx.EquipamentosLivres(DateTime.Parse(inicio), DateTime.Parse(fim), null);
         }
 
-        public IQueryable<EquipamentosSemAlugueresNaUltimaSemana_Result> EquipamentosSemAlugueresNaUltimaSemana() {
-            return ctx.EquipamentosSemAlugueresNaUltimaSemana();
+        public DataTable EquipamentosSemAlugueresNaUltimaSemana() {
+            return null;
         }
         //*/
 

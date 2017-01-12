@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,8 @@ namespace App
         String InserirAluguerComNovoCliente(String nif, String nome, String morada, String empregado, String eq, String inicio, String duracao, String preco, String pid);
         int RemoverAluguer(String id);
 
-        // IQueryable<EquipamentosLivres_Result> EquipamentosLivres(String inicio, String fim);
-        // IQueryable<EquipamentosSemAlugueresNaUltimaSemana_Result> EquipamentosSemAlugueresNaUltimaSemana();
+        DataTable EquipamentosLivres(String inicio, String fim);
+        DataTable EquipamentosSemAlugueresNaUltimaSemana();
 
         int InserirPreco(String tipo, String valor, String duracao, String validade);
         int ActualizarPreco(String tipo, String valor, String duracao, String validade, String novovalor, String novaduracao, String novavalidade);

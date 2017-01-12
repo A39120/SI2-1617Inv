@@ -18,35 +18,8 @@ namespace App.Forms
         public LastWeekForm()
         {
             InitializeComponent();
-            if (Program.EntityFramework)
-            {
-                using (EfCommand cmd = new EfCommand())
-                {
-                    dataGridView1.DataSource = cmd.EquipamentosSemAlugueresNaUltimaSemana();
-                }
-            }
-            else
-            {
-
-                using (SqlConnection con = new SqlConnection())
-                {
-                    con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                    using (SqlCommand cmd = con.CreateCommand())
-                    {
-                        AdoCommand command = new AdoCommand();
-                        //command.GetLastWeekUnusedEquipments(cmd);
-                        con.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            DataTable dt = new DataTable();
-                            dt.Load(reader);
-                            dataGridView1.DataSource = dt;
-                        }
-                        reader.Close();
-                    }
-                }
-            }
+            ICommand cmd = App.Program.GetCommand();
+            dataGridView1.DataSource = cmd.EquipamentosSemAlugueresNaUltimaSemana();
         }
     }
 }
