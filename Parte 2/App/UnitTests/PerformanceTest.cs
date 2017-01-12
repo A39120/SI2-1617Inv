@@ -5,12 +5,11 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
 using App.EF;
-using App.ADO.NET;
 using App;
 
 namespace UnitTests {
     [TestClass]
-    public class UnitTests {
+    public class AdoTests {
         [TestMethod]
         public void CompareADO_VS_EF() {
             Stopwatch sw = new Stopwatch();
@@ -29,19 +28,10 @@ namespace UnitTests {
             sw.Reset();
             sw.Start();
             for (int i = 0; i < MAX_RUNS; i++)
-                using (SqlConnection con = new SqlConnection()) {
-                    con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                    using (SqlCommand cmd = con.CreateCommand()) {
-                        App.AdoCommand command = new AdoCommand();
-                        con.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        if (reader.HasRows) {
-                            DataTable dt = new DataTable();
-                            dt.Load(reader);
-                        }
-                        reader.Close();
-                    }
+                using(AdoCommand cmd = new AdoCommand()){
+                    cmd.EquipamentosSemAlugueresNaUltimaSemana();
                 }
+
             sw.Stop();
             long ADOdotNETtime = sw.ElapsedMilliseconds;
 

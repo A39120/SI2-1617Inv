@@ -476,5 +476,7 @@ namespace App
             if(con != null) 
                 con.Dispose();
         }
+
+        public SqlConnection GetConnection() { return con; }
     }
 }

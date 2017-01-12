@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ADO.NET\AlugueresDataAdapter.cs" />
+    <Compile Include="ADONET\AlugueresDataAdapter.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="EF\AEnimaModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -109,7 +109,7 @@
     <Compile Include="EF\EquipamentoDisponivelView.cs">
       <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO.NET\AlugueresDataSet.cs">
+    <Compile Include="ADONET\AlugueresDataSet.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="EF\EquipamentosLivres_Result.cs">
@@ -136,7 +136,7 @@
     <Compile Include="Forms\AluguerRemoveForm.Designer.cs">
       <DependentUpon>AluguerRemoveForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ADO.NET\AdoCommand.cs" />
+    <Compile Include="ADONET\AdoCommand.cs" />
     <Compile Include="Forms\EquipamentosLivresTabelaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,11 +229,9 @@
     <Compile Include="EF\TipoView.cs">
       <DependentUpon>AEnimaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="XML\Alugueres.cs" />
     <Compile Include="EF\AlugueresSchema.cs">
       <DependentUpon>AlugueresSchema.xsd</DependentUpon>
     </Compile>
-    <Compile Include="XML\XmlFileCreator.cs" />
     <EmbeddedResource Include="Forms\AluguerAddForm.resx">
       <DependentUpon>AluguerAddForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -289,7 +287,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AEnimaModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ADO.NET\AlugueresSchema.xsd">
+    <None Include="ADONET\AlugueresSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="EF\AEnimaModel.Context.tt">
