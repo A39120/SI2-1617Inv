@@ -18,39 +18,8 @@ namespace App.Forms
         public EquipamentosLivresTabelaForm(String inicio, String fim)
         {
             InitializeComponent();
-            #region EF
-            if (Program.EntityFramework) 
-            {
-                using (EfCommand cmd = new EfCommand())
-                {
-                    var equip = cmd.EquipamentosLivres(inicio, fim);
-                    dataGridView1.DataSource = equip;
-                }
-            }
-            #endregion
-            #region ADO
-            else
-            {
-                using (SqlConnection con = new SqlConnection())
-                {
-                    con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                    using (SqlCommand cmd = con.CreateCommand())
-                    {
-                        AdoCommand command = new AdoCommand();
-                        //command.GetUnusedEquipmentsForParameter(cmd, inicio, fim);
-                        con.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            DataTable dt = new DataTable();
-                            dt.Load(reader);
-                            dataGridView1.DataSource = dt;
-                        }
-                        reader.Close();
-                    }
-                }
-            #endregion
-            }
+            ICommand cmd = App.Program.GetCommand();
+            dataGridView1.DataSource = cmd.EquipamentosLivres(inicio, fim);
         }
     }
 }
