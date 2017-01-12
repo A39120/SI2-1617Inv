@@ -32,7 +32,7 @@ namespace UnitTests {
                 using (SqlConnection con = new SqlConnection()) {
                     con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                     using (SqlCommand cmd = con.CreateCommand()) {
-                        App.AdoCommand command = new AdoCommand();
+                        AdoCommand command = new AdoCommand();
                         con.Open();
                         SqlDataReader reader = cmd.ExecuteReader();
                         if (reader.HasRows) {
