@@ -21,18 +21,10 @@ namespace App.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Program.EntityFramework)
-            {
-                using (EfCommand cmd = new EfCommand())
+                using (ICommand cmd = Program.GetCommand())
                 {
                     cmd.ExportarXml(textBox1.Text, textBox2.Text);
                 }
-            } 
-            else 
-            {
-                AlugueresDataAdapter ada = new AlugueresDataAdapter();
-                ada.exportAlugueresToXml(textBox1.Text, textBox2.Text);
-            }
         }
     }
 }

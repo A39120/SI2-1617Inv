@@ -11,7 +11,7 @@
       <xs:element type="xs:positiveInteger" name="cliente"/>
       <xs:element type="xs:positiveInteger" name="equipamento"/>
     </xs:sequence>
-    <xs:attribute type="xs:string" name="serial" use="required"/>
+    <xs:attribute type="xs:string" name="id" use="required"/>
     <xs:attribute type="xs:string" name="tipo"/>
   </xs:complexType>
   <xs:complexType name="alugueresType">

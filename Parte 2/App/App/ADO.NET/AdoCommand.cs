@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace App
@@ -399,12 +400,16 @@ namespace App
         }
         public void ExportarXml(string inicio, string fim)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(xmlType));
+            XmlSerializer serializer = new XmlSerializer(typeof(xmlType),"xml");
+            xmlType xml = new xmlType();
+            xml.alugueres = new alugueresType();
+            xml.alugueres.dataInicio = inicio;
+            xml.alugueres.dataFim = fim;
 
             using (SqlCommand cmd = con.CreateCommand())
             {
-                AlugueresDataSet ds = new AlugueresDataSet();
-                SqlDataAdapter adapterAluguer, adapterAlugueres; //adapterEquipamento
+                AluguerTable at = new AluguerTable();
+                SqlDataAdapter adapterAluguer;
                 SqlParameter param_inicio = new SqlParameter("@inicio", SqlDbType.DateTime);
                 SqlParameter param_fim = new SqlParameter("@fim", SqlDbType.DateTime);
                 param_inicio.Value = inicio;
@@ -412,34 +417,28 @@ namespace App
 
                 cmd.Parameters.Add(param_inicio);
                 cmd.Parameters.Add(param_fim);
-                cmd.CommandText = "SELECT @inicio as dataInicio, @fim as dataFim, al.serial as id " +
-                    "FROM Aluguer al INNER JOIN AluguerDataFim adf ON (al.serial = adf.serial_adf) " +
-                    "WHERE al.data_inicio >= @inicio AND adf.data_fim <= @fim";
-                adapterAlugueres = new SqlDataAdapter(cmd);
-                adapterAlugueres.Fill(ds.AlugueresTable);
-
-                cmd.CommandText = "SELECT serial as id, tipo, al.eqId as equipamento, cliente " +
-                    "FROM Aluguer al INNER JOIN Equipamento eq ON (al.eqId = eq.eqId) " +
-                    "INNER JOIN AluguerDataFim adf ON (al.serial = adf.serial_adf) " +
-                    "WHERE al.deleted = 0 AND data_inicio >= @inicio AND adf.data_fim <= @fim";
+                cmd.CommandText = "SELECT id, eq.tipo as tipo, equipamento, cliente " +
+                    "FROM AluguerView al INNER JOIN Equipamento eq ON (al.equipamento = eq.eqId) " +
+                    "WHERE dataInicio >= @inicio AND dataFim <= @fim";
                 adapterAluguer = new SqlDataAdapter(cmd);
-                adapterAluguer.Fill(ds.AluguerTable);
+                adapterAluguer.Fill(at);
+                xml.alugueres.aluguer = new aluguerType[at.Select().Length];
 
-                DataRelation alugueres = ds.Relations.Add("xml",
-                    ds.Tables["alugueres"].Columns["id"], ds.Tables["aluguer"].Columns["id"]);
-
-                alugueres.Nested = true;
+                int count = 0;
+                foreach(DataRow row in at.Rows){
+                    xml.alugueres.aluguer[count] = new aluguerType();
+                    xml.alugueres.aluguer[count].cliente = row["cliente"].ToString();
+                    xml.alugueres.aluguer[count].equipamento = row["equipamento"].ToString();
+                    xml.alugueres.aluguer[count].id = row["id"].ToString();
+                    xml.alugueres.aluguer[count].tipo = row["tipo"].ToString();
+                    count++;
+                }
             }
-
-            
-            //String path =  Environment.CurrentDirectory + "\\Alugueres" + inicio.Replace(":", "").Replace(" ", "") + "_" + fim.Replace(":", "").Replace(" ", "") + ".xml";
-            //using (FileStream file = File.Create(path))
-            //{
-            //    serializer.Serialize(file, xml);
-            //}
-                
-            //TODO
-            //throw new NotImplementedException();
+            String path =  Environment.CurrentDirectory + "\\ADOAlugueres" + inicio.Replace(":", "").Replace(" ", "") + "_" + fim.Replace(":", "").Replace(" ", "") + ".xml";
+            using (FileStream file = File.Create(path))
+            {
+                serializer.Serialize(file, xml);
+            }
         }
 
         public void Dispose()

@@ -162,7 +162,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
     <Property Name="nome" Type="varchar" MaxLength="31" Nullable="false" />
     <Property Name="descr" Type="varchar" MaxLength="255" />
   </EntityType>
-  <Association Name="FK__Aluguer__cliente__4480EA04">
+  <Association Name="FK__Aluguer__cliente__770C69D1">
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
     <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -174,7 +174,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Aluguer__emprega__438CC5CB">
+  <Association Name="FK__Aluguer__emprega__76184598">
     <End Role="Empregado" Type="Self.Empregado" Multiplicity="1" />
     <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -186,7 +186,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Aluguer__eqId__4298A192">
+  <Association Name="FK__Aluguer__eqId__7524215F">
     <End Role="Equipamento" Type="Self.Equipamento" Multiplicity="1" />
     <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -198,7 +198,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Aluguer__eqId__46693276">
+  <Association Name="FK__Aluguer__eqId__78F4B243">
     <End Role="Equipamento" Type="Self.Equipamento" Multiplicity="1" />
     <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -210,7 +210,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__AluguerDa__data___4C220BCC">
+  <Association Name="FK__AluguerDa__data___7EAD8B99">
     <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="1" />
     <End Role="AluguerDataFim" Type="Self.AluguerDataFim" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -222,7 +222,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__AluguerPr__seria__49459F21">
+  <Association Name="FK__AluguerPr__seria__7BD11EEE">
     <End Role="Aluguer" Type="Self.Aluguer" Multiplicity="1" />
     <End Role="AluguerPrecoDuracao" Type="Self.AluguerPrecoDuracao" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -234,7 +234,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Equipament__tipo__25FC62E4">
+  <Association Name="FK__Equipament__tipo__5887E2B1">
     <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
     <End Role="Equipamento" Type="Self.Equipamento" Multiplicity="*" />
     <ReferentialConstraint>
@@ -246,7 +246,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Preco__tipo__2E91A8E5">
+  <Association Name="FK__Preco__tipo__611D28B2">
     <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
     <End Role="Preco" Type="Self.Preco" Multiplicity="*" />
     <ReferentialConstraint>
@@ -258,7 +258,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PromocaoDes__pId__3A035B91">
+  <Association Name="FK__PromocaoDes__pId__6C8EDB5E">
     <End Role="Promocao" Type="Self.Promocao" Multiplicity="1" />
     <End Role="PromocaoDesconto" Type="Self.PromocaoDesconto" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -270,7 +270,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PromocaoTem__pId__3632CAAD">
+  <Association Name="FK__PromocaoTem__pId__68BE4A7A">
     <End Role="Promocao" Type="Self.Promocao" Multiplicity="1" />
     <End Role="PromocaoTemporal" Type="Self.PromocaoTemporal" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -282,7 +282,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TipoPromoc__tipo__3DD3EC75">
+  <Association Name="FK__TipoPromoc__tipo__705F6C42">
     <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
     <End Role="TipoPromocao" Type="Self.TipoPromocao" Multiplicity="*" />
     <ReferentialConstraint>
@@ -294,7 +294,7 @@ warning 6002: The table/view 'AEnima.dbo.TipoView' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TipoPromoca__pId__3EC810AE">
+  <Association Name="FK__TipoPromoca__pId__7153907B">
     <End Role="Promocao" Type="Self.Promocao" Multiplicity="1" />
     <End Role="TipoPromocao" Type="Self.TipoPromocao" Multiplicity="*" />
     <ReferentialConstraint>
@@ -584,51 +584,51 @@ FROM [dbo].[EquipamentoDisponivelView] AS [EquipamentoDisponivelView]</DefiningQ
 [TipoView].[descr] AS [descr]
 FROM [dbo].[TipoView] AS [TipoView]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__Aluguer__cliente__4480EA04" Association="Self.FK__Aluguer__cliente__4480EA04">
+    <AssociationSet Name="FK__Aluguer__cliente__770C69D1" Association="Self.FK__Aluguer__cliente__770C69D1">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Aluguer" EntitySet="Aluguer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Aluguer__emprega__438CC5CB" Association="Self.FK__Aluguer__emprega__438CC5CB">
+    <AssociationSet Name="FK__Aluguer__emprega__76184598" Association="Self.FK__Aluguer__emprega__76184598">
       <End Role="Empregado" EntitySet="Empregado" />
       <End Role="Aluguer" EntitySet="Aluguer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Aluguer__eqId__4298A192" Association="Self.FK__Aluguer__eqId__4298A192">
+    <AssociationSet Name="FK__Aluguer__eqId__7524215F" Association="Self.FK__Aluguer__eqId__7524215F">
       <End Role="Equipamento" EntitySet="Equipamento" />
       <End Role="Aluguer" EntitySet="Aluguer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Aluguer__eqId__46693276" Association="Self.FK__Aluguer__eqId__46693276">
+    <AssociationSet Name="FK__Aluguer__eqId__78F4B243" Association="Self.FK__Aluguer__eqId__78F4B243">
       <End Role="Equipamento" EntitySet="Equipamento" />
       <End Role="Aluguer" EntitySet="Aluguer" />
     </AssociationSet>
-    <AssociationSet Name="FK__AluguerDa__data___4C220BCC" Association="Self.FK__AluguerDa__data___4C220BCC">
+    <AssociationSet Name="FK__AluguerDa__data___7EAD8B99" Association="Self.FK__AluguerDa__data___7EAD8B99">
       <End Role="Aluguer" EntitySet="Aluguer" />
       <End Role="AluguerDataFim" EntitySet="AluguerDataFim" />
     </AssociationSet>
-    <AssociationSet Name="FK__AluguerPr__seria__49459F21" Association="Self.FK__AluguerPr__seria__49459F21">
+    <AssociationSet Name="FK__AluguerPr__seria__7BD11EEE" Association="Self.FK__AluguerPr__seria__7BD11EEE">
       <End Role="Aluguer" EntitySet="Aluguer" />
       <End Role="AluguerPrecoDuracao" EntitySet="AluguerPrecoDuracao" />
     </AssociationSet>
-    <AssociationSet Name="FK__Equipament__tipo__25FC62E4" Association="Self.FK__Equipament__tipo__25FC62E4">
+    <AssociationSet Name="FK__Equipament__tipo__5887E2B1" Association="Self.FK__Equipament__tipo__5887E2B1">
       <End Role="Tipo" EntitySet="Tipo" />
       <End Role="Equipamento" EntitySet="Equipamento" />
     </AssociationSet>
-    <AssociationSet Name="FK__Preco__tipo__2E91A8E5" Association="Self.FK__Preco__tipo__2E91A8E5">
+    <AssociationSet Name="FK__Preco__tipo__611D28B2" Association="Self.FK__Preco__tipo__611D28B2">
       <End Role="Tipo" EntitySet="Tipo" />
       <End Role="Preco" EntitySet="Preco" />
     </AssociationSet>
-    <AssociationSet Name="FK__PromocaoDes__pId__3A035B91" Association="Self.FK__PromocaoDes__pId__3A035B91">
+    <AssociationSet Name="FK__PromocaoDes__pId__6C8EDB5E" Association="Self.FK__PromocaoDes__pId__6C8EDB5E">
       <End Role="Promocao" EntitySet="Promocao" />
       <End Role="PromocaoDesconto" EntitySet="PromocaoDesconto" />
     </AssociationSet>
-    <AssociationSet Name="FK__PromocaoTem__pId__3632CAAD" Association="Self.FK__PromocaoTem__pId__3632CAAD">
+    <AssociationSet Name="FK__PromocaoTem__pId__68BE4A7A" Association="Self.FK__PromocaoTem__pId__68BE4A7A">
       <End Role="Promocao" EntitySet="Promocao" />
       <End Role="PromocaoTemporal" EntitySet="PromocaoTemporal" />
     </AssociationSet>
-    <AssociationSet Name="FK__TipoPromoc__tipo__3DD3EC75" Association="Self.FK__TipoPromoc__tipo__3DD3EC75">
+    <AssociationSet Name="FK__TipoPromoc__tipo__705F6C42" Association="Self.FK__TipoPromoc__tipo__705F6C42">
       <End Role="Tipo" EntitySet="Tipo" />
       <End Role="TipoPromocao" EntitySet="TipoPromocao" />
     </AssociationSet>
-    <AssociationSet Name="FK__TipoPromoca__pId__3EC810AE" Association="Self.FK__TipoPromoca__pId__3EC810AE">
+    <AssociationSet Name="FK__TipoPromoca__pId__7153907B" Association="Self.FK__TipoPromoca__pId__7153907B">
       <End Role="Promocao" EntitySet="Promocao" />
       <End Role="TipoPromocao" EntitySet="TipoPromocao" />
     </AssociationSet>

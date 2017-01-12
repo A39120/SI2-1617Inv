@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.ADO.NET
 {
-    class AlugueresDataAdapter
+    /*class AlugueresDataAdapter
     {
         public void exportAlugueresToXml(String inicio, String fim)
         {
@@ -49,5 +49,5 @@ namespace App.ADO.NET
                 ds.WriteXml("VendorDS.XML"); //TODO: Fix this
             }
         }
-    }
+    }*/
 }
