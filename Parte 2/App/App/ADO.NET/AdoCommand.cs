@@ -206,6 +206,9 @@ namespace App.ADO.NET
             SqlParameter param_inicioAluguer = new SqlParameter("@inicioAluguer", SqlDbType.DateTime);
             SqlParameter param_duracao = new SqlParameter("@duracao", SqlDbType.Time);
             SqlParameter param_preco = new SqlParameter("@preco", SqlDbType.Float);
+            SqlParameter param_novoID = new SqlParameter("@novoID", SqlDbType.VarChar);
+            param_novoID.Direction = ParameterDirection.Output;
+
             if (!pid.Equals(""))
             {
                 SqlParameter param_promocao = new SqlParameter("@pid", SqlDbType.Int);
@@ -218,14 +221,13 @@ namespace App.ADO.NET
             param_inicioAluguer.Value = inicio;
             param_duracao.Value = duracao;
             param_preco.Value = preco;
-            
 
             cmd.Parameters.Add(param_empregado);
             cmd.Parameters.Add(param_equipamento);
             cmd.Parameters.Add(param_inicioAluguer);
             cmd.Parameters.Add(param_duracao);
             cmd.Parameters.Add(param_preco);
-            
+            cmd.Parameters.Add(param_novoID);
         }
 
         private void InsertAluguerWithClientParameters(SqlCommand cmd, String empregado,
@@ -357,15 +359,17 @@ namespace App.ADO.NET
 
         public String InserirAluguer(string empregado, string cliente, string equipamento, string inicio, string duracao, string preco, string prom)
         {
-            Func<SqlCommand, String> ret = (comd) => ReturnSerial(comd,
-                (cmd) => { InsertAluguerWithClientParameters(cmd, empregado, equipamento, inicio, duracao, preco, prom, cliente); });
-            return executeProcedure(ret);
+            return executeProcedure((cmd) => {
+                    InsertAluguerWithClientParameters(cmd, empregado, equipamento, inicio, duracao, preco, prom, cliente);
+                    return cmd.Parameters["@novoID"].Value as string;
+                });
         }
         public String InserirAluguerComNovoCliente(string nif, string nome, string morada, string empregado, string eq, string inicio, string duracao, string preco, string pid)
         {
-            Func<SqlCommand, String> ret = (comd) => ReturnSerial(comd,
-                (cmd) => { InsertAluguerWithNewClientParameters(cmd, empregado, eq, inicio, duracao, preco, pid, nif, morada, nome); });
-            return executeProcedure(ret);
+            return executeProcedure((cmd) => {
+                InsertAluguerWithNewClientParameters(cmd, empregado, eq, inicio, duracao, preco, pid, nif, morada, nome);
+                return cmd.Parameters["@novoID"].Value as string;
+            });
         }
         public int RemoverAluguer(string id)
         {

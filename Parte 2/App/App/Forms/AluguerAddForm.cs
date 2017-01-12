@@ -21,7 +21,7 @@ namespace App
             String duracao = textBoxDuracao.Text;
             String preco = textBoxPreco.Text;
             String pid = textBoxPromocao.Text;
-            if (textBoxCliente.Text.Equals(""))
+            if (textBoxCliente.Text.Equals("")) // show add aluguer w/o client form if no client was specified
             {
                 Dictionary<String, String> dic = new Dictionary<string, string>();
                 dic.Add("empregado", empregado);
@@ -38,8 +38,9 @@ namespace App
             {
                 using(ICommand cmd = Program.GetCommand())
                 {
-                //TODO: try, catch & handle return
-                cmd.InserirAluguer(empregado, textBoxCliente.Text,
+                    cmd.InserirAluguer(
+                        empregado,
+                        textBoxCliente.Text,
                         equipamento,
                         inicio,
                         duracao,

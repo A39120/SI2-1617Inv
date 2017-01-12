@@ -458,6 +458,7 @@
       <Parameter Name="duracao" Mode="In" Type="Time" />
       <Parameter Name="preco" Mode="In" Type="Double" />
       <Parameter Name="pid" Mode="In" Type="Int32" />
+      <Parameter Name="novoID" Mode="InOut" Type="String" />
     </FunctionImport>
     <FunctionImport Name="InserirAluguerComNovoCliente">
       <Parameter Name="cliente_nif" Mode="In" Type="Int32" />
