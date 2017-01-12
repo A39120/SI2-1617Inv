@@ -9,9 +9,9 @@ AS
 	BEGIN TRAN
 	DECLARE @now DATETIME = GETDATE()
 
-	IF EXISTS(SELECT eqId FROM dbo.AluguerView
-				INNER JOIN dbo.AluguerDataFim ON(serial = serial_adf)
-				WHERE(eqId = @id AND data_fim > @now)) 
+	IF EXISTS(SELECT equipamento FROM dbo.AluguerView
+				INNER JOIN dbo.AluguerDataFim ON(id = serial_adf)
+				WHERE(equipamento = @id AND data_fim > @now)) 
 	BEGIN
 		ROLLBACK TRAN;
 		DECLARE @msg VARCHAR(MAX) = CONCAT('O equipamento com eid=', @id, ' está em uso'); 
