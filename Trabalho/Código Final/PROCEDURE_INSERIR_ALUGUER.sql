@@ -92,11 +92,12 @@ CREATE PROCEDURE dbo.InserirAluguerComNovoCliente
 	@inicioAluguer DATETIME, 
 	@duracao TIME,
 	@preco FLOAT,
-	@pid INT = NULL -- cliente escolhe de antemão qual a promoção que quer
+	@pid INT = NULL, -- cliente escolhe de antemão qual a promoção que quer
+	@novoID VARCHAR(36) OUTPUT
 AS 
 	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	BEGIN TRAN
 	DECLARE @idCliente INT = 0
 	exec dbo.InserirCliente @cliente_nome, @cliente_nif, @cliente_morada, @idCliente OUTPUT
-	exec dbo.InserirAluguer @empregado, @idCliente, @eqId, @inicioAluguer, @duracao, @preco, @pid
+	exec dbo.InserirAluguer @empregado, @idCliente, @eqId, @inicioAluguer, @duracao, @preco, @pid, @novoID
 	COMMIT
