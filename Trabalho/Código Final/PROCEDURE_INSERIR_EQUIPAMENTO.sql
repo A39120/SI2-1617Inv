@@ -17,8 +17,13 @@ AS
 	COMMIT
 	
 GO
-CREATE PROCEDURE dbo.InserirEquipamento @tipo VARCHAR(31), @descr VARCHAR(255) = NULL
+CREATE PROCEDURE dbo.InserirEquipamento @tipo VARCHAR(31), @descr VARCHAR(255) = NULL, @novoID INT OUTPUT
 AS
-	INSERT INTO Equipamento(descr, tipo) VALUES (@descr, @tipo)
+	DECLARE @tmpTable TABLE (id INT)
+	INSERT INTO Equipamento(descr, tipo) 
+	OUTPUT INSERTED.eqId INTO @tmpTable
+	VALUES (@descr, @tipo)
+
+	SELECT @novoID = id FROM @tmpTable
 GO
 
