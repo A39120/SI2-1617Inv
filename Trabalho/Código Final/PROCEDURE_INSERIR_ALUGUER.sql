@@ -99,5 +99,5 @@ AS
 	BEGIN TRAN
 	DECLARE @idCliente INT = 0
 	exec dbo.InserirCliente @cliente_nome, @cliente_nif, @cliente_morada, @idCliente OUTPUT
-	exec dbo.InserirAluguer @empregado, @idCliente, @eqId, @inicioAluguer, @duracao, @preco, @pid, @novoID
+	exec dbo.InserirAluguer @empregado, @idCliente, @eqId, @inicioAluguer, @duracao, @preco, @pid, @novoID OUTPUT
 	COMMIT
