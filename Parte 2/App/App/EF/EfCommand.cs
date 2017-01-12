@@ -43,7 +43,9 @@ namespace App.EF
 
         public string InserirAluguerComNovoCliente(string nif, string nome, string morada, string empregado, string eq, string inicio, string duracao, string preco, string pid)
         {
-            int id = ctx.InserirAluguerComNovoCliente(
+
+            var novoID = new ObjectParameter("novoID", typeof(string));
+            ctx.InserirAluguerComNovoCliente(
                 int.Parse(nif),
                 nome,
                 morada,
@@ -52,9 +54,10 @@ namespace App.EF
                 DateTime.Parse(inicio),
                 TimeSpan.Parse(duracao),
                 double.Parse(preco),
-                pid.Equals("") ? null as int? : int.Parse(pid));
+                pid.Equals("") ? null as int? : int.Parse(pid),
+                novoID);
 
-            return id.ToString();
+            return novoID.Value as string;
         }
 
         public int RemoverAluguer(string id)
