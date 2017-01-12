@@ -31,15 +31,8 @@ namespace UnitTests {
             for (int i = 0; i < MAX_RUNS; i++)
                 using (SqlConnection con = new SqlConnection()) {
                     con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                    using (SqlCommand cmd = con.CreateCommand()) {
-                        AdoCommand command = new AdoCommand();
-                        con.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        if (reader.HasRows) {
-                            DataTable dt = new DataTable();
-                            dt.Load(reader);
-                        }
-                        reader.Close();
+                    using (AdoCommand cmd = new AdoCommand()) {
+                        cmd.EquipamentosSemAlugueresNaUltimaSemana();
                     }
                 }
             sw.Stop();
@@ -47,7 +40,7 @@ namespace UnitTests {
 
             Console.WriteLine(
                 "EF: " + EFtime + "ms" +
-                "ADO.NET: " + ADOdotNETtime + "ms"
+                "\nADO.NET: " + ADOdotNETtime + "ms"
             );
         }
     }

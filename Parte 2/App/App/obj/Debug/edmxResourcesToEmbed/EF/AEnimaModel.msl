@@ -125,15 +125,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EquipamentoDisponivel">
-      <EntityTypeMapping TypeName="AEnimaModel.EquipamentoDisponivel">
-        <MappingFragment StoreEntitySet="EquipamentoDisponivel">
-          <ScalarProperty Name="eqId" ColumnName="eqId" />
-          <ScalarProperty Name="descr" ColumnName="descr" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EquipamentoDisponivelView">
       <EntityTypeMapping TypeName="AEnimaModel.EquipamentoDisponivelView">
         <MappingFragment StoreEntitySet="EquipamentoDisponivelView">
