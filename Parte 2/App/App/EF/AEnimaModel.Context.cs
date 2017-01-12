@@ -41,7 +41,6 @@ namespace App.EF
         public DbSet<Tipo> Tipo { get; set; }
         public DbSet<AluguerView> AluguerView { get; set; }
         public DbSet<ClienteView> ClienteView { get; set; }
-        public DbSet<EquipamentoDisponivel> EquipamentoDisponivel { get; set; }
         public DbSet<EquipamentoDisponivelView> EquipamentoDisponivelView { get; set; }
         public DbSet<TipoView> TipoView { get; set; }
     
