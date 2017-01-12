@@ -14,7 +14,8 @@ CREATE PROCEDURE dbo.InserirAluguer
 	@inicioAluguer DATETIME, 
 	@duracao TIME,
 	@preco FLOAT,
-	@pid INT = NULL -- cliente escolhe de antemão qual a promoção que quer
+	@pid INT = NULL, -- cliente escolhe de antemão qual a promoção que quer
+	@novoID VARCHAR(36) OUTPUT
 AS 
 	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	BEGIN TRAN -- 5 Reads, 3 Write
@@ -76,6 +77,8 @@ AS
 	
 	DECLARE @fimAluguer DATETIME = @inicioAluguer + CAST(@duracaoFinal AS DATETIME)
 	INSERT INTO AluguerDataFim VALUES (@currentAluguerId, @fimAluguer)
+	SET @novoID = @currentAluguerId;
+
 	COMMIT
 
 GO

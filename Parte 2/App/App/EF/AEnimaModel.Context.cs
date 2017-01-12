@@ -292,7 +292,7 @@ namespace App.EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarPromocaoTemporal", promotion_idParameter, inicioParameter, fimParameter, descrParameter, tempoExtraParameter);
         }
     
-        public virtual int InserirAluguer(Nullable<int> empregado, Nullable<int> cliente, Nullable<int> eqId, Nullable<System.DateTime> inicioAluguer, Nullable<System.TimeSpan> duracao, Nullable<double> preco, Nullable<int> pid)
+        public virtual int InserirAluguer(Nullable<int> empregado, Nullable<int> cliente, Nullable<int> eqId, Nullable<System.DateTime> inicioAluguer, Nullable<System.TimeSpan> duracao, Nullable<double> preco, Nullable<int> pid, ObjectParameter novoID)
         {
             var empregadoParameter = empregado.HasValue ?
                 new ObjectParameter("empregado", empregado) :
@@ -322,7 +322,7 @@ namespace App.EF
                 new ObjectParameter("pid", pid) :
                 new ObjectParameter("pid", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirAluguer", empregadoParameter, clienteParameter, eqIdParameter, inicioAluguerParameter, duracaoParameter, precoParameter, pidParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InserirAluguer", empregadoParameter, clienteParameter, eqIdParameter, inicioAluguerParameter, duracaoParameter, precoParameter, pidParameter, novoID);
         }
     
         public virtual int InserirAluguerComNovoCliente(Nullable<int> cliente_nif, string cliente_nome, string cliente_morada, Nullable<int> empregado, Nullable<int> eqId, Nullable<System.DateTime> inicioAluguer, Nullable<System.TimeSpan> duracao, Nullable<double> preco, Nullable<int> pid)
