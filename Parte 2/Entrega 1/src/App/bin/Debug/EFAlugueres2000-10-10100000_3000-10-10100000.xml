@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<xml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <alugueres dataInicio="2000-10-10 10:00:00" dataFim="3000-10-10 10:00:00">
+    <aluguer id="0368B5D1-E9D6-4A93-A852-060715E9A806" tipo="Tenda">
+      <cliente>16</cliente>
+      <equipamento>4</equipamento>
+    </aluguer>
+    <aluguer id="1C5E135F-3C85-4673-A26B-CCF051B99658" tipo="Toldo">
+      <cliente>3</cliente>
+      <equipamento>2</equipamento>
+    </aluguer>
+    <aluguer id="26C13A41-61D4-4A08-9396-1CC737E6A61F" tipo="Chapeu De Palha">
+      <cliente>1</cliente>
+      <equipamento>1</equipamento>
+    </aluguer>
+    <aluguer id="89BEF866-6CDD-4E3C-90B4-B777139B8999" tipo="Espreguiçadeira">
+      <cliente>3</cliente>
+      <equipamento>3</equipamento>
+    </aluguer>
+  </alugueres>
+</xml>
