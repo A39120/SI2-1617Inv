@@ -1,17 +1,19 @@
-﻿using App;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Transactions;
 using App.ADO.NET;
+using System.Data.Objects;
+using System.Linq;
+using System.Xml.Serialization;
 
 namespace UnitTests
 {
+
+    /**
+     * ADO test class, please reset database and run AppTests.sql first
+     */
     [TestClass]
     public class AdoTests
     {
@@ -335,7 +337,7 @@ namespace UnitTests
         [TestMethod]
         public void ActualizarPromocaoTemporal_test()
         {
-            String id = "5";
+            String id = "3";
             String desc = "Promocao Temporal Ado Actualizada";
             using (TransactionScope tran = new TransactionScope())
             {

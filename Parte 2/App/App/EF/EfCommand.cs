@@ -103,6 +103,7 @@ namespace App.EF
 
         public int InserirPromocaoTemporal(string inicio, string fim, string desc, string tipo, string tempoExtra)
         {
+            
             int rows = ctx.InserirPromocaoTemporal(DateTime.Parse(inicio),
                 DateTime.Parse(fim),
                 desc,
@@ -195,6 +196,10 @@ namespace App.EF
                 return path;
             }
 
+        }
+        public AEnimaEntities GetContext()
+        {
+            return this.ctx;
         }
 
         public void Dispose()

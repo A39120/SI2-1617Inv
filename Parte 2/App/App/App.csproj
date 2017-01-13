@@ -55,7 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ADONET\AlugueresDataAdapter.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="EF\AEnimaModel.Context.cs">
       <AutoGen>True</AutoGen>

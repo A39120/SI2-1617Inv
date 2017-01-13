@@ -14,6 +14,7 @@ exec InserirPromocaoTemporal '2000-10-10 10:00:00', '3000-10-10 10:00:00', '', '
 exec InserirPromocaoDesconto '2000-10-10 10:00:00', '3000-10-10 10:00:00', '', 'Baldes', 0.5
 exec InserirAluguer 1, 1, 1, '2000-10-11 10:00:00', '1:00:00', 10, 1, NULL
 
+SELECT @@trancount
 SELECT * FROM AluguerView
 SELECT * FROM Preco
 SELECT * FROM Promocao
