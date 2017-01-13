@@ -125,15 +125,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EquipamentoDisponivel">
-      <EntityTypeMapping TypeName="AEnimaModel.EquipamentoDisponivel">
-        <MappingFragment StoreEntitySet="EquipamentoDisponivel">
-          <ScalarProperty Name="eqId" ColumnName="eqId" />
-          <ScalarProperty Name="descr" ColumnName="descr" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EquipamentoDisponivelView">
       <EntityTypeMapping TypeName="AEnimaModel.EquipamentoDisponivelView">
         <MappingFragment StoreEntitySet="EquipamentoDisponivelView">
@@ -167,14 +158,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionName="AEnimaModel.Store.CalcularSemanaPassada" FunctionImportName="CalcularSemanaPassada">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="AEnimaModel.CalcularSemanaPassada_Result">
-          <ScalarProperty Name="firstDay" ColumnName="firstDay" />
-          <ScalarProperty Name="lastDay" ColumnName="lastDay" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionName="AEnimaModel.Store.EquipamentosLivres" FunctionImportName="EquipamentosLivres">
       <ResultMapping>
         <ComplexTypeMapping TypeName="AEnimaModel.EquipamentosLivres_Result">
@@ -190,26 +173,6 @@
           <ScalarProperty Name="eqId" ColumnName="eqId" />
           <ScalarProperty Name="descr" ColumnName="descr" />
           <ScalarProperty Name="tipo" ColumnName="tipo" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionName="AEnimaModel.Store.GetPromocao" FunctionImportName="GetPromocao">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="AEnimaModel.GetPromocao_Result">
-          <ScalarProperty Name="pId" ColumnName="pId" />
-          <ScalarProperty Name="inicio" ColumnName="inicio" />
-          <ScalarProperty Name="fim" ColumnName="fim" />
-          <ScalarProperty Name="descr" ColumnName="descr" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionName="AEnimaModel.Store.GETPROMOTION" FunctionImportName="GETPROMOTION">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="AEnimaModel.GETPROMOTION_Result">
-          <ScalarProperty Name="pId" ColumnName="pId" />
-          <ScalarProperty Name="inicio" ColumnName="inicio" />
-          <ScalarProperty Name="fim" ColumnName="fim" />
-          <ScalarProperty Name="descr" ColumnName="descr" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -237,6 +200,5 @@
     <FunctionImportMapping FunctionImportName="RemoverPromocao" FunctionName="AEnimaModel.Store.RemoverPromocao" />
     <FunctionImportMapping FunctionImportName="RemoverPromocaoDesconto" FunctionName="AEnimaModel.Store.RemoverPromocaoDesconto" />
     <FunctionImportMapping FunctionImportName="RemoverPromocaoTemporal" FunctionName="AEnimaModel.Store.RemoverPromocaoTemporal" />
-    <FunctionImportMapping FunctionImportName="UpdateCliente" FunctionName="AEnimaModel.Store.UpdateCliente" />
   </EntityContainerMapping>
 </Mapping>

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace App.ADO.NET
+namespace App
 {
     public class AdoCommand : ICommand
     {
@@ -16,13 +16,12 @@ namespace App.ADO.NET
         {
             con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            con.Open();
         }
 
         private DataTable executeFunction(Action<SqlCommand> action) {
             using (SqlCommand cmd = con.CreateCommand()) {
                 action(cmd);
-                //con.Open();
+                con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows) {
                     DataTable dt = new DataTable();
@@ -44,7 +43,7 @@ namespace App.ADO.NET
 
         private int ReturnRowNumber(SqlCommand cmd, Action<SqlCommand> action){
             action(cmd);
-            //con.Open();
+            con.Open();
             int i = cmd.ExecuteNonQuery();
             return i;
         }
@@ -52,17 +51,17 @@ namespace App.ADO.NET
         private String ReturnSerial(SqlCommand cmd, Action<SqlCommand> action)
         {
             action(cmd);
-            //con.Open();
+            con.Open();
             cmd.ExecuteNonQuery();
-            return (String)cmd.Parameters["@novoID"].Value;
+            return (String)cmd.Parameters["@ret"].Value;
         }
 
         private int ReturnResult(SqlCommand cmd, Action<SqlCommand> action)
         {
             action(cmd);
-            //con.Open();
+            con.Open();
             cmd.ExecuteNonQuery();
-            return (int)cmd.Parameters["@novoID"].Value;
+            return (int)cmd.Parameters["@ret"].Value; ;
         }
 
         #region parameters
@@ -77,7 +76,6 @@ namespace App.ADO.NET
             SqlParameter desc = new SqlParameter("@descricao", SqlDbType.VarChar, 255);
             SqlParameter tipo = new SqlParameter("@tipo", SqlDbType.VarChar, 31);
             
-            
             tipo.Value = textBoxTipo;
             desc.Value = textBoxDescricao;
             fim.Value = textBoxFim;
@@ -87,7 +85,6 @@ namespace App.ADO.NET
             cmd.Parameters.Add(fim);
             cmd.Parameters.Add(inicio);
             cmd.Parameters.Add(desc);
-            cmd.Parameters.Add("@novoID", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
         }
 
         private void InsertPromotionTemporalParameters(SqlCommand cmd, 
@@ -209,9 +206,6 @@ namespace App.ADO.NET
             SqlParameter param_inicioAluguer = new SqlParameter("@inicioAluguer", SqlDbType.DateTime);
             SqlParameter param_duracao = new SqlParameter("@duracao", SqlDbType.Time);
             SqlParameter param_preco = new SqlParameter("@preco", SqlDbType.Float);
-            SqlParameter param_novoID = new SqlParameter("@novoID", SqlDbType.VarChar, 36);
-            param_novoID.Direction = ParameterDirection.Output;
-
             if (!pid.Equals(""))
             {
                 SqlParameter param_promocao = new SqlParameter("@pid", SqlDbType.Int);
@@ -224,13 +218,14 @@ namespace App.ADO.NET
             param_inicioAluguer.Value = inicio;
             param_duracao.Value = duracao;
             param_preco.Value = preco;
+            
 
             cmd.Parameters.Add(param_empregado);
             cmd.Parameters.Add(param_equipamento);
             cmd.Parameters.Add(param_inicioAluguer);
             cmd.Parameters.Add(param_duracao);
             cmd.Parameters.Add(param_preco);
-            cmd.Parameters.Add(param_novoID);
+            
         }
 
         private void InsertAluguerWithClientParameters(SqlCommand cmd, String empregado,
@@ -363,13 +358,13 @@ namespace App.ADO.NET
         public String InserirAluguer(string empregado, string cliente, string equipamento, string inicio, string duracao, string preco, string prom)
         {
             Func<SqlCommand, String> ret = (comd) => ReturnSerial(comd,
-               (cmd) => { InsertAluguerWithClientParameters(cmd, empregado, equipamento, inicio, duracao, preco, prom, cliente); });
+                (cmd) => { InsertAluguerWithClientParameters(cmd, empregado, equipamento, inicio, duracao, preco, prom, cliente); });
             return executeProcedure(ret);
         }
         public String InserirAluguerComNovoCliente(string nif, string nome, string morada, string empregado, string eq, string inicio, string duracao, string preco, string pid)
         {
             Func<SqlCommand, String> ret = (comd) => ReturnSerial(comd,
-                    (cmd) => { InsertAluguerWithNewClientParameters(cmd, empregado, eq, inicio, duracao, preco, pid, nif, morada, nome); });
+                (cmd) => { InsertAluguerWithNewClientParameters(cmd, empregado, eq, inicio, duracao, preco, pid, nif, morada, nome); });
             return executeProcedure(ret);
         }
         public int RemoverAluguer(string id)
@@ -398,13 +393,13 @@ namespace App.ADO.NET
         }
         public int InserirPromocaoTemporal(string inicio, string fim, string desc, string tipo, string tempoExtra)
         {
-            Func<SqlCommand, int> ret = (comd) => ReturnResult(comd,
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
                 (cmd) => { InsertPromotionTemporalParameters(cmd, tipo, desc, fim, inicio, tempoExtra); });
             return executeProcedure(ret);
         }
         public int InserirPromocaoDesconto(string inicio, string fim, string desc, string tipo, string desconto)
         {
-            Func<SqlCommand, int> ret = (comd) => ReturnResult(comd,
+            Func<SqlCommand, int> ret = (comd) => ReturnRowNumber(comd,
                 (cmd) => { InsertPromotionDescontoParameters(cmd, tipo, desc, fim, inicio, desconto); });
             return executeProcedure(ret);
         }
@@ -478,10 +473,8 @@ namespace App.ADO.NET
 
         public void Dispose()
         {
-            if (con != null) 
+            if(con != null) 
                 con.Dispose();
         }
-
-        public SqlConnection GetConnection() { return con; }
     }
 }

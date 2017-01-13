@@ -171,15 +171,6 @@
     <Property Name="nome" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
     <Property Name="morada" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="EquipamentoDisponivel">
-    <Key>
-      <PropertyRef Name="eqId" />
-      <PropertyRef Name="tipo" />
-    </Key>
-    <Property Name="eqId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="descr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="tipo" Type="String" MaxLength="31" FixedLength="false" Unicode="false" Nullable="false" />
-  </EntityType>
   <EntityType Name="EquipamentoDisponivelView">
     <Key>
       <PropertyRef Name="eqId" />
@@ -334,7 +325,6 @@
     <EntitySet Name="Tipo" EntityType="Self.Tipo" />
     <EntitySet Name="AluguerView" EntityType="Self.AluguerView" />
     <EntitySet Name="ClienteView" EntityType="Self.ClienteView" />
-    <EntitySet Name="EquipamentoDisponivel" EntityType="Self.EquipamentoDisponivel" />
     <EntitySet Name="EquipamentoDisponivelView" EntityType="Self.EquipamentoDisponivelView" />
     <EntitySet Name="TipoView" EntityType="Self.TipoView" />
     <AssociationSet Name="FK__Aluguer__cliente__4480EA04" Association="Self.FK__Aluguer__cliente__4480EA04">
@@ -458,6 +448,7 @@
       <Parameter Name="duracao" Mode="In" Type="Time" />
       <Parameter Name="preco" Mode="In" Type="Double" />
       <Parameter Name="pid" Mode="In" Type="Int32" />
+      <Parameter Name="novoID" Mode="InOut" Type="String" />
     </FunctionImport>
     <FunctionImport Name="InserirAluguerComNovoCliente">
       <Parameter Name="cliente_nif" Mode="In" Type="Int32" />
@@ -469,6 +460,7 @@
       <Parameter Name="duracao" Mode="In" Type="Time" />
       <Parameter Name="preco" Mode="In" Type="Double" />
       <Parameter Name="pid" Mode="In" Type="Int32" />
+      <Parameter Name="novoID" Mode="InOut" Type="String" />
     </FunctionImport>
     <FunctionImport Name="InserirCliente">
       <Parameter Name="nome" Mode="In" Type="String" />
@@ -479,11 +471,13 @@
     <FunctionImport Name="InserirEquipamento">
       <Parameter Name="tipo" Mode="In" Type="String" />
       <Parameter Name="descr" Mode="In" Type="String" />
+      <Parameter Name="novoID" Mode="InOut" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="InserirEquipamentoComTipo">
       <Parameter Name="tipo" Mode="In" Type="String" />
       <Parameter Name="descr" Mode="In" Type="String" />
       <Parameter Name="descrTipo" Mode="In" Type="String" />
+      <Parameter Name="novoID" Mode="InOut" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="InserirPreco">
       <Parameter Name="tipo" Mode="In" Type="String" />

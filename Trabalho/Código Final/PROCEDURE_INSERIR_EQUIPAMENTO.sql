@@ -5,7 +5,11 @@ IF OBJECT_ID('dbo.InserirEquipamento') IS NOT NULL
 	DROP PROCEDURE dbo.InserirEquipamento
 
 GO
-CREATE PROCEDURE dbo.InserirEquipamentoComTipo @tipo VARCHAR(31), @descr VARCHAR(255) = NULL, @descrTipo VARCHAR(255) = NULL
+CREATE PROCEDURE dbo.InserirEquipamentoComTipo 
+@tipo VARCHAR(31),
+@descr VARCHAR(255) = NULL,
+@descrTipo VARCHAR(255) = NULL,
+@novoID INT OUTPUT
 AS
 	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN 
@@ -13,12 +17,23 @@ AS
 		BEGIN
 			INSERT INTO Tipo(nome, descr) VALUES (@tipo, @descrTipo)
 		END
-	INSERT INTO Equipamento(descr, tipo) VALUES (@descr, @tipo)
+	
+	DECLARE @tmpTable TABLE (id INT)
+	INSERT INTO Equipamento(descr, tipo)
+	OUTPUT INSERTED.eqId INTO @tmpTable
+	VALUES (@descr, @tipo)
+
+	SELECT @novoID = id FROM @tmpTable
 	COMMIT
 	
 GO
-CREATE PROCEDURE dbo.InserirEquipamento @tipo VARCHAR(31), @descr VARCHAR(255) = NULL
+CREATE PROCEDURE dbo.InserirEquipamento @tipo VARCHAR(31), @descr VARCHAR(255) = NULL, @novoID INT OUTPUT
 AS
-	INSERT INTO Equipamento(descr, tipo) VALUES (@descr, @tipo)
+	DECLARE @tmpTable TABLE (id INT)
+	INSERT INTO Equipamento(descr, tipo) 
+	OUTPUT INSERTED.eqId INTO @tmpTable
+	VALUES (@descr, @tipo)
+
+	SELECT @novoID = id FROM @tmpTable
 GO
 

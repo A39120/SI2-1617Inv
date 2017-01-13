@@ -38,7 +38,6 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
@@ -55,7 +54,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AdoTests.cs" />
-    <Compile Include="EfTests.cs" />
     <Compile Include="PerformanceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,7 +64,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="App.config" />
+=======
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+>>>>>>> 1bdc36cc12bd103230d2455e6ac0fe5978ef3f4f
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

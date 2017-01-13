@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.Objects;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -25,21 +26,26 @@ namespace App.EF
 
         public string InserirAluguer(string empregado, string cliente, string equipamento, string inicio, string duracao, string preco, string prom)
         {
-            int inserted = ctx.InserirAluguer(
-                  int.Parse(empregado),
-                  int.Parse(cliente),
-                  int.Parse(equipamento),
-                  DateTime.Parse(inicio),
-                  TimeSpan.Parse(duracao),
-                  double.Parse(preco),
-                  prom.Equals("") ? null as int? : int.Parse(prom));
+            var novoID = new ObjectParameter("novoID", typeof(string));
+            
+            ctx.InserirAluguer(
+                int.Parse(empregado),
+                int.Parse(cliente),
+                int.Parse(equipamento),
+                DateTime.Parse(inicio),
+                TimeSpan.Parse(duracao),
+                double.Parse(preco),
+                prom.Equals("") ? null as int? : int.Parse(prom),
+                novoID); //out parameter novoID
 
-            return inserted.ToString();
+            return novoID.Value as string;
         }
 
         public string InserirAluguerComNovoCliente(string nif, string nome, string morada, string empregado, string eq, string inicio, string duracao, string preco, string pid)
         {
-            int id = ctx.InserirAluguerComNovoCliente(
+
+            var novoID = new ObjectParameter("novoID", typeof(string));
+            ctx.InserirAluguerComNovoCliente(
                 int.Parse(nif),
                 nome,
                 morada,
@@ -48,9 +54,10 @@ namespace App.EF
                 DateTime.Parse(inicio),
                 TimeSpan.Parse(duracao),
                 double.Parse(preco),
-                pid.Equals("") ? null as int? : int.Parse(pid));
+                pid.Equals("") ? null as int? : int.Parse(pid),
+                novoID);
 
-            return id.ToString();
+            return novoID.Value as string;
         }
 
         public int RemoverAluguer(string id)

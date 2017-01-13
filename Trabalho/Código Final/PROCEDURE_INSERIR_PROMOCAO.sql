@@ -46,7 +46,7 @@ AS
 		THROW 50016, 'Transação interna interrompida', 1
 	END CATCH
 	COMMIT
-
+	RETURN @id
 GO
 CREATE PROCEDURE dbo.InserirPromocaoDesconto @inicio DATETIME, 
 	@fim DATETIME, 
@@ -70,5 +70,5 @@ AS
 		THROW 50015, 'Transação interna interrompida', 1
 	END CATCH
 	COMMIT
-
+	RETURN @id
 GO
