@@ -18,7 +18,7 @@ namespace UnitTests
     public class AdoTests
     {
         [TestMethod]
-        public void InserirAluguer_test()
+        public void Ado_InserirAluguer_test()
         {
             using (TransactionScope tran = new TransactionScope())
             {
@@ -39,7 +39,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void InserirAluguerComNovoCliente_test()
+        public void Ado_InserirAluguerComNovoCliente_test()
         {
             using (TransactionScope tran = new TransactionScope())
             {
@@ -74,7 +74,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void RemoverAluguer_test()
+        public void Ado_RemoverAluguer_test()
         {
             using (TransactionScope tran = new TransactionScope())
             {
@@ -108,7 +108,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void InserirPreco_test() 
+        public void Ado_InserirPreco_test() 
         {
             String tipo = "Baldes", valor = "20,0", duracao = "2:00:00", validade = "3000-10-10 10:00:00";
             using (TransactionScope tran = new TransactionScope())
@@ -150,7 +150,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void ActualizarPreco_test()
+        public void Ado_ActualizarPreco_test()
         {
             String nome = "Baldes", preco = "5,00", duracao = "00:45:00", validade = "3000-10-10 10:00:00";
             using (TransactionScope tran = new TransactionScope())
@@ -193,7 +193,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void RemoverPreco_test() 
+        public void Ado_RemoverPreco_test() 
         {
             String nome = "Baldes", preco = "7,00", duracao = "00:50:00", validade = "3000-10-10 10:00:00";
             using (TransactionScope tran = new TransactionScope())
@@ -232,7 +232,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void InserirPromocaoTemporal_test()
+        public void Ado_InserirPromocaoTemporal_test()
         {
             using (TransactionScope tran = new TransactionScope())
             {
@@ -255,7 +255,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void InserirPromocaoDesconto_test()
+        public void Ado_InserirPromocaoDesconto_test()
         {
             using (TransactionScope tran = new TransactionScope())
             {
@@ -277,7 +277,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void RemoverPromocaoTemporal_test()
+        public void Ado_RemoverPromocaoTemporal_test()
         {
             using (TransactionScope tran = new TransactionScope())
             {
@@ -305,7 +305,7 @@ namespace UnitTests
         }
         
         [TestMethod]
-        public void RemoverPromocaoDesconto_test()
+        public void Ado_RemoverPromocaoDesconto_test()
         {
             using (TransactionScope tran = new TransactionScope())
             {
@@ -335,7 +335,7 @@ namespace UnitTests
         }
         
         [TestMethod]
-        public void ActualizarPromocaoTemporal_test()
+        public void Ado_ActualizarPromocaoTemporal_test()
         {
             String id = "3";
             String desc = "Promocao Temporal Ado Actualizada";
@@ -364,7 +364,7 @@ namespace UnitTests
         }
         
         [TestMethod]
-        public void ActualizarPromocaoDesconto_test()
+        public void Ado_ActualizarPromocaoDesconto_test()
         {
             String id = "4";
             String desc = "Promocao Desconto Ado Actualizada";

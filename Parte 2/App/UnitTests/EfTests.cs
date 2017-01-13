@@ -13,8 +13,24 @@ namespace UnitTests
     [TestClass]
     public class EfTests
     {
+        /*[TestMethod]
+        public void Ef_MethodToRunTestsInOrder() {
+            Ef_ActualizarPreco_test();
+            Ef_ActualizarPromocaoDesconto_test();
+            Ef_ActualizarPromocaoTemporal_test();
+            Ef_InserirAluguer_test();
+            Ef_InserirAluguerComNovoCliente_test();
+            Ef_InserirPreco_test();
+            Ef_InserirPromocaoDesconto_test();
+            Ef_InserirPromocaoTemporal_test();
+            Ef_RemoverAluguer_test();
+            Ef_RemoverPreco_test();
+            Ef_RemoverPromocaoTemporal_test();
+            Ef_RemoverPromocaoDesconto_test();
+        }*/
+
         [TestMethod]
-        public void InserirAluguer_test()
+        public void Ef_InserirAluguer_test()
         {
             using(EfCommand cmd = new EfCommand()) 
             {
@@ -28,7 +44,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void InserirAluguerComNovoCliente_test()
+        public void Ef_InserirAluguerComNovoCliente_test()
         {
             using (EfCommand cmd = new EfCommand())
             {
@@ -50,7 +66,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void RemoverAluguer_test()
+        public void Ef_RemoverAluguer_test()
         {
             using(EfCommand cmd = new EfCommand()) 
             {
@@ -62,7 +78,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void InserirPreco_test()
+        public void Ef_InserirPreco_test()
         {
             String tipo = "Baldes", valor = "20,0", duracao = "2:00:00", validade = "3000-10-10 10:00:00";
 
@@ -80,45 +96,46 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void ActualizarPreco_test()
+        public void Ef_ActualizarPreco_test()
         {
             String nome = "Baldes", preco = "5,00", duracao = "00:45:00", validade = "3000-10-10 10:00:00";
             using (EfCommand cmd = new EfCommand())
             {
 
-                var preco1 = cmd.GetContext().Preco.Where((prec) => prec.tipo == nome && prec.valor == 5);
+                var duracaoParsed = TimeSpan.Parse(duracao);
+                var preco1 = cmd.GetContext().Preco.Where((prec) => prec.tipo == nome && prec.valor == 5 && prec.duracao == duracaoParsed);
                 Assert.IsTrue(preco1.Count() == 1);
 
-
-                int row = cmd.ActualizarPreco(nome, preco, duracao, validade, "6,00", "00:30:00", "3000-10-10 10:00:00");
+                int row = cmd.ActualizarPreco(nome, preco, duracao, validade, "5,00", "00:30:00", "3000-10-10 10:00:00");
                 Assert.AreEqual(2, row);
 
-                var preco2 = cmd.GetContext().Preco.Where((prec) => prec.tipo == nome && prec.valor == 5);
-                Assert.IsTrue(preco1.Count() == 0);
+                var preco2 = cmd.GetContext().Preco.Where((prec) => prec.tipo == nome && prec.valor == 5 && prec.duracao == duracaoParsed);
+                Assert.IsFalse(preco1.Count() == 1);
             }
         }
 
         [TestMethod]
-        public void RemoverPreco_test()
+        public void Ef_RemoverPreco_test()
         {
-            String nome = "Baldes", preco = "5,00", duracao = "00:45:00", validade = "3000-10-10 10:00:00";
+            String nome = "Baldes", preco = "7,00", duracao = "00:50:00", validade = "3000-10-10 10:00:00";
             using (EfCommand cmd = new EfCommand())
             {
 
-                var preco1 = cmd.GetContext().Preco.Where((prec) => prec.tipo == nome && prec.valor == 5);
-                Assert.IsTrue(preco1.Count() == 1);
+                var duracaoParsed = TimeSpan.Parse(duracao);
+                var preco1 = cmd.GetContext().Preco.Where((prec) => prec.tipo == nome && prec.valor == 7 && prec.duracao == duracaoParsed);
+                Assert.IsTrue(preco1.Count() > 0);
 
                 int row = cmd.RemoverPreco(nome, preco, duracao, validade);
                 Assert.AreEqual(1, row);
 
-                var preco2 = cmd.GetContext().Preco.Where((prec) => prec.tipo == nome && prec.valor == 5);
+                var preco2 = cmd.GetContext().Preco.Where((prec) => prec.tipo == nome && prec.valor == 7 && prec.duracao == duracaoParsed);
                 Assert.IsTrue(preco1.Count() == 0);
             }
             
         }
 
         [TestMethod]
-        public void InserirPromocaoTemporal_test()
+        public void Ef_InserirPromocaoTemporal_test()
         {
 
             using (EfCommand cmd = new EfCommand())
@@ -130,7 +147,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void InserirPromocaoDesconto_test()
+        public void Ef_InserirPromocaoDesconto_test()
         {
             using (EfCommand cmd = new EfCommand())
             {
@@ -140,7 +157,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void RemoverPromocaoTemporal_test()
+        public void Ef_RemoverPromocaoTemporal_test()
         {
             using (EfCommand cmd = new EfCommand())
             {
@@ -156,7 +173,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void RemoverPromocaoDesconto_test()
+        public void Ef_RemoverPromocaoDesconto_test()
         {
             using (EfCommand cmd = new EfCommand())
             {
@@ -173,9 +190,9 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void ActualizarPromocaoTemporal_test()
+        public void Ef_ActualizarPromocaoTemporal_test()
         {
-            String id = "5";
+            String id = "3";
             String desc = "Promocao Temporal Ado Actualizada";
             using (EfCommand cmd = new EfCommand())
             {
@@ -183,15 +200,15 @@ namespace UnitTests
                 Assert.IsTrue(promocao.Count() == 0);
 
                 int row = cmd.ActualizarPromocaoTemporal(id, "2000-10-10 10:00:00", "3000-10-10 10:00:00", desc, "1:00:00");
-                Assert.AreEqual(1, row);
+                Assert.AreEqual(2, row);
 
-                var promocao2 = cmd.GetContext().Promocao.Where(p => p.pId == 5 && p.descr == desc);
+                var promocao2 = cmd.GetContext().Promocao.Where(p => p.pId == 3 && p.descr == desc);
                 Assert.IsTrue(promocao2.Count()==1);
             }
         }
 
         [TestMethod]
-        public void ActualizarPromocaoDesconto_test()
+        public void Ef_ActualizarPromocaoDesconto_test()
         {
             String id = "4";
             String desc = "Promocao Temporal Ef Actualizada";

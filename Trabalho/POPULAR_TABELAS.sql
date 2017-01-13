@@ -33,18 +33,18 @@ INSERT INTO Tipo VALUES('Equipamento Diving'	   , 'Lazer')
 DECLARE @loopCount INT = 1
 WHILE (@loopCount > 0)
 BEGIN
-exec InserirEquipamentoComTipo 'Chapeu De Palha'		  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Toldo'					  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Espreguiçadeira'		  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Tenda'					  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Volleyball'				  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Caiaque'				  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Mota de Agua'			  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Raquetes(Ping Pong Praia)', 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Football'				  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Baldes'					  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Pás'					  , 'Equipamento Simples'
-exec InserirEquipamentoComTipo 'Equipamento Diving'		  , 'Equipamento Simples'
+exec InserirEquipamentoComTipo 'Chapeu De Palha'		  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Toldo'					  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Espreguiçadeira'		  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Tenda'					  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Volleyball'				  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Caiaque'				  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Mota de Agua'			  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Raquetes(Ping Pong Praia)', 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Football'				  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Baldes'					  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Pás'					  , 'Equipamento Simples', NULL, NULL
+exec InserirEquipamentoComTipo 'Equipamento Diving'		  , 'Equipamento Simples', NULL, NULL
 SET @loopCount = @loopCount - 1 						  
 END
 
@@ -123,11 +123,11 @@ exec dbo.InserirPromocaoTemporal '2014-12-31 23:59:59', '2017-12-31 23:59:59','P
 exec dbo.InserirPromocaoTemporal '2014-12-31 23:59:59', '2017-12-31 23:59:59','Promoção de tempo','Equipamento Diving', '01:00:00'
 
 -- Inserir aluguer sem promoção, com preço e duração existentes, no cliente final, que já aconteceu
-exec InserirAluguer @empregado = 1, @eqId = 1, @inicioAluguer = '2014-12-12 13:00:00', @duracao = '01:00:00', @preco = 10
+exec InserirAluguer @empregado = 1, @eqId = 1, @inicioAluguer = '2014-12-12 13:00:00', @duracao = '01:00:00', @preco = 10, @novoID = NULL
 -- Inserir aluguer sem promoção, com preço e duração existentes, no cliente existente, que já aconteceu, na semana passada
-exec InserirAluguer 1, 3, 2, '2016-12-27 13:00:00', '01:30:00.0000000', 20
+exec InserirAluguer 1, 3, 2, '2016-12-27 13:00:00', '01:30:00.0000000', 20, NULL, NULL
 -- Inserir aluguer sem promoção, com preço e duração existentes, no cliente existente, que está a acontecer
 DECLARE @currentDate DATETIME = GETDATE()
-exec InserirAluguer 1, 3, 3, @currentDate, '01:00:00', 10, 3
+exec InserirAluguer 1, 3, 3, @currentDate, '01:00:00', 10, 3, NULL
 -- Inserir aluguer que ainda não aconteceu, com uma promoção temporal, com um novo cliente
-exec InserirAluguerComNovoCliente 333322343,'New Client', 'SAvn.', 1, 4, '2017-05-31 23:59:59', '01:30:00', 20, 4
+exec InserirAluguerComNovoCliente 333322343,'New Client', 'SAvn.', 1, 4, '2017-05-31 23:59:59', '01:30:00', 20, 4, NULL
